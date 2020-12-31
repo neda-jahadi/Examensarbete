@@ -1,24 +1,40 @@
-import logo from './logo.svg';
+import React,{useState} from 'react';
 import './App.css';
-
+import Travel from './components/Travel';
+import ChosedCity from './components/ChosedCity';
+import Container from './components/Container';
 function App() {
+
+  const TRAVEL= 'travel', CHOSEDCITY='chosedcity';
+  const [screen, setScreen] = useState(TRAVEL);
+
+  let content = null;
+
+  switch (screen) {
+
+    case CHOSEDCITY:
+      content = <ChosedCity 
+      showTravel = {() => setScreen(Travel)} />
+      break;
+
+    default:
+      content = <Travel 
+      showChosedCity = {() => setScreen(CHOSEDCITY)} />
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+   
+    <div>
+      <Container>
+        {content}
+      </Container>
+      
     </div>
+       
+    
+       
+
+    
   );
 }
 

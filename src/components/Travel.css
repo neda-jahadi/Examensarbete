@@ -1,0 +1,12 @@
+.travel-container {
+    border: 1px solid; 
+    height: 100%;
+}
+.travel-container > div {
+    margin: 10px;
+}
+.cities {
+    overflow-y: scroll;
+    border: 1px solid; 
+    height: 50%;
+}
