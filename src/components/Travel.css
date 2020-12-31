@@ -3,10 +3,25 @@
     height: 100%;
 }
 .travel-container > div {
-    margin: 10px;
+    margin: 20px;
 }
 .cities {
     overflow-y: scroll;
     border: 1px solid; 
     height: 50%;
+}
+.city-list {
+    padding: 10px;
+
+}
+.city-list:nth-child(odd) {
+  background-color: lightgray;
+}
+.addBtn-container {
+    text-align: center;
+}
+.addBtn {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
 }

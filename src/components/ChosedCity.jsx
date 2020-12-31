@@ -1,11 +1,21 @@
 import React from 'react';
+import './ChosedCity.css';
+import {useHistory} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 
-const ChosedCity = ({showTravel}) => {
+const ChosedCity = ({cities}) => {
+    
+    const {id} = useParams();
+    const history = useHistory();
 
+    const sendTo = (link) =>{
+        history.push(link);
+    }
+     
     return(
-        <div>
-            <div>ChosedCity page</div>
-            <button onClick={showTravel}>Travel</button>
+        <div className="chosed-city">
+            <div>{cities[id]}</div>
+            <button onClick={()=> sendTo("/travel")}>Travel</button>
         </div>
     )
 }

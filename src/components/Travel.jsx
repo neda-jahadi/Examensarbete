@@ -1,11 +1,18 @@
 import React from 'react';
 import './Travel.css';
+import {useHistory} from 'react-router-dom';
 
-const Travel = ({showChosedCity}) => {
+const Travel = ({cities}) => {
 
-    let cities = ['Paris', 'Rome', 'Kualalampour', 'Stickholm', 'Madrid', 'London',
-                  'Paris', 'Rome', 'Kualalampour', 'Stickholm', 'Madrid', 'London', ]
-    const jsxCities = cities.map((city, index) => <div key={index} style={{padding: 10}}>
+    
+
+    const history = useHistory();
+
+    const sendTo = (link) =>{
+        history.push(link);
+    }
+
+    const jsxCities = cities.map((city, index) => <div key={index} className="city-list" onClick={()=>sendTo(`/travel/${index}`)}>
                                                       {city}
                                                   </div>)
     return(
@@ -20,6 +27,9 @@ const Travel = ({showChosedCity}) => {
 
             <div className="cities">
                 {jsxCities}
+            </div>
+            <div className="addBtn-container">
+                <button className="addBtn">Add your destination</button>
             </div>
             
         </div>

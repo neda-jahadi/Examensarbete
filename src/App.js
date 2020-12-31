@@ -3,30 +3,30 @@ import './App.css';
 import Travel from './components/Travel';
 import ChosedCity from './components/ChosedCity';
 import Container from './components/Container';
+import {BrowserRouter, Route} from 'react-router-dom';
+
 function App() {
 
-  const TRAVEL= 'travel', CHOSEDCITY='chosedcity';
-  const [screen, setScreen] = useState(TRAVEL);
+  let cities = ['Paris', 'Rome', 'Kualalampour', 'Stickholm', 'Madrid', 'London',
+                  'Tokyo', 'Rio', 'Moscow', 'Los Angeles', 'Milan', 'Sergy', ]
 
-  let content = null;
-
-  switch (screen) {
-
-    case CHOSEDCITY:
-      content = <ChosedCity 
-      showTravel = {() => setScreen(Travel)} />
-      break;
-
-    default:
-      content = <Travel 
-      showChosedCity = {() => setScreen(CHOSEDCITY)} />
-  }
+  
 
   return (
    
     <div>
       <Container>
-        {content}
+        <BrowserRouter>
+
+          <Route path="/travel" exact>
+              <Travel cities={cities}/>
+          </Route>
+
+          <Route path="/travel/:id" exact>
+              <ChosedCity cities={cities}/>
+          </Route>
+
+        </BrowserRouter>
       </Container>
       
     </div>
