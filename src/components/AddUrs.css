@@ -1,0 +1,16 @@
+.content > * {
+    display: block;
+    margin: 20px;
+    width: 70vw;
+    padding: 10px;
+   
+}
+.input-address {
+    height: 40px;
+}
+.input-comment {
+    height: 100px;
+}
+.submit {
+    text-align: center;
+}

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Travel.css';
 import {useHistory} from 'react-router-dom';
 
-const Travel = ({cities}) => {
+const Travel = ({cities, addNewCity}) => {
 
     
-
+    const [addCity, setAddCity] = useState(false);
+    const [city, setCity] = useState('');
     const history = useHistory();
 
     const sendTo = (link) =>{
@@ -29,7 +30,13 @@ const Travel = ({cities}) => {
                 {jsxCities}
             </div>
             <div className="addBtn-container">
-                <button className="addBtn">Add your destination</button>
+                {!addCity 
+                    ? <button className="addBtn" onClick={() => setAddCity(true)}>Add your destination</button>
+                    : <div>
+                        <input type="text" placeholder="City..." onChange={(e) => setCity(e.target.value)} />
+                        <button onClick={() => {setAddCity(false); addNewCity(city)}}>Add</button>
+                      </div>}
+                
             </div>
             
         </div>

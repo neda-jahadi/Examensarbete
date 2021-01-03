@@ -2,3 +2,44 @@
     border: 1px solid;
     height: 100%;
 }
+.activity-holder {
+    border: 1px solid ;
+    padding: 10px;
+    background-color: lightblue;
+    margin: 10px; 
+    
+}
+ .activity-holder > div {
+     display: flex;
+     flex-direction: row;
+     width: 50vw;
+     
+ }
+
+.activities-holder {
+    overflow-x: scroll;
+    display: flex;
+    flex-direction: row;
+    
+}
+.city-info {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.info-title {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+}
+.add-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+.addIcon-holder {
+    border: 1px solid; 
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 10px;
+}

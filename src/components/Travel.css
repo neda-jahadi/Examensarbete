@@ -12,6 +12,7 @@
 }
 .city-list {
     padding: 10px;
+    margin-right: 30px;
 
 }
 .city-list:nth-child(odd) {
