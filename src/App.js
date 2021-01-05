@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import './App.css';
 import Travel from './components/Travel';
 import ChosedCity from './components/ChosedCity';
@@ -9,7 +9,7 @@ import Header from './components/Header';
 
 function App() {
 
-  let cities = ['Paris', 'Rome', 'Kualalampour', 'Stickholm', 'Madrid', 'London',
+  let cities = ['Paris', 'Rome', 'Kualalampour', 'Stockholm', 'Madrid', 'London',
                   'Tokyo', 'Rio', 'Moscow', 'Los Angeles', 'Milan', 'Sergy', ]
 
   const addNewCity = (newCity) => {

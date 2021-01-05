@@ -8,7 +8,6 @@ const AddUrs = () => {
 
     const history = useHistory();
     const {id} = useParams();
-    console.log('id is:', id);
 
     const sendTo = (link) =>{
         history.push(link);
