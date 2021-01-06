@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import Travel from './components/Travel';
 import ChosedCity from './components/ChosedCity';
@@ -9,8 +9,17 @@ import Header from './components/Header';
 
 function App() {
 
+  const [datacities, setCities] = useState([]);
+
   let cities = ['Paris', 'Rome', 'Kualalampour', 'Stockholm', 'Madrid', 'London',
                   'Tokyo', 'Rio', 'Moscow', 'Los Angeles', 'Milan', 'Sergy', ]
+
+  useEffect(async () => {
+    const response = await fetch('/api/cities', { method: 'GET' });;
+    setCities(response.json());
+  }, []);
+
+  console.log('cities are:', datacities);
 
   const addNewCity = (newCity) => {
     cities.push(newCity);

@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './DataList.css';
 import deleteIcon from '../assets/delete.png';
 import editIcon from '../assets/edit.png';
-import backgroundImg from '../assets/background.jpg'
+import backgroundImg from '../assets/background.jpg';
+import likeIcon from '../assets/like.png';
+import likedIcon from '../assets/liked.png';
 
 const DataList = ({data}) => {
+    const [like, setLike] = useState(false);
+
     let dataList = data.map((datum, index) => <div className="activity-box" key={index}>
                                                                         <div className="img-holder">
                                                                             <img src={backgroundImg} alt="backImg" className="backImg" />
@@ -30,9 +34,16 @@ const DataList = ({data}) => {
                                                                             
                                                                         </div>
                                                                         
-                                                                        <div className="iconForItem-holder"> 
-                                                                            <img src={deleteIcon} alt="delete" />
-                                                                            <img src={editIcon} alt="edit" />
+                                                                        <div className="iconForItem-holder">
+                                                                            {!like 
+                                                                                ? <div className="like" onClick={() => setLike(true)}>Like </div>
+                                                                                : <div className="liked" onClick={() => setLike(false)}>Liked </div>} 
+                                                                            
+                                                                            <div className="Delete-edit">
+                                                                                <img src={deleteIcon} alt="delete" className="delete-icon" />
+                                                                                <img src={editIcon} alt="edit" />
+                                                                            </div>
+                                                                            
                                                                         </div>
                                                                        
                                                            </div>)
