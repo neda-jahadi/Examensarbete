@@ -14,12 +14,24 @@ function App() {
   let cities = ['Paris', 'Rome', 'Kualalampour', 'Stockholm', 'Madrid', 'London',
                   'Tokyo', 'Rio', 'Moscow', 'Los Angeles', 'Milan', 'Sergy', ]
 
-  useEffect(async () => {
-    const response = await fetch('/api/cities', { method: 'GET' });;
-    setCities(response.json());
-  }, []);
+  // useEffect(async () => {
+  //   const response = await fetch('/api/cities', { method: 'GET' });;
+  //   setCities(response.json());
+  // }, []);
 
-  console.log('cities are:', datacities);
+  // console.log('cities are:', datacities);
+  const getData =  () => {
+    fetch('/api/cities').then(response => {
+      console.log('response is:',response);
+      console.log('response json is:',response.json()) ;
+  
+    }).catch(err => {
+      // Do something for an error here
+      console.log("Error Reading data " + err);
+    });
+  
+  }
+
 
   const addNewCity = (newCity) => {
     cities.push(newCity);
@@ -29,7 +41,12 @@ function App() {
    
     <div>
       <Container>
+        
         <BrowserRouter>
+
+          <Route path="/" exact>
+              <button onClick={getData}>Get data</button>
+          </Route>
 
           <Route path="/travel" exact>
               <Travel cities={cities} addNewCity={addNewCity} />
