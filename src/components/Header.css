@@ -2,3 +2,14 @@
     width: 30px;
     height: 30px;
 }
+.header-holder {
+    padding: 10px;
+    background-color: #B3F1F5;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.sign-out {
+    border: 1px solid;
+    padding: 5px;
+}

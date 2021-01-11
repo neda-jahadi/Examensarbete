@@ -9,33 +9,24 @@ import Header from './components/Header';
 
 function App() {
 
-  const [datacities, setCities] = useState([]);
+  const [dataCities, setDataCities] = useState([]);
 
-  let cities = ['Paris', 'Rome', 'Kualalampour', 'Stockholm', 'Madrid', 'London',
-                  'Tokyo', 'Rio', 'Moscow', 'Los Angeles', 'Milan', 'Sergy', ]
+  // let cities = ['Paris', 'Rome', 'Kualalampour', 'Stockholm', 'Madrid', 'London',
+  //                 'Tokyo', 'Rio', 'Moscow', 'Los Angeles', 'Milan', 'Sergy', ]
 
-  // useEffect(async () => {
-  //   const response = await fetch('/api/cities', { method: 'GET' });;
-  //   setCities(response.json());
-  // }, []);
+  useEffect(async () => {
+    const response = await fetch('http://localhost:2294/api/cities' );
+    const cities = await response.json();
+    setDataCities(cities);
+  }, []);
 
-  // console.log('cities are:', datacities);
-  const getData =  () => {
-    fetch('/api/cities').then(response => {
-      console.log('response is:',response);
-      console.log('response json is:',response.json()) ;
   
-    }).catch(err => {
-      // Do something for an error here
-      console.log("Error Reading data " + err);
-    });
   
-  }
 
 
-  const addNewCity = (newCity) => {
-    cities.push(newCity);
-  }
+  // const addNewCity = (newCity) => {
+  //   cities.push(newCity);
+  // }
 
   return (
    
@@ -45,16 +36,17 @@ function App() {
         <BrowserRouter>
 
           <Route path="/" exact>
-              <button onClick={getData}>Get data</button>
+              <button >Get data</button>
           </Route>
 
           <Route path="/travel" exact>
-              <Travel cities={cities} addNewCity={addNewCity} />
+              <Header />
+              <Travel cities={dataCities} />
           </Route>
 
           <Route path="/travel/:id" exact>
               <Header />
-              <ChosedCity cities={cities}/>
+              <ChosedCity cities={dataCities}/>
           </Route>
 
           <Route path="/add-activity-restaurant/:id">

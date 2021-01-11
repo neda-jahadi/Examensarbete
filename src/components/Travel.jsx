@@ -13,16 +13,19 @@ const Travel = ({cities, addNewCity}) => {
         history.push(link);
     }
 
-    const jsxCities = cities.map((city, index) => <div key={index} className="city-list" onClick={()=>sendTo(`/travel/${index}`)}>
-                                                      {city}
+    const jsxCities = cities.map((city, index) => <div key={index} className="city-list" >
+                                                      <span className="cityName" onClick={()=>sendTo(`/travel/${index}`)} >{city}</span>
                                                   </div>)
     return(
         <div className='travel-container'>
-            <div>Choose your favorite destination</div>
+            <div className="greeting">
+                <h2>Hej Neda!</h2>
+            </div>
+            <div className="choose-alternative" >Choose your favorite destination</div>
             
-            <div>
+            <div className="search-input-h">
 
-                <input type='text' placeholder="Search what you want..." />
+                <input className="search-input" type='text' placeholder="Search what you want..." />
 
             </div>
 
@@ -32,9 +35,9 @@ const Travel = ({cities, addNewCity}) => {
             <div className="addBtn-container">
                 {!addCity 
                     ? <button className="addBtn" onClick={() => setAddCity(true)}>Add your destination</button>
-                    : <div>
-                        <input type="text" placeholder="City..." onChange={(e) => setCity(e.target.value)} />
-                        <button onClick={() => {setAddCity(false); addNewCity(city)}}>Add</button>
+                    : <div className="input-add-holder" onBlur={ () => setAddCity(false)} >
+                        <input className="input-addCity" type="text" placeholder="City..." onChange={(e) => setCity(e.target.value)} />
+                        <button className="add-myCity" onClick={() => {setAddCity(false); addNewCity(city)}}>Add</button>
                       </div>}
                 
             </div>

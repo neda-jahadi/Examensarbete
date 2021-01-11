@@ -1,25 +1,70 @@
 .travel-container {
-    border: 1px solid; 
+    padding: 20px;
     height: 100%;
+   
 }
-.travel-container > div {
-    margin: 20px;
+.travel-container {
+    display: grid;
+    grid-template-rows: 10% 5% 10% 50% 20%;
 }
+
+.greeting {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.choose-alternative {
+    
+    font-size: large;
+}
+.search-input-h {
+   
+    display: flex;
+    align-items: center;
+}
+.search-input {
+    padding: 10px;
+    
+    border: none;
+    background-color: lightgray;
+    border-radius: 5px;
+}
+
 .cities {
     overflow-y: scroll;
-    border: 1px solid; 
-    height: 50%;
+    background: #B3F1F5; 
+    
 }
 .city-list {
     padding: 10px;
-    margin-right: 30px;
+    
 
+}
+.cityName:hover{
+    cursor: pointer;
 }
 .city-list:nth-child(odd) {
   background-color: lightgray;
 }
 .addBtn-container {
-    text-align: center;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-addCity{
+    padding: 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: lightgray;
+}
+.add-myCity {
+    padding: 10px;
+    background-color: green;
+    border-radius: 5px;
+    border: none;
 }
 .addBtn {
     padding: 10px;
