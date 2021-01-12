@@ -3,8 +3,7 @@ import './DataList.css';
 import deleteIcon from '../assets/delete.png';
 import editIcon from '../assets/edit.png';
 import backgroundImg from '../assets/background.jpg';
-import likeIcon from '../assets/like.png';
-import likedIcon from '../assets/liked.png';
+
 
 const DataList = ({data}) => {
     const [like, setLike] = useState(false);

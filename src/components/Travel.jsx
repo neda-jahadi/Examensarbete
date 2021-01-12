@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './Travel.css';
 import {useHistory} from 'react-router-dom';
 
-const Travel = ({cities, addNewCity}) => {
+const Travel = () => {
 
-    
+    const [dataCities, setDataCities] = useState([]);
     const [addCity, setAddCity] = useState(false);
     const [city, setCity] = useState('');
     const history = useHistory();
@@ -13,13 +13,40 @@ const Travel = ({cities, addNewCity}) => {
         history.push(link);
     }
 
-    const jsxCities = cities.map((city, index) => <div key={index} className="city-list" >
-                                                      <span className="cityName" onClick={()=>sendTo(`/travel/${index}`)} >{city}</span>
-                                                  </div>)
+    useEffect(async () => {
+        const response = await fetch('http://localhost:2294/api/cities' );
+        const cities = await response.json();
+        setDataCities(cities);
+        
+        
+      }, [dataCities]);
+   
+
+     async function addNewCity(addedCity) {
+        
+        let name = addedCity;
+        let activities = [];
+        let restaurants = [];
+        let data = { name , activities, restaurants};
+        
+        const response = await fetch('http://localhost:2294/api/addcity', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const text = await response.text();
+            console.log('response is:',text);
+      }
+
+    const jsxCities = dataCities.map((city, index) => <div key={index} className="city-list" >
+                                                             <span className="cityName" onClick={()=>sendTo(`/travel/${index}`)} >{city.name}</span>
+                                                      </div>)
     return(
         <div className='travel-container'>
             <div className="greeting">
-                <h2>Hej Neda!</h2>
+                <h2>Hej Neda!</h2> 
             </div>
             <div className="choose-alternative" >Choose your favorite destination</div>
             
@@ -35,7 +62,7 @@ const Travel = ({cities, addNewCity}) => {
             <div className="addBtn-container">
                 {!addCity 
                     ? <button className="addBtn" onClick={() => setAddCity(true)}>Add your destination</button>
-                    : <div className="input-add-holder" onBlur={ () => setAddCity(false)} >
+                    : <div className="input-add-holder" >
                         <input className="input-addCity" type="text" placeholder="City..." onChange={(e) => setCity(e.target.value)} />
                         <button className="add-myCity" onClick={() => {setAddCity(false); addNewCity(city)}}>Add</button>
                       </div>}

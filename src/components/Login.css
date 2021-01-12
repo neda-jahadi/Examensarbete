@@ -1,0 +1,10 @@
+.login-container {
+    height: 90%;
+   border: 1px solid;
+   display: grid;
+   grid-template-rows: 60% 20% 20%;
+}
+.user-info {
+    display: flex;
+    flex-direction: column;
+}

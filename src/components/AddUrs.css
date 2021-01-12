@@ -1,6 +1,6 @@
 .content-holder {
     height: 90%;
-    border: 1px solid;
+    
     display: grid;
     grid-template-rows: 10% 70% 10%;
     padding: 20px;

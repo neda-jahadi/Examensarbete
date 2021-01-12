@@ -13,7 +13,7 @@ const Header = () => {
     return(
         <div className="header-holder">
              <img src={home} alt="home" onClick={()=> sendTo("/travel")} className="home-icon" />
-             <div className="sign-out">Sign out!</div>
+             <div className="sign-out" onClick={()=> sendTo("/")}>Sign out!</div>
             
         </div>
     )

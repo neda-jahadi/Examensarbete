@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
 import Travel from './components/Travel';
 import ChosedCity from './components/ChosedCity';
@@ -6,27 +6,15 @@ import Container from './components/Container';
 import {BrowserRouter, Route} from 'react-router-dom';
 import AddUrs from './components/AddUrs';
 import Header from './components/Header';
+import Login  from './components/Login';
 
 function App() {
 
-  const [dataCities, setDataCities] = useState([]);
-
-  // let cities = ['Paris', 'Rome', 'Kualalampour', 'Stockholm', 'Madrid', 'London',
-  //                 'Tokyo', 'Rio', 'Moscow', 'Los Angeles', 'Milan', 'Sergy', ]
-
-  useEffect(async () => {
-    const response = await fetch('http://localhost:2294/api/cities' );
-    const cities = await response.json();
-    setDataCities(cities);
-  }, []);
-
-  
   
 
+  
 
-  // const addNewCity = (newCity) => {
-  //   cities.push(newCity);
-  // }
+  
 
   return (
    
@@ -34,19 +22,20 @@ function App() {
       <Container>
         
         <BrowserRouter>
-
+          
           <Route path="/" exact>
-              <button >Get data</button>
+              <Header />
+              <Login />
           </Route>
 
           <Route path="/travel" exact>
               <Header />
-              <Travel cities={dataCities} />
+              <Travel />
           </Route>
 
           <Route path="/travel/:id" exact>
               <Header />
-              <ChosedCity cities={dataCities}/>
+              <ChosedCity />
           </Route>
 
           <Route path="/add-activity-restaurant/:id">
