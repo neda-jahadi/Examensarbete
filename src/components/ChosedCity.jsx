@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react';
+import React,{ useState} from 'react';
 import './ChosedCity.css';
 import {useHistory} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
@@ -8,7 +8,7 @@ import DataList from './DataList';
 const ChosedCity = () => {
     let activities = null;
     let restaurants = null;
-    
+
     const [city, setCity] = useState({});
     
     const {id} = useParams();
@@ -18,14 +18,11 @@ const ChosedCity = () => {
     const getCity = () => {
         fetch(`http://localhost:2294/api/city/?id=${id}` )
         .then(response => response.json())
-        .then(res => {setCity(res); console.log('activity',res.activities); console.log('restaurant', res.restaurants)})
+        .then(res => setCity(res))
         .catch(error => console.log(error))
         
     }
-        
-      
     
-   
      if(!city.name) {
          getCity();
          
@@ -36,23 +33,17 @@ const ChosedCity = () => {
         history.push(link);
     }
 
-    // let data = [{name: 'jssj', address: 'msncjsnjs', comment:'ssds', likes:1 },
-    //                     {name: 'jnzsjk', address: 'Fredåsgatan 18B 31276 Göteborg', comment:'ssds', likes:1 },
-    //                     {name: 'sklcishi', address: 'knc jszk', comment:'ssds', likes:1 },
-    //                     {name: 'sllsos', address: 'skcnsjs', comment:'ssds', likes:1 },
-    //                     {name: 'sxkcnsis', address: 'l.los', comment:'ssds', likes:1 },
-    //                     {name: 'szkiidid', address: 'ksmksi', comment:'ssds', likes:1 },
-    //                     {name: 'xmncjksj', address: 'ucsknsj', comment:'ssds', likes:1 },
-    //                     {name: 'jnzsjk', address: 'Fredåsgatan 18B 31276 Göteborg', comment:'ssds', likes:1 },
-    //                     {name: 'sklcishi', address: 'knc jszk', comment:'ssds', likes:1 },
-    //                     {name: 'sllsos', address: 'skcnsjs', comment:'ssds', likes:1 },
-    //                     {name: 'sxkcnsis', address: 'l.los', comment:'ssds', likes:1 },
-    //                     {name: 'szkiidid', address: 'ksmksi', comment:'ssds', likes:1 },
-    //                     {name: 'xmncjksj', address: 'ucsknsj', comment:'ssds', likes:1 },
-    //                  ]
    
-    if(city.activities) activities = <DataList data={city.activities} />
-    if(city.restaurants) restaurants = <DataList data={city.restaurants} />
+    if(city.activities) activities = <DataList
+                                         data={city.activities}
+                                         source ='activity'
+                                         id1={id}
+                                         updateCity={getCity} />
+    if(city.restaurants) restaurants = <DataList 
+                                         data={city.restaurants}
+                                         source ='restaurant'
+                                         id1={id}
+                                         updateCity={getCity} />
    
     
     
@@ -75,7 +66,7 @@ const ChosedCity = () => {
                 </div>
                 <div className="addIcon-holder">
                     <div>Add yours</div>
-                    <img src={addIcon} alt="add-activity" className="add-icon" onClick={()=> sendTo(`/add-activity-restaurant/${id}`)} />
+                    <img src={addIcon} alt="add-activity" className="add-icon" onClick={()=> sendTo(`/add-activity/${id}`)} />
                 </div>
 
             </div>
@@ -94,7 +85,7 @@ const ChosedCity = () => {
                 </div>
                 <div className="addIcon-holder">
                     <div>Add yours</div>
-                    <img src={addIcon} alt="add-activity" className="add-icon"  onClick={()=> sendTo(`/add-activity-restaurant/${id}`)}/>
+                    <img src={addIcon} alt="add-restaurant" className="add-icon"  onClick={()=> sendTo(`/add-restaurant/${id}`)}/>
                 </div>
 
             </div>

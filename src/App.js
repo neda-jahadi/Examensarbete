@@ -4,7 +4,9 @@ import Travel from './components/Travel';
 import ChosedCity from './components/ChosedCity';
 import Container from './components/Container';
 import {BrowserRouter, Route} from 'react-router-dom';
-import AddUrs from './components/AddUrs';
+import AddUrsActivity from './components/AddUrsActivity';
+import AddUrsRestaurant from './components/AddUrsRestaurant';
+
 import Header from './components/Header';
 import Login  from './components/Login';
 
@@ -38,9 +40,14 @@ function App() {
               <ChosedCity />
           </Route>
 
-          <Route path="/add-activity-restaurant/:id">
+          <Route path="/add-activity/:id">
               <Header />
-              <AddUrs />
+              <AddUrsActivity />
+          </Route>
+
+          <Route path="/add-restaurant/:id">
+              <Header />
+              <AddUrsRestaurant />
           </Route>
 
         </BrowserRouter>
