@@ -40,15 +40,15 @@ function App() {
               <ChosedCity />
           </Route>
 
-          <Route path="/add-activity/:id">
+          <Route path="/add/:item/:id">
               <Header />
               <AddUrsActivity />
           </Route>
 
-          <Route path="/add-restaurant/:id">
+          {/* <Route path="/add-restaurant/:id">
               <Header />
               <AddUrsRestaurant />
-          </Route>
+          </Route> */}
 
         </BrowserRouter>
       </Container>

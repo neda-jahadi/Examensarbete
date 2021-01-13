@@ -18,7 +18,7 @@ const AddUrsRestaurant = () => {
     }
 
     async function onSubmit() {
-        let restaurant = {rname: name, address: address, comment: comment, likes: '1'};
+        let restaurant = {name: name, address: address, comment: comment, likes: '1'};
   
          const response = await fetch(`http://localhost:2294/api/addrestaurant?id=${id}`, {
                   method: 'POST',

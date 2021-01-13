@@ -66,7 +66,7 @@ const ChosedCity = () => {
                 </div>
                 <div className="addIcon-holder">
                     <div>Add yours</div>
-                    <img src={addIcon} alt="add-activity" className="add-icon" onClick={()=> sendTo(`/add-activity/${id}`)} />
+                    <img src={addIcon} alt="add-activity" className="add-icon" onClick={()=> sendTo(`/add/activity/${id}`)} />
                 </div>
 
             </div>
@@ -85,7 +85,7 @@ const ChosedCity = () => {
                 </div>
                 <div className="addIcon-holder">
                     <div>Add yours</div>
-                    <img src={addIcon} alt="add-restaurant" className="add-icon"  onClick={()=> sendTo(`/add-restaurant/${id}`)}/>
+                    <img src={addIcon} alt="add-restaurant" className="add-icon"  onClick={()=> sendTo(`/add/restaurant/${id}`)}/>
                 </div>
 
             </div>

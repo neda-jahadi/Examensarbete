@@ -34,7 +34,7 @@ const DataList = ({data,source,id1, updateCity}) => {
                                                                         <div className="activity-holder">
                                                                             <div>
                                                                                 <div className="title">Name:</div>
-                                                                                <div className="item-info">{datum.aname}</div>
+                                                                                <div className="item-info">{datum.name}</div>
                                                                             </div>
                                                                             <div>
                                                                                 <div className="title">Address:</div>
@@ -72,7 +72,7 @@ const DataList = ({data,source,id1, updateCity}) => {
                                                                         <div className="activity-holder">
                                                                             <div>
                                                                                 <div className="title">Name:</div>
-                                                                                <div className="item-info">{datum.rname}</div>
+                                                                                <div className="item-info">{datum.name}</div>
                                                                             </div>
                                                                             <div>
                                                                                 <div className="title">Address:</div>

@@ -6,26 +6,47 @@ import {useParams} from 'react-router-dom';
 
 const AddUrsActivity = () => {
 
+    let title = '', apiTitle = '';
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [comment, setComment] = useState('');
 
     const history = useHistory();
-    const {id} = useParams();
-
+    const {item,id} = useParams();
+    
     const sendTo = (link) =>{
         history.push(link);
     }
 
-    async function onSubmit() {
-      let activity = {aname: name, address: address, comment: comment, likes: '1'};
+    switch (item) {
+        case 'activity':
+            title = 'Your favorite Activity';
+            apiTitle = 'activities';
+            break;
+        case 'restaurant':
+            title = 'Your favorite Restaurant';
+            apiTitle = 'restaurants';
+            break;
+        case 'editactivity':
+            title = 'Edit Activity';
+            apiTitle = 'editactivity';
+            break;
+    
+        default:
+            title = 'Edit Restaurant';
+            apiTitle = 'editrestaurant';
+            break;
+    }
 
-       const response = await fetch(`http://localhost:2294/api/addactivity?id=${id}`, {
+    async function onSubmit() {
+      let item = {name: name, address: address, comment: comment, likes: '1'};
+
+       const response = await fetch(`http://localhost:2294/api/add/?title=${apiTitle}&id=${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(activity)
+                body: JSON.stringify(item)
             })
         const text = await response.text();
         console.log(text);
@@ -36,7 +57,7 @@ const AddUrsActivity = () => {
     return(
         <div className="content-holder">
             <div className="title">
-                <span>Your favorite Activity</span>
+                <span>{title}</span>
             </div>
             <div className="content">
                 <input type="text" placeholder="Name ... " onChange={(e) => setName(e.target.value) }/>
