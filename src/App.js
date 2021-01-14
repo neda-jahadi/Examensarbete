@@ -5,7 +5,6 @@ import ChosedCity from './components/ChosedCity';
 import Container from './components/Container';
 import {BrowserRouter, Route} from 'react-router-dom';
 import AddUrsActivity from './components/AddUrsActivity';
-import AddUrsRestaurant from './components/AddUrsRestaurant';
 
 import Header from './components/Header';
 import Login  from './components/Login';
@@ -13,8 +12,7 @@ import Login  from './components/Login';
 function App() {
 
   
-
-  
+ 
 
   
 
