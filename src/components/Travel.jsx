@@ -40,8 +40,9 @@ const Travel = () => {
             console.log('response is:',text);
       }
 
-    const jsxCities = dataCities.map((city, index) => <div key={index} className="city-list" >
-                                                             <span className="cityName" onClick={()=>sendTo(`/travel/${index}`)} >{city.name}</span>
+    const jsxCities = dataCities.map((city, index) => <div key={city._id} className="city-list" >
+                                                            
+                                                             <span className="cityName" onClick={()=>sendTo(`/travel/${city._id}`)} >{city.name}</span>
                                                       </div>)
     return(
         <div className='travel-container'>
