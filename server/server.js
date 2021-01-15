@@ -132,3 +132,7 @@ app.listen(port, ()=>{
 
 // add to activities list
 // db.cities.update({ _id: ObjectId("60001f8c981b5758410bcbdf") }, { $push: { activities: {name:'RollerCoster', address:'Wide street 432 12', likes:1, comment:'Very exciting'} } } )
+
+//db.cities.findOne({$elemMatch:{name:'Paris'}})
+//db.cities.updateOne({ name: {$nin: 'Paris'} }, {  $push: { "list.$.arr": "55555555555555555" } } )
+// db.cities.update({name:'Los Angeles'}, {name:'Los Angeles', activities:[], restaurants:[]}, upsert=true)

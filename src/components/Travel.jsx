@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import './Travel.css';
 import {useHistory} from 'react-router-dom';
 
 const Travel = () => {
 
-    const [dataCities, setDataCities] = useState([]);
+    const [cities, setCities] = useState([]);
     const [addCity, setAddCity] = useState(false);
     const [city, setCity] = useState('');
     const history = useHistory();
@@ -12,14 +12,17 @@ const Travel = () => {
     const sendTo = (link) =>{
         history.push(link);
     }
+    
 
-    useEffect(async () => {
+    async function updateCities() {
         const response = await fetch('http://localhost:2294/api/cities' );
-        const cities = await response.json();
-        setDataCities(cities);
+        const updatedCities = await response.json();
+        setCities(updatedCities);
+        
+    }
         
         
-      }, [dataCities]);
+      
    
 
      async function addNewCity(addedCity) {
@@ -38,12 +41,21 @@ const Travel = () => {
             });
             const text = await response.text();
             console.log('response is:',text);
+            updateCities();
       }
 
-    const jsxCities = dataCities.map((city, index) => <div key={city._id} className="city-list" >
+    let jsxCities = null;
+    if(cities.length === 0){
+        updateCities();
+    }
+    
+    if(cities.length > 0) {
+      jsxCities = cities.map((city, index) => <div key={city._id} className="city-list" >
                                                             
                                                              <span className="cityName" onClick={()=>sendTo(`/travel/${city._id}`)} >{city.name}</span>
                                                       </div>)
+    }
+
     return(
         <div className='travel-container'>
             <div className="greeting">

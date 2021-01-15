@@ -13,6 +13,8 @@ function getAllCities(callback) {
     }
 
     function insertCity(newCity, callback) {
+      key = {'name': newCity.name}
+      value = newCity
         MongoClient.connect(
           url,
           {  useUnifiedTopology: true },
@@ -23,12 +25,24 @@ function getAllCities(callback) {
             }
             const col = client.db(dbName).collection(collectionName);
             try {
-              const cursor = await col.insertOne(newCity);
+              const cursor = await col.findOne({name: { "$regex":  newCity.name, $options: 'i'} });
+              if(cursor){callback('Already exists');}
+              else {
+                try{
+                  const cursor = await col.insertOne(newCity);
+                  callback(cursor.insertedId);
+                }catch(error){
+                  callback('"ERROR!! Query error insert"');
+                }finally{
+                  client.close();
+                }
+              }
       
-              callback(cursor.insertedId);
+              
             }catch(error) {
+
               console.log('Querry error:', error.message);
-              callback('"ERROR!! Query error"');
+              callback('"ERROR!! Query error find"');
       
             } finally {
               client.close();
