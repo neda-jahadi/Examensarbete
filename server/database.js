@@ -64,16 +64,15 @@ function getAllCities(callback) {
             const col = client.db(dbName).collection(collectionName);
             try {
                 if(entityTitle === 'activities' ) {
-                    const cursor = await col.updateOne({ _id: new ObjectID(id) }, { $push: { activities: newEntity } } );
-                    callback(cursor.result);
+                    
+                        const cursor = await col.updateOne({ _id: new ObjectID(id) }, { $push: { activities: newEntity } } );
+                        callback(cursor.result);
                 }
                 else{
-                    const cursor = await col.updateOne({ _id: new ObjectID(id) }, { $push: { restaurants: newEntity } } );
-                    callback(cursor.result);
+                        const cursor = await col.updateOne({ _id: new ObjectID(id) }, { $push: { restaurants: newEntity } } );
+                        callback(cursor.result);
                 } 
 
-      
-              
             }catch(error) {
               console.log('Querry error:', error.message);
               callback('"ERROR!! Query error"');
@@ -84,6 +83,43 @@ function getAllCities(callback) {
           }
         )
       }
+
+  function deleteEntity(id, entityTitle, entityname,entityaddress, callback){
+   
+
+    MongoClient.connect(
+      url,
+      {  useUnifiedTopology: true },
+      async (error,client) => {
+        if(error) {
+          callback('"ERROR!! Could not connect"');
+          return;
+        }
+        const col = client.db(dbName).collection(collectionName);
+        try {
+            if(entityTitle === 'activity' ) {
+                
+                    const cursor = await col.updateOne(
+                      { _id: new ObjectID(id) }, { $pull: { activities: {name: entityname , address: entityaddress} } })
+                    callback(cursor.result);
+            }
+            else{
+                    const cursor = await col.updateOne(
+                      { _id: new ObjectID(id) }, { $pull: { restaurants: {name: entityname , address: entityaddress} } } );
+                    callback(cursor.result);
+            } 
+
+        }catch(error) {
+          console.log('Querry error:', error.message);
+          callback('"ERROR!! Query error"');
+  
+        } finally {
+          client.close();
+        }
+      }
+    )
+
+  }
 
   function get(filter, callback) {
     console.log('1');
@@ -121,4 +157,4 @@ function getAllCities(callback) {
   )
 }
 
-module.exports = {getAllCities, getCity, insertCity, insertEntity}
+module.exports = {getAllCities, getCity, insertCity, insertEntity, deleteEntity}

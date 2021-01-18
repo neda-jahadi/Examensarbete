@@ -9,7 +9,7 @@ app.use(cors())
 
 const port = 2294;
 
-const {getAllCities, getCity, insertCity, insertEntity} = require('./database.js');
+const {getAllCities, getCity, insertCity, insertEntity, deleteEntity} = require('./database.js');
 
 let logger = (req,res,next) =>{
     console.log(`LOGGER: ${req.method} ${req.url}`);
@@ -70,21 +70,23 @@ app.get('/api/city', (req, res) => {
     // res.send( cities[id] )
 })
 
-app.get('/api/deleteactivity', (req,res) => {
-    let cityId = Number(req.query.id1);
-    let activityId = Number(req.query.id2);
-    let city = cities[cityId];
-    city.activities.splice(activityId,1);
-    res.send('Activity is deleted');
+app.get('/api/deletentity', (req,res) => {
+    let cityId = (req.query.id1);
+    let entityTitle = (req.query.title);
+    let entityDataName = req.query.entityname;
+    let entityDataAddress = req.query.entityaddress;
+    deleteEntity(cityId,entityTitle,entityDataName, entityDataAddress, dataOrError => {
+        res.send(dataOrError)
+    })
 })
 
-app.get('/api/deleterestaurant', (req,res) => {
-    let cityId = Number(req.query.id1);
-    let restaurantId = Number(req.query.id2);
-    let city = cities[cityId];
-    city.restaurants.splice(restaurantId,1);
-    res.send('Restaurant is deleted');
-})
+// app.get('/api/deleterestaurant', (req,res) => {
+//     let cityId = Number(req.query.id1);
+//     let restaurantId = Number(req.query.id2);
+//     let city = cities[cityId];
+//     city.restaurants.splice(restaurantId,1);
+//     res.send('Restaurant is deleted');
+// })
 
 app.post('/api/addcity', (req, res) => {
     let newCity = { name: req.body.name, activities: req.body.activities, restaurants: req.body.restaurants };
@@ -136,3 +138,36 @@ app.listen(port, ()=>{
 //db.cities.findOne({$elemMatch:{name:'Paris'}})
 //db.cities.updateOne({ name: {$nin: 'Paris'} }, {  $push: { "list.$.arr": "55555555555555555" } } )
 // db.cities.update({name:'Los Angeles'}, {name:'Los Angeles', activities:[], restaurants:[]}, upsert=true)
+// db.cities.findOne({})
+// db.collection.update( {name: 'Rome', activities: { $nin: [{name:"Rome Pizza", address: "West st. 1234"} ] } }, {  $push: { activities: {name: 'Rome Pizza', address: 'West st. 1234'} } } )
+// "_id" : ObjectId("60001f8c981b5758410bcbdf"),
+// "name" : "Rome",
+// "activities" : [
+//         {
+//                 "name" : "Parco Savello",
+//                 "address" : "Lookouts, Parks, Gardens",
+// db.cities.findOne({"_id" : ObjectId("60001f8c981b5758410bcbdf")}, {activities:{"name" : "Parco","address" : "Look, Gardens"}})
+// db.cities.findOne(
+//     {"_id" : ObjectId("60001f8c981b5758410bcbdf"), activities:{"name" : "Parco","address" : "Look, Gardens"} })
+// try {
+//     if(entityTitle === 'activities' ) {
+//         const cursor = await col.findOne({activities:{$elemMatch:{"name" :{ "$regex":  newEntity.name, $options: 'i'} ,"address" : { "$regex":  newEntity.address, $options: 'i'}}}})
+//         if(cursor){
+//           callback('Activity already exist');
+//         }else{
+//           try{
+//             const cursor = await col.updateOne({ _id: new ObjectID(id) }, { $push: { activities: newEntity } } );
+//             callback(cursor.result);
+//           }catch(error){
+//             callback('"ERROR!! Query error insert"');
+//           }finally{
+//             client.close();
+//           }
+//         }
+       
+//     }
+// db.cities.updateOne({ _id: ObjectId("60001f8c981b5758410bcbdf") }, { $pull: { activities: {name: 'Pitta naze', address: 'Lookouts, Parks, Gardens'} } } )
+
+// db.cities.updateOne({ _id: ObjectId("60003d4c67f8b03cd0d27c8d") }, { $pull: { activities: {name:'Battery Park', address:'"New York, NY 10004, USA'}}})
+
+// db.cities.updateOne({ _id: ObjectId("60001f8c981b5758410bcbdf") }, { $pull: { activities: {name: 'Parco Savello', address: 'Lookouts, Parks, Gardens'} } } )

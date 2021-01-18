@@ -12,18 +12,20 @@ const DataList = ({ data, source, id1, updateCity }) => {
 
     switch (source) {
         case 'activity':
-            deleteTitle = 'deleteactivity';
+            deleteTitle = 'activity';
             editTitle = 'editactivity';
             break;
     
         default:
-            deleteTitle = 'deleterestaurant';
+            deleteTitle = 'restaurant';
             editTitle = 'editrestaurant';
             break;
     }
 
-    const OnDeleteEntity = (id2) => {
-        fetch(`http://localhost:2294/api/${deleteTitle}/?id1=${id1}&id2=${id2}`)
+    const OnDeleteEntity = (data) => {
+        let url = `http://localhost:2294/api/deletentity/?id1=${id1}&title=${deleteTitle}&entityname=${data.name}&entityaddress=${data.address}`;
+        
+        fetch(url)
             .then(response => response.text())
             .then(res => console.log(res))
             .catch(error => console.log(error))
@@ -63,7 +65,7 @@ const DataList = ({ data, source, id1, updateCity }) => {
                     : <div className="liked" onClick={() => setLike(false)}>Liked </div>}
 
                 <div className="Delete-edit">
-                    <img src={deleteIcon} alt="delete" className="delete-icon" onClick={() => OnDeleteEntity(index)} />
+                    <img src={deleteIcon} alt="delete" className="delete-icon" onClick={() => OnDeleteEntity(datum)} />
                     <img src={editIcon} alt="edit" onClick={() =>   history.push(`/add/${editTitle}/${index}`)} />
                 </div>
 
