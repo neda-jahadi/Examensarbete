@@ -111,12 +111,12 @@ app.post('/api/add/', (req,res) =>{
     
 })
 
-app.post('/api/addrestaurant', (req,res) =>{
-    let newRestaurant = {name: req.body.name, address: req.body.address, comment: req.body.comment, likes: Number(req.body.likes) }
-    let id = Number(req.query.id);
-    cities[id].restaurants.push(newRestaurant);
-    res.send('New restaurant is added');
-})
+// app.post('/api/addrestaurant', (req,res) =>{
+//     let newRestaurant = {name: req.body.name, address: req.body.address, comment: req.body.comment, likes: Number(req.body.likes) }
+//     let id = Number(req.query.id);
+//     cities[id].restaurants.push(newRestaurant);
+//     res.send('New restaurant is added');
+// })
 
 app.listen(port, ()=>{
     console.log('Web server listening on port:' + port);

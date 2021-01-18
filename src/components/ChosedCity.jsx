@@ -10,7 +10,9 @@ const ChosedCity = () => {
     let restaurants = null;
 
     const [city, setCity] = useState({});
-    
+    const [showActivitySearch, setShowActivitySearch] = useState(false);
+    const [showRestaurantSearch, setShowRestaurantSearch] = useState(false);
+
     const {id} = useParams();
     const history = useHistory();
     
@@ -18,19 +20,37 @@ const ChosedCity = () => {
     const getCity = () => {
         fetch(`http://localhost:2294/api/city/?id=${id}` )
         .then(response => response.json())
-        .then(res => setCity(res))
+        .then(res => {
+                setCity(res);
+                decideShowSearch(res);
+            }
+                )
         .catch(error => console.log(error))
         
     }
     
      if(!city.name) {
-         getCity();
-         
+         getCity();   
      }
      
 
     const sendTo = (link) =>{
         history.push(link);
+    }
+
+    const decideShowSearch = (cityResponse) => {
+
+        if(cityResponse.activities.length > 0){
+            setShowActivitySearch(true)
+        }else{
+            setShowActivitySearch(false)
+        }
+        if(cityResponse.restaurants.length > 0){
+            
+            setShowRestaurantSearch(true)
+        }else {
+            setShowRestaurantSearch(false)
+        }
     }
 
    
@@ -55,7 +75,8 @@ const ChosedCity = () => {
             <div className="city-info">
                 <div className="info-title">
                     <div>Activities</div>
-                    <input type="text" placeholder="Search what you want..." style={{marginLeft: 20}} />
+                    <input type="text" placeholder="Search what you want..." 
+                        style={{ display: showActivitySearch ? "block" : "none" }} />
                 </div>
                 
                 <div className="activities-scroll">
@@ -74,7 +95,8 @@ const ChosedCity = () => {
             <div className="city-info">
                 <div className="info-title">
                     <div>Restaurants</div>
-                    <input type="text" placeholder="Search what you want..." style={{marginLeft: 20}} />
+                    <input type="text" placeholder="Search what you want..." 
+                        style={{ display: showRestaurantSearch ? "block" : "none" }} />
                 </div>
                 
                 <div className="activities-scroll">
