@@ -4,8 +4,8 @@ const url = 'mongodb://localhost:27017';
 const dbName = 'trip';
 const collectionName = 'cities';
 
-function getAllCities(callback) {
-    get({}, callback)
+function getAllCities(searchword, callback) {
+    get({name:{"$regex": `.*${searchword}.*`, $options: "i"}}, callback)
   }
 
   function getCity(id,callback) {

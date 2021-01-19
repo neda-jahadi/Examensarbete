@@ -1,4 +1,4 @@
-import React,{ useState} from 'react';
+import React,{ useState, useEffect} from 'react';
 import './ChosedCity.css';
 import {useHistory} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
@@ -12,6 +12,8 @@ const ChosedCity = () => {
     const [city, setCity] = useState({});
     const [showActivitySearch, setShowActivitySearch] = useState(false);
     const [showRestaurantSearch, setShowRestaurantSearch] = useState(false);
+    // const [searchActivity, setSearchActivity] = useState('');
+    // const [searchRestaurant, setSearchRestaurant] = useState('');
 
     const {id} = useParams();
     const history = useHistory();
@@ -28,6 +30,11 @@ const ChosedCity = () => {
         .catch(error => console.log(error))
         
     }
+
+    // useEffect( () => {
+    //     getCity()
+       
+    //   },[searchActivity]);   
     
      if(!city.name) {
          getCity();   
@@ -76,7 +83,9 @@ const ChosedCity = () => {
                 <div className="info-title">
                     <div>Activities</div>
                     <input type="text" placeholder="Search what you want..." 
-                        style={{ display: showActivitySearch ? "block" : "none" }} />
+                        style={{ display: showActivitySearch ? "block" : "none" }}
+                        // onChange={(e) => setSearchActivity(e.target.value)}
+                         />
                 </div>
                 
                 <div className="activities-scroll">

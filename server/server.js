@@ -56,7 +56,8 @@ let cities = [{ id: '0',name:'Paris'
 
 
 app.get('/api/cities/', (req,res) =>{
-    getAllCities(dataOrError =>{
+    let searchword = req.query.searchword;
+    getAllCities(searchword, dataOrError =>{
         res.send(dataOrError)
       })
     // res.send(cities);

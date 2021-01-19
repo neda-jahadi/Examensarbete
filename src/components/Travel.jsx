@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './Travel.css';
 import {useHistory} from 'react-router-dom';
 
@@ -7,6 +7,8 @@ const Travel = () => {
     const [cities, setCities] = useState([]);
     const [addCity, setAddCity] = useState(false);
     const [city, setCity] = useState('');
+    const [searchedCity, setSearchedCity] = useState('');
+
     const history = useHistory();
 
     const sendTo = (link) =>{
@@ -15,13 +17,16 @@ const Travel = () => {
     
 
     async function updateCities() {
-        const response = await fetch('http://localhost:2294/api/cities' );
+        const response = await fetch(`http://localhost:2294/api/cities/?searchword=${searchedCity}`);
         const updatedCities = await response.json();
         setCities(updatedCities);
         
     }
         
-        
+    useEffect( () => {
+        updateCities()
+       
+      },[searchedCity]);   
       
    
 
@@ -65,7 +70,9 @@ const Travel = () => {
             
             <div className="search-input-h">
 
-                <input className="search-input" type='text' placeholder="Search what you want..." />
+                <input className="search-input" type='text'
+                      placeholder="Search city you want..."
+                      onChange={(e) => setSearchedCity(e.target.value) } />
 
             </div>
 
