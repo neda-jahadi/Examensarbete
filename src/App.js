@@ -8,6 +8,7 @@ import AddUrsActivity from './components/AddUrsActivity';
 
 import Header from './components/Header';
 import Login  from './components/Login';
+import CreateAccount from './CreateAccount';
 
 function App() {
   
@@ -22,6 +23,11 @@ function App() {
           <Route path="/" exact>
               <Header />
               <Login />
+          </Route>
+
+          <Route path="/account" exact>
+              <Header />
+              <CreateAccount />
           </Route>
 
           <Route path="/travel" exact>

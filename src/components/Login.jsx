@@ -10,11 +10,11 @@ const Login = () => {
                 <input type="text" placeholder="Password..." />
 
             </div>
-            <div>
-                <button>Login</button>
+            <div className="loginbtn-holder">
+                <button className="login-btn">Login</button>
             </div>
             <div className="create-account">
-                Create an account!
+                <span>Create an account!</span>
             </div>
             
         </div>
