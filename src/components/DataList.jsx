@@ -24,7 +24,7 @@ const DataList = ({ data, source, id1, updateCity }) => {
 
     const OnDeleteEntity = (data) => {
         let url = `http://localhost:2294/api/deletentity/?id1=${id1}&title=${deleteTitle}&entityname=${data.name}&entityaddress=${data.address}`;
-        
+        console.log(url);
         fetch(url)
             .then(response => response.text())
             .then(res => console.log(res))

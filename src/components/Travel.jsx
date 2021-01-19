@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import './Travel.css';
 import {useHistory} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
+import { getSuggestedQuery } from '@testing-library/react';
+
 
 const Travel = () => {
 
@@ -8,13 +11,31 @@ const Travel = () => {
     const [addCity, setAddCity] = useState(false);
     const [city, setCity] = useState('');
     const [searchedCity, setSearchedCity] = useState('');
+    const [greetingName, setGreetingName] = useState('');
+
+    const {userid} = useParams();
+
 
     const history = useHistory();
 
     const sendTo = (link) =>{
         history.push(link);
     }
+
     
+    const getUser = () => {
+        fetch(`http://localhost:2294/api/user/?userid=${userid}` )
+        .then(response => response.json())
+        .then(res => {
+                setGreetingName(res.name)
+            }
+                )
+        .catch(error => console.log(error))
+    }
+
+    if(greetingName ===''){
+        getUser();
+    }
 
     async function updateCities() {
         const response = await fetch(`http://localhost:2294/api/cities/?searchword=${searchedCity}`);
@@ -57,14 +78,14 @@ const Travel = () => {
     if(cities.length > 0) {
       jsxCities = cities.map((city, index) => <div key={city._id} className="city-list" >
                                                             
-                                                             <span className="cityName" onClick={()=>sendTo(`/travel/${city._id}`)} >{city.name}</span>
+                                                             <span className="cityName" onClick={()=>sendTo(`/travel/city/${userid}/${city._id}`)} >{city.name}</span>
                                                       </div>)
     }
 
     return(
         <div className='travel-container'>
             <div className="greeting">
-                <h2>Hej Neda!</h2> 
+                <h2>Hej{greetingName}!</h2> 
             </div>
             <div className="choose-alternative" >Choose your favorite destination</div>
             

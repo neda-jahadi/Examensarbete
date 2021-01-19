@@ -13,7 +13,7 @@ const AddUrsActivity = () => {
     const [comment, setComment] = useState('');
 
     const history = useHistory();
-    const {item,id} = useParams();
+    const {item,userid,cityid} = useParams();
     const [city, setCity] = useState({});
 
     const sendTo = (link) =>{
@@ -21,7 +21,7 @@ const AddUrsActivity = () => {
     }
 
     const getCity = () => {
-        fetch(`http://localhost:2294/api/city/?id=${id}` )
+        fetch(`http://localhost:2294/api/city/?id=${cityid}` )
         .then(response => response.json())
         .then(res => setCity(res))
         .catch(error => console.log(error))
@@ -79,7 +79,7 @@ const AddUrsActivity = () => {
     }
 
     async function insertTheEntity (item) {
-           const response = await fetch(`http://localhost:2294/api/add/?title=${apiTitle}&id=${id}`, {
+           const response = await fetch(`http://localhost:2294/api/add/?title=${apiTitle}&id=${cityid}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -89,7 +89,7 @@ const AddUrsActivity = () => {
         const text = await response.text();
         console.log(text);
             
-        sendTo(`/travel/${id}`);
+        sendTo(`/travel/city/${userid}/${cityid}`);
     }
 
     return(

@@ -30,17 +30,17 @@ function App() {
               <CreateAccount />
           </Route>
 
-          <Route path="/travel" exact>
+          <Route path="/travel/:userid" exact>
               <Header />
               <Travel />
           </Route>
 
-          <Route path="/travel/:id" exact>
+          <Route path="/travel/city/:userid/:cityid" exact>
               <Header />
               <ChosedCity />
           </Route>
 
-          <Route path="/add/:item/:id">
+          <Route path="/add/:item/:userid/:cityid">
               <Header />
               <AddUrsActivity />
           </Route>

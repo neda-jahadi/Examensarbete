@@ -15,12 +15,12 @@ const ChosedCity = () => {
     // const [searchActivity, setSearchActivity] = useState('');
     // const [searchRestaurant, setSearchRestaurant] = useState('');
 
-    const {id} = useParams();
+    const {userid,cityid} = useParams();
     const history = useHistory();
     
 
     const getCity = () => {
-        fetch(`http://localhost:2294/api/city/?id=${id}` )
+        fetch(`http://localhost:2294/api/city/?id=${cityid}` )
         .then(response => response.json())
         .then(res => {
                 setCity(res);
@@ -64,12 +64,12 @@ const ChosedCity = () => {
     if(city.activities) activities = <DataList
                                          data={city.activities}
                                          source ='activity'
-                                         id1={id}
+                                         id1={cityid}
                                          updateCity={getCity} />
     if(city.restaurants) restaurants = <DataList 
                                          data={city.restaurants}
                                          source ='restaurant'
-                                         id1={id}
+                                         id1={cityid}
                                          updateCity={getCity} />
    
     
@@ -96,7 +96,7 @@ const ChosedCity = () => {
                 </div>
                 <div className="addIcon-holder">
                     <div>Add yours</div>
-                    <img src={addIcon} alt="add-activity" className="add-icon" onClick={()=> sendTo(`/add/activity/${id}`)} />
+                    <img src={addIcon} alt="add-activity" className="add-icon" onClick={()=> sendTo(`/add/activity/${userid}/${cityid}`)} />
                 </div>
 
             </div>
@@ -116,7 +116,7 @@ const ChosedCity = () => {
                 </div>
                 <div className="addIcon-holder">
                     <div>Add yours</div>
-                    <img src={addIcon} alt="add-restaurant" className="add-icon"  onClick={()=> sendTo(`/add/restaurant/${id}`)}/>
+                    <img src={addIcon} alt="add-restaurant" className="add-icon"  onClick={()=> sendTo(`/add/restaurant/${userid}/${cityid}`)}/>
                 </div>
 
             </div>
