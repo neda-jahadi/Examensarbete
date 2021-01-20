@@ -9,7 +9,8 @@ app.use(cors())
 
 const port = 2294;
 
-const {getAllCities, getCity, insertCity, insertEntity, deleteEntity, insertUser, getUser,loginUser} = require('./database.js');
+const {getAllCities, getCity, insertCity, insertEntity,
+         deleteEntity, insertUser, getUser,loginUser, userAvailibility} = require('./database.js');
 
 let logger = (req,res,next) =>{
     console.log(`LOGGER: ${req.method} ${req.url}`);
@@ -51,6 +52,13 @@ app.get('/api/login', (req,res) => {
     let user = req.query.username;
     let pass = req.query.password;
     loginUser(user, pass, dataOrError => {
+        res.send(dataOrError)
+    })
+})
+
+app.get('/api/useravailibility', (req,res) => {
+    let user = req.query.username;
+    userAvailibility(user, dataOrError => {
         res.send(dataOrError)
     })
 })

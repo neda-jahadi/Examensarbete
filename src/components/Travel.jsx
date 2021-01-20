@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import './Travel.css';
 import {useHistory} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
-import { getSuggestedQuery } from '@testing-library/react';
 
 
 const Travel = () => {
@@ -85,7 +84,7 @@ const Travel = () => {
     return(
         <div className='travel-container'>
             <div className="greeting">
-                <h2>Hej{greetingName}!</h2> 
+                <h2>Hello {greetingName}!</h2> 
             </div>
             <div className="choose-alternative" >Choose your favorite destination</div>
             

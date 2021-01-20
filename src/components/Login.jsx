@@ -15,23 +15,33 @@ const Login = () => {
         fetch(url )
         .then(response => response.json())
         .then(res => {
-                console.log('res is:',res)
+                setShowError(false);
+                history.push(`/travel/${res._id}`);
             }
                 )
-        .catch(error => console.log('error is:',error))
+        .catch(error => setShowError(true))
     }
 
     return(
         <div className="login-container">
             <div className="user-info">
-                <input type="text" placeholder="Username..." onChange={(e) => setUsername(e.target.value)} />
+                <input type="text" placeholder="Username..." onChange={(e) => {
+                        setUsername(e.target.value)
+                        setShowError(false)}} />
                 <input type="text" placeholder="Password..." onChange={(e) => setPassword(e.target.value)} />
 
             </div>
+
             <div className="loginbtn-holder">
                 <button className="login-btn" onClick={() => onLogin()}>Login</button>
-                <div className="errormsg">Wrong username or password</div>
             </div>
+
+            <div className="errormsg" >
+                <div style={{ display: showError ? 'block' : 'none' }}>
+                    Wrong username or password
+                </div>
+            </div>
+
             <div className="create-account">
                 <span onClick={() => history.push('/account') }>Create an account!</span>
             </div>

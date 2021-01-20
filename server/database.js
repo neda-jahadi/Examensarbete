@@ -21,6 +21,10 @@ function getAllCities(searchword, callback) {
       getUserByFilter({username:user, password:pass}, array => callback( array[0] ) )
     }
 
+    function userAvailibility(user, callback) {
+      getUserByFilter({ username:user }, array => callback( array[0] ) )
+    }
+
     function insertUser(newUser, callback){
       MongoClient.connect(
         url,
@@ -218,4 +222,5 @@ function getUserByFilter(filter, callback) {
   )
 }
 
-module.exports = {getAllCities, getCity, insertCity, insertEntity, deleteEntity, insertUser, getUser,loginUser}
+module.exports = {getAllCities, getCity, insertCity, insertEntity,
+     deleteEntity, insertUser, getUser,loginUser, userAvailibility}

@@ -21,7 +21,6 @@ function App() {
         <BrowserRouter>
           
           <Route path="/" exact>
-              <Header />
               <Login />
           </Route>
 

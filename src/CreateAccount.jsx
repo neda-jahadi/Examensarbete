@@ -14,6 +14,18 @@ const CreateAccount = () => {
         history.push(link);
     }
 
+    const usernameAvailibility = () => {
+        let url = `http://localhost:2294/api/useravailibility/?username=${username}`;
+        console.log(url);
+        // fetch(url )
+        // .then(response => response.json())
+        // .then(res => {
+        //         console.log('Not Available:', res)
+        //     }
+        //         )
+        // .catch(error => console.log('Available'))
+    }
+
     async function onSubmitUser() {
         let user = {name: name , username: username, password: password }
 
@@ -26,8 +38,8 @@ const CreateAccount = () => {
          })
      const text = await response.text();
      console.log(text);
-         
-     sendTo(`/travel/${text}`);
+         sendTo('/');
+
  }
 
     return(
@@ -48,7 +60,9 @@ const CreateAccount = () => {
                     <div className="label">Desired User Name:</div>
                     <input type="text" onChange={(e) => setUsername(e.target.value)} />
                     <div>
-                        <button className="availibility">Check availibility!</button>
+                        <button className="availibility" onClick={() => console.log('yes')}>
+                            Check availibility!
+                        </button>
                     </div>
                 </div>
                 
