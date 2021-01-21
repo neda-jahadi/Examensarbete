@@ -10,6 +10,7 @@ const CreateAccount = () => {
     const [password, setPassword] = useState('');
     const [availibilityColor, setAvailibilityColor] = useState('gray');
     const [availibilityMsg, setAvailibilityMsg] = useState('Check availibility!');
+    const [submit, setSubmit] = useState(false);
 
     const history = useHistory();
     
@@ -46,8 +47,8 @@ const CreateAccount = () => {
              body: JSON.stringify(user)
          })
      const text = await response.text();
-     console.log(text);
-         sendTo('/');
+     setSubmit(true);
+         
 
  }
 
@@ -62,7 +63,9 @@ const CreateAccount = () => {
                 
                     <div>
                         <div className="label">First name:</div>
-                        <input type="text" onChange={(e) => setName(e.target.value)} />
+                        <input type="text" onChange={(e) => {
+                                setSubmit(false)
+                                setName(e.target.value) }} />
                     </div>
             
                 
@@ -72,7 +75,8 @@ const CreateAccount = () => {
                     <input type="text" onChange={(e) => {
                             setUsername(e.target.value)
                             setAvailibilityMsg('Check availibility!')
-                            setAvailibilityColor('gray') }} />
+                            setAvailibilityColor('gray')
+                            setSubmit(false) }} />
                     <div>
                         <button className="availibility" 
                             style={{background: `${availibilityColor}`, color: 'white'}}
@@ -86,15 +90,32 @@ const CreateAccount = () => {
                 
                 <div>
                      <div className="label">Choose a password:</div>
-                    <input type="text" onChange={(e) => setPassword(e.target.value)} />
+                    <input type="text" onChange={(e) => {
+                            setPassword(e.target.value); 
+                            setSubmit(false)}} />
                 </div>
                 
             </div>
             
             
             <div className="submit-holder">
-                <button className="submit-btn" onClick={() => onSubmitUser()} >Submit</button>
+                <div>
+                    <button className="submit-btn" onClick={() => onSubmitUser()} >Submit</button>
+                </div>
                 
+                    <div>
+                        <span style={{display: submit ? 'block' : 'none'}}>
+                            Congratulations!
+                        </span>
+                    </div>
+                    <div>
+                        <span className="login"
+                             style={{display: submit ? 'block' : 'none'}}
+                             onClick={() => history.push('/')}>
+                            Log in!
+                        </span>
+                    </div>
+
             </div>
            
             

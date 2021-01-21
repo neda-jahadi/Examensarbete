@@ -35,9 +35,8 @@
     margin-top: 10px; 
 }
 .submit-btn {
-    padding: 10px;
-    width: 40%;
-    height: 40px;
+    padding: 20px;
+    width: 50%;
     border-radius: 5px;
     background-color: green;
     border: none;
@@ -46,6 +45,18 @@
 }
 .submit-holder {
     display: flex;
+    border: 1px solid;
+    flex-direction: column;
+    /* align-items: center; */
+    
+}
+.submit-holder > div {
+    display: flex;
     justify-content: center;
-   
+    font-size: larger;
+}
+.login {
+    font-weight: bold;
+    color: green;
+    margin-top: 10px;
 }

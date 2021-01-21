@@ -8,7 +8,7 @@ import AddUrsActivity from './components/AddUrsActivity';
 
 import Header from './components/Header';
 import Login  from './components/Login';
-import CreateAccount from './CreateAccount';
+import CreateAccount from './components/CreateAccount';
 
 function App() {
   

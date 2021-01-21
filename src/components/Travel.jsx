@@ -13,7 +13,7 @@ const Travel = () => {
     const [greetingName, setGreetingName] = useState('');
 
     const {userid} = useParams();
-
+    
 
     const history = useHistory();
 
