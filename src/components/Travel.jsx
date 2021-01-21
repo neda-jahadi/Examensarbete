@@ -77,7 +77,7 @@ const Travel = () => {
     if(cities.length > 0) {
       jsxCities = cities.map((city, index) => <div key={city._id} className="city-list" >
                                                             
-                                                             <span className="cityName" onClick={()=>sendTo(`/travel/city/${userid}/${city._id}`)} >{city.name}</span>
+                                                             <span className="cityName" onClick={()=>sendTo(`/city/${userid}/${city._id}`)} >{city.name}</span>
                                                       </div>)
     }
 

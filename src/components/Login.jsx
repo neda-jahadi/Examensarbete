@@ -11,12 +11,12 @@ const Login = () => {
     
     const onLogin = () => {
         let url = `http://localhost:2294/api/login/?username=${username}&password=${password}`;
-        console.log(url);
+        // console.log(url);
         fetch(url )
         .then(response => response.json())
         .then(res => {
                 setShowError(false);
-                history.push(`/travel/${res._id}`);
+                history.push(`/home/${res._id}`);
             }
                 )
         .catch(error => setShowError(true))

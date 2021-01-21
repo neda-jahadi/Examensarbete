@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
 import {useHistory} from 'react-router-dom';
-import home from '../assets/home.png';
+import HamburgerMenu from './HamburgerMenu';
 
 const Header = () => {
     
@@ -12,8 +12,8 @@ const Header = () => {
 
     return(
         <div className="header-holder">
-             <img src={home} alt="home" onClick={()=> sendTo("/travel/:id")} className="home-icon" />
-             <div className="sign-out" onClick={()=> sendTo("/")}>Sign out!</div>
+            
+             <HamburgerMenu />
             
         </div>
     )

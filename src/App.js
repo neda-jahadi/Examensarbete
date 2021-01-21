@@ -25,16 +25,15 @@ function App() {
           </Route>
 
           <Route path="/account" exact>
-              <Header />
               <CreateAccount />
           </Route>
 
-          <Route path="/travel/:userid" exact>
+          <Route path="/home/:userid" exact>
               <Header />
               <Travel />
           </Route>
 
-          <Route path="/travel/city/:userid/:cityid" exact>
+          <Route path="/city/:userid/:cityid" exact>
               <Header />
               <ChosedCity />
           </Route>

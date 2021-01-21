@@ -2,7 +2,6 @@ import React,{useState} from 'react';
 import './AddUrsActivity.css';
 import {useHistory} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
-// import { findByTitle } from '@testing-library/react';
 
 
 const AddUrsActivity = () => {
@@ -89,7 +88,7 @@ const AddUrsActivity = () => {
         const text = await response.text();
         console.log(text);
             
-        sendTo(`/travel/city/${userid}/${cityid}`);
+        sendTo(`/city/${userid}/${cityid}`);
     }
 
     return(
