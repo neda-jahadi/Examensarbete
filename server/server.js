@@ -10,7 +10,8 @@ app.use(cors())
 const port = 2294;
 
 const {getAllCities, getCity, insertCity, insertEntity,
-         deleteEntity, insertUser, getUser,loginUser, userAvailibility} = require('./database.js');
+         deleteEntity, insertUser, getUser,loginUser, userAvailibility,insertNewComment} = require('./database.js');
+const { Db } = require('mongodb');
 
 let logger = (req,res,next) =>{
     console.log(`LOGGER: ${req.method} ${req.url}`);
@@ -90,23 +91,31 @@ app.post('/api/adduser', (req, res) => {
 })
 
 app.post('/api/add/', (req,res) =>{
-    let newEntity = {name: req.body.name, address: req.body.address, comment: req.body.comment, likes: Number(req.body.likes) }
+    let newEntity = {name: req.body.name, address: req.body.address, comments: req.body.comments, likes: Number(req.body.likes) }
     let id = req.query.id;
     let entityTitle = req.query.title;
     insertEntity(id, newEntity, entityTitle, dataOrError => {
         res.send(dataOrError)
-    } ) 
-
-    
-    
+    } )      
 })
 
+app.post('/api/addcomment/', (req,res) =>{
+    let newComment = { name: req.body.name, comment: req.body.comment }
+    let cityId = req.query.cityid;
+    let title = req.query.title;
+    let name = req.query.name;
+    let address = req.query.address;
+
+    insertNewComment(cityId,title,name,address, newComment, dataOrError => {
+        res.send(dataOrError)
+    } )   
+})
 
 app.listen(port, ()=>{
     console.log('Web server listening on port:' + port);
 })
 
 
-
-
+// db.cities.updateOne({"_id":ObjectId("60001c3b53ee671e497156ca"), activities: { $elemMatch: { name: "knkmnkm" , address: "c mc m" } } }, {  $push: { "activities.$.comments": {id: ObjectId("6006cad8b4c6da2f06047971"), name: 'Neda', comment:'Again test hope'} } } )
+// db.cities.updateOne({"_id":ObjectId("60001c3b53ee671e497156ca"), activities: { $elemMatch: { name: "name" , address: "address" } } }, {  $push: { "activities.$.comments": {id: ObjectId("6006cad8b4c6da2f06047971"), name: 'Neda', comment:'Do it again for Paris'} } } )
 

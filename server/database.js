@@ -205,7 +205,6 @@ function getUserByFilter(filter, callback) {
       }
       const col = client.db(dbName).collection(userCollectionName);
       try {
-          // console.log('type of filter is:', typeof(filter));
         
         const cursor = await col.find(filter)
         const array = await cursor.toArray();
@@ -222,5 +221,36 @@ function getUserByFilter(filter, callback) {
   )
 }
 
+function insertNewComment(cityId,title, name, address,newComment,  callback) {
+          
+  MongoClient.connect(
+    url,
+    {  useUnifiedTopology: true },
+    async (error,client) => {
+      if(error) {
+        callback('"ERROR!! Could not connect"');
+        return;
+      }
+      const col = client.db(dbName).collection(cityCollectionName);
+      try { 
+        if(title === 'activity') {  
+            const cursor = await col.updateOne({"_id":new ObjectID(cityId), activities: { $elemMatch: { name: name , address: address } } }, {  $push: { "activities.$.comments": newComment } } )
+            callback(cursor.result);
+        }else{
+            const cursor = await col.updateOne({"_id":new ObjectID(cityId), restaurants: { $elemMatch: { name: name , address: address } } }, {  $push: { "restaurants.$.comments": newComment } } )
+            callback(cursor.result);
+        }
+
+      }catch(error) {
+        console.log('Querry error:', error.message);
+        callback('"ERROR!! Query error"');
+
+      } finally {
+        client.close();
+      }
+    }
+  )
+}
+
 module.exports = {getAllCities, getCity, insertCity, insertEntity,
-     deleteEntity, insertUser, getUser,loginUser, userAvailibility}
+     deleteEntity, insertUser, getUser,loginUser, userAvailibility,insertNewComment}

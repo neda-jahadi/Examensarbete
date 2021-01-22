@@ -10,6 +10,7 @@ const AddUrsActivity = () => {
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [comment, setComment] = useState('');
+    const [userName, setUserName] = useState('');
 
     const history = useHistory();
     const {item,userid,cityid} = useParams();
@@ -31,6 +32,21 @@ const AddUrsActivity = () => {
          getCity();
          
      }
+
+     const getUser = () => {
+        fetch(`http://localhost:2294/api/user/?userid=${userid}` )
+        .then(response => response.json())
+        .then(res => {
+                setUserName(res.name)
+            }
+                )
+        .catch(error => console.log(error))
+    }
+
+    if(userName ===''){
+        console.log(userName);
+        getUser();
+    }
      
 
     switch (item) {
@@ -73,7 +89,8 @@ const AddUrsActivity = () => {
 
     
     async function onSubmit() {
-      let item = {name: name, address: address, comment: comment, likes: '1'};
+        let comments = [{ name: userName, comment: comment}];
+      let item = {name: name, address: address, comments, likes: '1'};
         IfThereIsAlready(item)
     }
 

@@ -1,4 +1,4 @@
-import React,{ useState, useEffect} from 'react';
+import React,{ useState} from 'react';
 import './ChosedCity.css';
 import {useHistory} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
@@ -65,11 +65,13 @@ const ChosedCity = () => {
                                          data={city.activities}
                                          source ='activity'
                                          id1={cityid}
+                                         userid={userid}
                                          updateCity={getCity} />
     if(city.restaurants) restaurants = <DataList 
                                          data={city.restaurants}
                                          source ='restaurant'
                                          id1={cityid}
+                                         userid={userid}
                                          updateCity={getCity} />
    
     
