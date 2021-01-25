@@ -1,15 +1,27 @@
 .login-container {
     height: 100%;
    display: grid;
-   grid-template-rows: 50% 10% 10% 30%;
+   grid-template-rows: 20% 40% 10% 10% 20%;
 }
 .login-container > div { 
      display: flex;
 }
+.app-name {
+    justify-content: center;
+    align-items: center;
+    font-family: "Cursive",Brush Script MT;
+    font-size: larger;
+    color: darkcyan;
+}
+.userinfo-holder {
+    justify-content: center;
+    align-items: center;
+    
+}
 .user-info {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 }
 .user-info > input {
@@ -23,11 +35,13 @@
 }
 
 .login-btn {
-    width: 50%;
+    width: 30%;
     border-radius: 5px;
     padding: 10px;
     border: none;
     background-color: green;
+    color: white;
+    font-size: large;
 }
 .create-account {
     justify-content: center;
@@ -39,4 +53,36 @@
 .errormsg {
     color: red;
     justify-content: center;
+}
+
+@media(min-width: 1025px){
+    .login-container {
+        margin: 50px;
+        height: 99%;
+        border: 1px solid;
+        border: none;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .app-name {
+        font-size: xx-large;
+    }
+    
+	.user-info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around; 
+        width: 80%;
+    }
+    .user-info > input {
+        padding: 20px;
+        width: 30vw;
+        margin: 0px;
+    }
+    .login-btn {
+        width: 20%;
+        border-radius: 5px;
+        padding: 10px;
+        border: none;
+        background-color: green;
+    }
 }
