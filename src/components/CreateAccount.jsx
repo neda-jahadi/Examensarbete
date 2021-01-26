@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import  './CreateAccount.css';
 import {useHistory} from 'react-router-dom';
+import backIcon from '../assets/backIcon.png';
 
 
 const CreateAccount = () => {
@@ -11,11 +12,18 @@ const CreateAccount = () => {
     const [availibilityColor, setAvailibilityColor] = useState('gray');
     const [availibilityMsg, setAvailibilityMsg] = useState('Check availibility!');
     const [submit, setSubmit] = useState(false);
+    const [firstnameValid, setFirstnameValid] = useState(false);
+    const [usernameValid, setUsernameValid] = useState(false);
+    const [passwordValid, setPasswordValid] = useState(false);
+    const [available, setAvailable] = useState(false);
 
     const history = useHistory();
+    let submitBtnStatus = 'disabled';
     
-    const sendTo = (link) =>{
-        history.push(link);
+    if(firstnameValid && usernameValid && passwordValid && available){
+        submitBtnStatus = 'submit-btn';
+    }else{
+        submitBtnStatus ='disabled';
     }
 
     const usernameAvailibility = () => {
@@ -26,13 +34,13 @@ const CreateAccount = () => {
         .then(res => {
             setAvailibilityColor('red');
             setAvailibilityMsg('Not Available');
-                   
+            setAvailable(false);  
             }
                 )
         .catch(error => {
             setAvailibilityColor('green');
             setAvailibilityMsg('Available');
-            
+            setAvailable(true);
         })
     }
 
@@ -52,8 +60,17 @@ const CreateAccount = () => {
 
  }
 
+
+
     return(
         <div className="account-container">
+
+            <div className="header">
+                <img src={backIcon} alt="back" className="back-icon" onClick={() => history.push('/') } />
+                <div className="app-name">Travel Advisor</div>
+
+            </div>
+
             <div className="greeting">
                 <h3>Create an account</h3>
                 
@@ -63,20 +80,36 @@ const CreateAccount = () => {
                 
                     <div>
                         <div className="label">First name:</div>
-                        <input type="text" onChange={(e) => {
-                                setSubmit(false)
-                                setName(e.target.value) }} />
+                        <div className="input-and-message"> 
+                            <input type="text" id="firstname" placeholder="Just letters(3-13)"
+                                    pattern="[A-Za-z]{3,13}"
+                                    onChange={(e) => {
+                                    setSubmit(false)
+                                    setName(e.target.value)
+                                    setFirstnameValid(e.target.validity.valid) }} />
+                            <div className={"firstname-error"}>Just Letters, Min 3,Max 13 characters </div>
+                        </div>
+                        
                     </div>
             
                 
 
                 <div>
                     <div className="label">Desired User Name:</div>
-                    <input type="text" onChange={(e) => {
-                            setUsername(e.target.value)
-                            setAvailibilityMsg('Check availibility!')
-                            setAvailibilityColor('gray')
-                            setSubmit(false) }} />
+                    <div className="input-and-message">
+                        <input type="text" placeholder="Numbers and letters(3-13)"
+                                pattern="[A-Za-z0-9]{3,13}"
+                                onChange={(e) => {
+                                setUsername(e.target.value)
+                                setAvailibilityMsg('Check availibility!')
+                                setAvailibilityColor('gray')
+                                setSubmit(false)
+                                setAvailable(false)
+                                setUsernameValid(e.target.validity.valid) }} />
+                        <div className={"username-error"}>Min 3,Max 13 characters, Just Numbers/Letters</div>
+                    </div>
+                    
+
                     <div>
                         <button className="availibility" 
                             style={{background: `${availibilityColor}`, color: 'white'}}
@@ -90,9 +123,17 @@ const CreateAccount = () => {
                 
                 <div>
                      <div className="label">Choose a password:</div>
-                    <input type="text" onChange={(e) => {
-                            setPassword(e.target.value); 
-                            setSubmit(false)}} />
+                     <div className="input-and-message">
+                        <input type="text" placeholder="Numbers and letters(3-13)"
+                                pattern="[A-Za-z0-9]{3,13}"
+                                onChange={(e) => {
+                                setPassword(e.target.value); 
+                                setSubmit(false)
+                                setPasswordValid(e.target.validity.valid)}} />
+                        <div className={"password-error"}>Min3,Max 13 characters, Just Numbers/letters</div>
+                     </div>
+                    
+
                 </div>
                 
             </div>
@@ -100,7 +141,10 @@ const CreateAccount = () => {
             
             <div className="submit-holder">
                 <div>
-                    <button className="submit-btn" onClick={() => onSubmitUser()} >Submit</button>
+                    <button className={submitBtnStatus} 
+                        onClick={() => onSubmitUser()} >
+                            Submit
+                    </button>
                 </div>
                 
                     <div>

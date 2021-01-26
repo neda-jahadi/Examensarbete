@@ -25,7 +25,7 @@ const Login = () => {
     return(
         <div className="login-container">
 
-            <div className="app-name">
+            <div className="applogin-name">
                 <h1>Travel Advisor</h1>
             </div>
 
@@ -35,7 +35,7 @@ const Login = () => {
                     <input type="text" placeholder="Username..." onChange={(e) => {
                             setUsername(e.target.value)
                             setShowError(false)}} />
-                    <input type="text" placeholder="Password..." onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" placeholder="Password..." onChange={(e) => setPassword(e.target.value)} />
                 </div>
 
             </div>
