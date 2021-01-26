@@ -2,6 +2,7 @@ import React from 'react';
 import './Header.css';
 import {useHistory} from 'react-router-dom';
 import HamburgerMenu from './HamburgerMenu';
+import DesktopMenu from './DesktopMenu';
 
 const Header = () => {
     
@@ -12,9 +13,15 @@ const Header = () => {
 
     return(
         <div className="header-holder">
-            
-             <HamburgerMenu />
-            
+            <div className="mobile">
+                <HamburgerMenu />
+                <div className="app-name">Travel Advisor</div>
+            </div>
+            <div className="desktop">
+                <DesktopMenu />
+                {/* <div className="app-name">Travel Advisor</div> */}
+            </div>
+             
         </div>
     )
 }

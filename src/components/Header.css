@@ -3,26 +3,42 @@
     height: 30px;
 }
 .header-holder {
-    padding: 10px;
+    height: 10vh;
+    padding-left: 10px;
+    padding-right: 10px;
     background-color: #B3F1F5;
+}
+
+.mobile {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+.app-name {
+    font-family: "Cursive",Brush Script MT;
+    color: white;
+    font-size: xx-large;
     
 }
-.header-holder > img {
-    border: 1px solid;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+.desktop {
+    display: none;
 }
-.sign-out {
-    border: 1px solid;
-    padding: 10px;
+
+@media(min-width: 1025px){
+    .mobile {
+        display: none;
+    }
+    .header-holder {
+        border: 1px solid;
+        display: flex;
+        align-items: center;
+        
+    }
     
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    .desktop {
+        display: block;
+        width: 100vw;
+    }
+   
 }

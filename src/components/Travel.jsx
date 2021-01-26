@@ -84,9 +84,9 @@ const Travel = () => {
     return(
         <div className='travel-container'>
             <div className="greeting">
-                <h2>Hello {greetingName}!</h2> 
+                <span>Hello {greetingName}! </span>
             </div>
-            <div className="choose-alternative" >Choose your favorite destination</div>
+            <div className="choose-alternative" >Choose your destination</div>
             
             <div className="search-input-h">
 
