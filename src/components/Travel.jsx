@@ -11,9 +11,25 @@ const Travel = () => {
     const [city, setCity] = useState('');
     const [searchedCity, setSearchedCity] = useState('');
     const [greetingName, setGreetingName] = useState('');
+    const [citynameValid, setCitynameValid] = useState(true);
+    const [classCityMessage, setClassCityMessage] = useState('no-error-msg');
 
     const {userid} = useParams();
-    
+
+    let addMycityBtnClass = 'disabled', infoMessage = "(a-z A-Z, Min 1- Max 50)" , classInfoMessage = 'no-error-msg';
+
+    if( citynameValid && city !== '' ){
+        addMycityBtnClass = 'add-myCity';
+        // classInfoMessage = 'no-error-msg';
+        
+    }else {
+        addMycityBtnClass = 'disabled';  
+        // classInfoMessage = 'error-msg';
+    }
+
+    if(!citynameValid){
+        classInfoMessage = 'error-msg'
+    }
 
     const history = useHistory();
 
@@ -66,7 +82,12 @@ const Travel = () => {
             });
             const text = await response.text();
             console.log('response is:',text);
-            updateCities();
+            if(text === 'Already exists'){
+                setClassCityMessage('error-msg')
+            }else {
+                setAddCity(false);
+                updateCities();
+            }
       }
 
     let jsxCities = null;
@@ -86,28 +107,54 @@ const Travel = () => {
             <div className="greeting">
                 <span>Hello {greetingName}! </span>
             </div>
-            <div className="choose-alternative" >Choose your destination</div>
-            
-            <div className="search-input-h">
+            <div className="choose-input">
+                <div className="choose-alternative" >Choose your destination</div>
+                
+                <div className="search-input-h">
 
-                <input className="search-input" type='text'
-                      placeholder="Search city you want..."
-                      onChange={(e) => setSearchedCity(e.target.value) } />
+                    <input className="search-input" type='text'
+                        placeholder="Search city you want..."
+                        onChange={(e) => setSearchedCity(e.target.value) } />
+
+                </div>
 
             </div>
-
+            
             <div className="cities">
                 {jsxCities}
             </div>
             <div className="addBtn-container">
                 {!addCity 
-                    ? <button className="addBtn" onClick={() => setAddCity(true)}>Add your destination</button>
+                    ? <button className="addBtn" onClick={() => {setAddCity(true); setClassCityMessage('no-error-msg')}}>Add your destination</button>
                     : <div className="input-add-holder" >
-                        <input className="input-addCity" type="text" placeholder="City..." onChange={(e) => setCity(e.target.value)} />
-                        <button className="add-myCity" onClick={() => {setAddCity(false); addNewCity(city)}}>Add</button>
+                        <div>
+                            <input className="input-addCity" type="text" placeholder="City..."
+                                pattern="[a-zA-Z\s]{1,50}"
+                                onChange={(e) => {setClassCityMessage('no-error-msg')
+                                                  setCity(e.target.value);
+                                                  setCitynameValid(e.target.validity.valid)}
+                                }/>
+                                    
+                        </div>
+                        
+                        <button className={addMycityBtnClass} onClick={() => {
+                                addNewCity(city) }}>Add
+                        </button>
+                        
                       </div>}
-                
+
             </div>
+            
+            <div className={classInfoMessage} >
+                <span>{infoMessage}</span>
+            </div>
+
+            <div className={classCityMessage} >
+                <span>This city Already exists</span>
+            </div>
+
+            
+            
             
         </div>
     )

@@ -30,7 +30,6 @@
         display: none;
     }
     .header-holder {
-        border: 1px solid;
         display: flex;
         align-items: center;
         
