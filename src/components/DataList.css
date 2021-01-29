@@ -1,9 +1,9 @@
 .activity-box {
     border: 1px solid green ;
-    background-color: lightblue;
     margin: 5px;
     position: relative;
     max-width: 70vw;
+    height: 99%;
 }
 
 .img-holder {
@@ -12,23 +12,24 @@
 }
 
  .activity-holder > div {
-     display: flex;
-     flex-direction: row;
+     /* display: flex;
+     flex-direction: row; */
      /* width: 70vw; */
-     flex-wrap: wrap;
+     /* flex-wrap: wrap; */
      padding-left:5px;
  }
 
  .activity-holder {
     position: absolute;
     top: 0;
-    background: rgb(0, 0, 0); /* Fallback color */
-    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
-    color: #f1f1f1;
+    background: rgb(255, 255, 255); 
+    background: rgba(255, 255, 255, 0.5);
+    /* background: rgb(0, 0, 0); 
+    background: rgba(0, 0, 0, 0.5);  */
+    color: black;
     width: 100%;
      overflow-y: scroll;
-     height: 60%;
-     
+     height: 80%;
  }
 
 .iconForItem-holder  img {
@@ -38,26 +39,39 @@
 .iconForItem-holder {
     position: absolute;
     bottom: 0;
-    background: rgb(255, 255, 255); /* Fallback color */
-    background: rgba(255, 255, 255, 0.5); /* Black background with 0.5 opacity */
+    /* background: rgb(255, 255, 255);  */
+    background:rgb(198,198,198,0.5); 
     color: #f1f1f1;
     width: 100%;
     /* padding: 20px; */
     display: flex;
     flex-direction: row;
     justify-content:space-between;
+    height: 18%;
     
-    
+}
+.activity-holder > div {
+    margin-left: 5px;
 }
 .delete-comment {
     display: flex;
     flex-direction: row;
 }
 .title {
+    margin-top: 10px;
+    font-size: small;
     font-weight: bold;
     margin-right: 5px;
 }
-
+.item-info-name {
+    margin-top: 10px;
+    font-size: larger;
+    font-weight: bold;
+}
+.item-info {
+    font-size: small;
+    margin-top: 2px;
+}
 .backImg {
     width: 100%;
     height: 100%;
@@ -79,22 +93,22 @@
     height: 30px;
 }
 .user {
-    font-size: large;
     font-weight: bold;
     background-color: #B3F1F5;
     border: 1px solid;
     border: none;
     border-radius: 50px;
     padding: 5px;
-    border-top-right-radius: 0%;
+    /* border-top-right-radius: 0%; */
     color: black;
     /* width: 40px; */
     height: 30px;
     justify-content: center;
-    
+    font-size: small;
 }
 .comment-holder {
     padding: 0px;
+    
 }
 .comment-holder > div {
      display: flex;
@@ -102,7 +116,13 @@
     padding: 5px;
     padding-left: 0px;
 }
+.user-comment > .comment-content {
+    margin-left: 5px;
+    font-size:small;
+    display: flex;
+    align-items: center;
 
+}
 .new-comment {
     width: 100%;
     display: flex;
@@ -121,4 +141,35 @@
    border: none;
    padding: 5px;
    margin-left: 5px;
+}
+@media(min-width: 1025px){
+    .activity-box {
+        /* border: 1px solid orangered; */
+        margin: 5px;
+        position: relative;
+        width: 95%;
+        height: 49%;
+        display: flex;
+        /* justify-content: center;
+        align-items: ; */
+    }
+    .img-holder {
+        width: 100%;
+        height: 100%;
+    }
+    .title {
+        margin-top: 15px;
+        font-size: medium;
+        font-weight: bold;
+        margin-right: 5px;
+    }
+    .item-info-name {
+        font-size: x-large;
+        font-weight: bold;
+    }
+    .item-info {
+        font-size: medium;
+        margin-top: 2px;
+    }
+   
 }

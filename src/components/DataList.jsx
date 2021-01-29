@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import './DataList.css';
 import deleteIcon from '../assets/delete.png';
 import commentIcon from '../assets/comment.png';
-import backgroundImg from '../assets/background.jpg';
+import activityBackground from '../assets/activityBack.jpg';
+import restaurantBackground from '../assets/restaurantBack.jpg';
 import {useHistory} from 'react-router-dom';
 
 const DataList = ({ data, source, id1,userid, updateCity }) => {
@@ -13,7 +14,7 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
     const [userName, setUserName] = useState('');
 
 
-    let deleteTitle = '', editTitle = '', commentTitle = '';
+    let deleteTitle = '', editTitle = '', commentTitle = '', backgroundImg = activityBackground;
 
     switch (source) {
         case 'activity':
@@ -26,6 +27,7 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
             deleteTitle = 'restaurant';
             editTitle = 'editrestaurant';
             commentTitle = 'restaurant';
+            backgroundImg = restaurantBackground;
             break;
     }
 
@@ -81,16 +83,16 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
             </div>
             <div className="activity-holder">
                 <div>
-                    <div className="title">Name:</div>
-                    <div className="item-info">{datum.name}</div>
+                    {/* <div className="title">Name:</div> */}
+                    <div className="item-info-name">{datum.name}</div>
                 </div>
                 <div>
-                    <div className="title">Address:</div>
+                    {/* <div className="title">Address:</div> */}
                     <div className="item-info">{datum.address}</div>
                 </div>
                 <div>
-                    <div className="title">Likes: </div>
-                    <div className="item-info">{datum.likes}</div>
+                    {/* <div className="title">Likes: </div> */}
+                    <div className="item-info">{datum.likes}Likes</div>
                 </div>
                 <div>
                     <div className="title">Comments: </div>
@@ -99,9 +101,9 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
                 <div className="comment-holder" 
                      style={{display: index === chosedIndex  ? 'none' : 'block'}}>
                     {datum.comments.map((comment, index) => 
-                        <div key={index}>
+                        <div className="user-comment" key={index}>
                             <span className="user">{comment.name}:</span>
-                            <span style={{marginLeft: 5}}>{comment.comment}</span>
+                            <span className="comment-content" >{comment.comment}</span>
                         </div> )
                      }
                 </div>

@@ -83,7 +83,7 @@ const ChosedCity = () => {
             </div>
             <div className="city-info">
                 <div className="info-title">
-                    <div>Activities</div>
+                    <div className="activity">Activities</div>
                     <input type="text" placeholder="Search what you want..." 
                         style={{ display: showActivitySearch ? "block" : "none" }}
                         // onChange={(e) => setSearchActivity(e.target.value)}
@@ -105,7 +105,7 @@ const ChosedCity = () => {
 
             <div className="city-info">
                 <div className="info-title">
-                    <div>Restaurants</div>
+                    <div className="restaurant">Restaurants</div>
                     <input type="text" placeholder="Search what you want..." 
                         style={{ display: showRestaurantSearch ? "block" : "none" }} />
                 </div>
