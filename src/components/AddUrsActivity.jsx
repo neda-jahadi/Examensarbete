@@ -6,15 +6,25 @@ import {useParams} from 'react-router-dom';
 
 const AddUrsActivity = () => {
 
-    let title = '', apiTitle = '';
+    let title = '', apiTitle = '',SubmitionMessage = '';
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [comment, setComment] = useState('');
     const [userName, setUserName] = useState('');
+    const [nameValid, setNameValid] = useState(false);
+    const [addressValid, setAddressValid] = useState(false);
+    const [commentValid, setCommentValid] = useState(false);
+    const [submit, setSubmit] = useState(false);
 
     const history = useHistory();
     const {item,userid,cityid} = useParams();
     const [city, setCity] = useState({});
+
+    let submitBtnStatus = 'inactiveBtn';
+
+    if(nameValid && addressValid && commentValid && name!=='' && address!=='' && comment!=='') {
+        submitBtnStatus = 'activeBtn';
+    }
 
     const sendTo = (link) =>{
         history.push(link);
@@ -53,10 +63,13 @@ const AddUrsActivity = () => {
         case 'activity':
             title = 'Add your favorite Activity';
             apiTitle = 'activities';
+            SubmitionMessage ='This activity already exists';
             break;
         case 'restaurant':
             title = 'Add your favorite Restaurant';
             apiTitle = 'restaurants';
+            SubmitionMessage ='This restaurant already exists';
+
             break;
         case 'editactivity':
             title = 'Edit Activity';
@@ -116,24 +129,35 @@ const AddUrsActivity = () => {
             <div className="content">
                 <div>
                     <input type="text" placeholder="Name ... " className="input" 
-                        pattern="[a-zA-Z0-9\s]"
-                        onChange={(e) => setName(e.target.value) }/>
-                    <span className="error-msg">Error message</span>
+                        pattern="[a-zA-Z0-9À-ž.\s]{1,30}"
+                        onChange={(e) => {
+                            setName(e.target.value)
+                            setNameValid(e.target.validity.valid)} }/>
+                    <div className="error-name">Just Letter/Number(Min 1-Max 30) </div>
                 </div>
 
                 <div>
-                    <input  type="text" placeholder="Address ..." className="input" onChange={(e) => setAddress(e.target.value)} />
-                    <span  className="error-msg" >Error message</span>
+                    <input  type="text" placeholder="Address ..." className="input"
+                         pattern="[a-zA-Z0-9À-ž.\s]{5,40}"
+                         onChange={(e) => {
+                             setAddress(e.target.value)
+                             setAddressValid(e.target.validity.valid)}} />
+                    <div  className="error-address" >Just Letter/Number(Min 5-Max 40)</div>
                 </div>
                 
                 <div>
-                    <input type="text" placeholder="Comment ..."  className="input-comment" onChange={(e) => setComment(e.target.value)} />
-                    <span  className="error-msg" >Error message</span>
+                    <input type="text" placeholder="Comment ..."  className="input-comment"
+                          pattern="[a-zA-Z0-9À-ž.)(!:'\s]{3,}"
+                         onChange={(e) => {
+                             setComment(e.target.value)
+                             setCommentValid(e.target.validity.valid)}} />
+                    <div  className="error-comment" >Min 3,Just Letter Number and ).(!:'</div>
                 </div>
                 
             </div>
             <div className="submit">
-                <button onClick={()=> onSubmit()}>Submit!</button>
+                <button className={submitBtnStatus} onClick={()=> onSubmit()}>Submit!</button>
+                <div>{SubmitionMessage}</div>
             </div>
         </div>
     )

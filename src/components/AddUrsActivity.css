@@ -18,17 +18,11 @@
     grid-row-gap: 15px;
     padding-top: 10px;
 }
+
 .content > * {
-    /* display: block;
-    margin: 20px;
-    width: 70vw;
-    padding: 10px;
-    background-color: lightgray; */
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
     justify-content: center;
-    align-items: center;
-    /* border: 1px solid red; */
 }
 .content input {
     border-radius: 5px;
@@ -45,20 +39,70 @@
     
 }
 .submit {
-    display: flex;
+    /* display: flex;
     justify-content: center;
     text-align: center;
-    align-items: center;
+    align-items: center; */
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    justify-content: center;
+    border: 1px solid;
+    /* padding-top: 10px; */
+    
 }
-.submit > button {
+.submit > * {
+    border: 1px solid blue;
+}
+
+:invalid + .error-name { 
+    display: block;
+    color: red;
+    font-size: small; 
+}
+
+:valid + .error-name {
+    display: none;
+}
+:invalid + .error-address { 
+    display: block;
+    color: red;
+    font-size: small; 
+}
+
+:valid + .error-address {
+    display: none;
+}
+:invalid + .error-comment { 
+    display: block;
+    color: red;
+    font-size: small; 
+}
+
+:valid + .error-comment {
+    display: none;
+}
+.activeBtn {
     padding: 20px;
-    width: 40vw;
+    /* width: 40vw; */
     font-size: large;
     background-color: green;
     border-radius: 5px;
     border: none;
     color: white;
 }
+.inactiveBtn{
+    padding: 20px;
+    /* width: 40vw; */
+    font-size: large;
+    border-radius: 5px;
+    border: none;
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.5;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
 
 @media(min-width: 1025px){
     .content-holder .title {
@@ -81,9 +125,11 @@
         justify-content: flex-start;
         display: flex;
         flex-direction: row;
-        
+        align-items: center;
+
         
     }
+
     .content > div > * {
         margin:10px;
     }
@@ -95,6 +141,6 @@
         text-align: left;
     }
     .submit > button {
-        width: 20vw;
+        /* width: 15vw; */
     }
 }
