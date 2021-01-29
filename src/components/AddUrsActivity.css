@@ -1,32 +1,54 @@
 .content-holder {
-    height: 90%;
-    
+    height: 90%;  
     display: grid;
-    grid-template-rows: 10% 70% 10%;
+    grid-template-rows: 10% 60% 20%;
     padding: 20px;
 }
 
-.title {
+.content-holder .title {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: darkcyan;
+    font-size: medium;
+}
+.content {
+    display: grid;
+    grid-template-rows: 20% 20% 50%;
+    grid-row-gap: 15px;
+    padding-top: 10px;
 }
 .content > * {
-    display: block;
+    /* display: block;
     margin: 20px;
+    width: 70vw;
+    padding: 10px;
+    background-color: lightgray; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid red; */
+}
+.content input {
+    border-radius: 5px;
+    border: none;
     width: 70vw;
     padding: 10px;
     background-color: lightgray;
 }
-.input-address {
-    height: 40px;
+.input {
+    height: 20px;
 }
 .input-comment {
     height: 100px;
+    
 }
 .submit {
+    display: flex;
+    justify-content: center;
     text-align: center;
-    
+    align-items: center;
 }
 .submit > button {
     padding: 20px;
@@ -35,4 +57,44 @@
     background-color: green;
     border-radius: 5px;
     border: none;
+    color: white;
+}
+
+@media(min-width: 1025px){
+    .content-holder .title {
+        font-size: x-large;
+    }
+    .content-holder {
+        justify-content: center;
+    }
+    .content {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 1px 5px rgba(0,139,139, 1);
+        border-radius: 5px;
+        width: 80vw;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .content > div {
+        justify-content: flex-start;
+        display: flex;
+        flex-direction: row;
+        
+        
+    }
+    .content > div > * {
+        margin:10px;
+    }
+    .content input {
+        width: 50%;   
+    }
+    .content .error-msg {
+        width: 50%;
+        text-align: left;
+    }
+    .submit > button {
+        width: 20vw;
+    }
 }

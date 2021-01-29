@@ -51,11 +51,11 @@ const AddUrsActivity = () => {
 
     switch (item) {
         case 'activity':
-            title = 'Your favorite Activity';
+            title = 'Add your favorite Activity';
             apiTitle = 'activities';
             break;
         case 'restaurant':
-            title = 'Your favorite Restaurant';
+            title = 'Add your favorite Restaurant';
             apiTitle = 'restaurants';
             break;
         case 'editactivity':
@@ -114,12 +114,23 @@ const AddUrsActivity = () => {
                 <span>{title}</span>
             </div>
             <div className="content">
-                <input type="text" placeholder="Name ... " onChange={(e) => setName(e.target.value) }/>
-                <input  type="text" placeholder="Address ..." className="input-address" onChange={(e) => setAddress(e.target.value)} />
-                <input type="text" placeholder="Comment ..."  className="input-comment" onChange={(e) => setComment(e.target.value)} />
                 <div>
-                   choose image:  
+                    <input type="text" placeholder="Name ... " className="input" 
+                        pattern="[a-zA-Z0-9\s]"
+                        onChange={(e) => setName(e.target.value) }/>
+                    <span className="error-msg">Error message</span>
                 </div>
+
+                <div>
+                    <input  type="text" placeholder="Address ..." className="input" onChange={(e) => setAddress(e.target.value)} />
+                    <span  className="error-msg" >Error message</span>
+                </div>
+                
+                <div>
+                    <input type="text" placeholder="Comment ..."  className="input-comment" onChange={(e) => setComment(e.target.value)} />
+                    <span  className="error-msg" >Error message</span>
+                </div>
+                
             </div>
             <div className="submit">
                 <button onClick={()=> onSubmit()}>Submit!</button>
