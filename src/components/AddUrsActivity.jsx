@@ -15,6 +15,7 @@ const AddUrsActivity = () => {
     const [addressValid, setAddressValid] = useState(false);
     const [commentValid, setCommentValid] = useState(false);
     const [submit, setSubmit] = useState(false);
+    const [submitMsgClass, setSubmitMsgClass] = useState('inactive-submit-error');
 
     const history = useHistory();
     const {item,userid,cityid} = useParams();
@@ -93,7 +94,8 @@ const AddUrsActivity = () => {
                  (element.address.toLowerCase() === item.address.toLowerCase() 
                     && element.name.toLowerCase() === item.name.toLowerCase()))
             if(res) {
-                console.log('Already exist')
+                console.log('Already exist');
+                setSubmitMsgClass('active-submit-error');
             } else {
                 insertTheEntity(item)
             }
@@ -132,7 +134,10 @@ const AddUrsActivity = () => {
                         pattern="[a-zA-Z0-9À-ž.\s]{1,30}"
                         onChange={(e) => {
                             setName(e.target.value)
-                            setNameValid(e.target.validity.valid)} }/>
+                            setNameValid(e.target.validity.valid)
+                            setSubmitMsgClass('inactive-submit-error');
+                            }}/>
+
                     <div className="error-name">Just Letter/Number(Min 1-Max 30) </div>
                 </div>
 
@@ -141,7 +146,10 @@ const AddUrsActivity = () => {
                          pattern="[a-zA-Z0-9À-ž.\s]{5,40}"
                          onChange={(e) => {
                              setAddress(e.target.value)
-                             setAddressValid(e.target.validity.valid)}} />
+                             setAddressValid(e.target.validity.valid)
+                             setSubmitMsgClass('inactive-submit-error');
+                             }} />
+                             
                     <div  className="error-address" >Just Letter/Number(Min 5-Max 40)</div>
                 </div>
                 
@@ -150,14 +158,17 @@ const AddUrsActivity = () => {
                           pattern="[a-zA-Z0-9À-ž.)(!:'\s]{3,}"
                          onChange={(e) => {
                              setComment(e.target.value)
-                             setCommentValid(e.target.validity.valid)}} />
+                             setCommentValid(e.target.validity.valid)
+                             setSubmitMsgClass('inactive-submit-error');
+                             }} />
+
                     <div  className="error-comment" >Min 3,Just Letter Number and ).(!:'</div>
                 </div>
                 
             </div>
             <div className="submit">
                 <button className={submitBtnStatus} onClick={()=> onSubmit()}>Submit!</button>
-                <div>{SubmitionMessage}</div>
+                <div className={submitMsgClass}>{SubmitionMessage}</div>
             </div>
         </div>
     )

@@ -1,5 +1,5 @@
 .content-holder {
-    height: 90%;  
+    height: 85%;  
     display: grid;
     grid-template-rows: 10% 60% 20%;
     padding: 20px;
@@ -46,13 +46,12 @@
     display: grid;
     grid-template-rows: 1fr 1fr;
     justify-content: center;
-    border: 1px solid;
-    /* padding-top: 10px; */
-    
+    /* padding-top: 10px; */ 
 }
-.submit > * {
-    border: 1px solid blue;
+.submit > button {
+    width: 50vw;
 }
+
 
 :invalid + .error-name { 
     display: block;
@@ -103,6 +102,13 @@
     -webkit-box-shadow: none;
     box-shadow: none;
   }
+  .active-submit-error {
+      display: block;
+      color: red;
+  }
+  .inactive-submit-error {
+      display: none;
+  }
 
 @media(min-width: 1025px){
     .content-holder .title {
@@ -141,6 +147,14 @@
         text-align: left;
     }
     .submit > button {
-        /* width: 15vw; */
+        width: 20vw;
+    }
+    
+    .submit {
+        grid-template-rows: 60% 30%;
+        padding-top: 20px;
+    }
+    .submit > div {
+        text-align: center;
     }
 }
