@@ -136,7 +136,6 @@
 
 @media(min-width: 1025px){
     .chosed-city {
-    
         grid-template-columns: 1fr 1fr;
     }
    
@@ -146,10 +145,10 @@
         height: 7vh;
     }
     .city-info {
-        height: 75vh;
+        height: 70vh;
         grid-template-rows: 10% 80% 10%;
         padding-top: 10px;
-        margin: 10px;
+        margin: 20px;
         background-color: #fff;
         border-radius: 5px;
         box-shadow: 0 1px 5px rgba(0,139,139, 1);
