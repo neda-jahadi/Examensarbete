@@ -16,18 +16,19 @@
 .userinfo-holder {
     justify-content: center;
     align-items: center;
-    
 }
 .user-info {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+
 }
 .user-info > input {
     padding: 20px;
     width: 50vw;
     margin: 20px;
+    border: 1px solid lightslategray;
 }
 .loginbtn-holder  {
     justify-content: center;

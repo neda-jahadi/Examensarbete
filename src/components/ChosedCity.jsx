@@ -9,18 +9,21 @@ const ChosedCity = () => {
     let activities = null;
     let restaurants = null;
 
+   
+
     const [city, setCity] = useState({});
     const [showActivitySearch, setShowActivitySearch] = useState(false);
     const [showRestaurantSearch, setShowRestaurantSearch] = useState(false);
-    // const [searchActivity, setSearchActivity] = useState('');
-    // const [searchRestaurant, setSearchRestaurant] = useState('');
+    const [searchActivity, setSearchActivity] = useState('');
+    const [searchRestaurant, setSearchRestaurant] = useState('');
 
     const {userid,cityid} = useParams();
     const history = useHistory();
     
 
     const getCity = () => {
-        fetch(`http://localhost:2294/api/city/?id=${cityid}` )
+        let url = `http://localhost:2294/api/city/?id=${cityid}`;
+        fetch( url )
         .then(response => response.json())
         .then(res => {
                 setCity(res);
@@ -34,7 +37,7 @@ const ChosedCity = () => {
     // useEffect( () => {
     //     getCity()
        
-    //   },[searchActivity]);   
+    //   },[]);   
     
      if(!city.name) {
          getCity();   
@@ -61,20 +64,26 @@ const ChosedCity = () => {
     }
 
    
-    if(city.activities) activities = <DataList
-                                         data={city.activities}
-                                         source ='activity'
-                                         id1={cityid}
-                                         userid={userid}
-                                         updateCity={getCity} />
-    if(city.restaurants) restaurants = <DataList 
-                                         data={city.restaurants}
-                                         source ='restaurant'
-                                         id1={cityid}
-                                         userid={userid}
-                                         updateCity={getCity} />
+    if(city.activities) {
+        let activityList = city.activities.filter(activity => activity.name.toLowerCase().includes(searchActivity.toLowerCase()) )
+        activities = <DataList
+                        data={activityList}
+                        source ='activity'
+                        id1={cityid}
+                        userid={userid}
+                        updateCity={getCity} />
+    }
+
+    if(city.restaurants) {
+        let restaurantList = city.restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(searchRestaurant.toLowerCase()) )
+        restaurants = <DataList 
+                        data={restaurantList}
+                        source ='restaurant'
+                        id1={cityid}
+                        userid={userid}
+                        updateCity={getCity} />
    
-    
+    }
     
     return(
         <div className="chosed-city">
@@ -86,7 +95,10 @@ const ChosedCity = () => {
                     <div className="activity">Activities</div>
                     <input type="text" placeholder="Search what you want..." 
                         style={{ display: showActivitySearch ? "block" : "none" }}
-                        // onChange={(e) => setSearchActivity(e.target.value)}
+                        onChange={(e) => {
+                            setSearchActivity(e.target.value);
+                            // getCity();
+                        }}
                          />
                 </div>
                 
@@ -107,7 +119,12 @@ const ChosedCity = () => {
                 <div className="info-title">
                     <div className="restaurant">Restaurants</div>
                     <input type="text" placeholder="Search what you want..." 
-                        style={{ display: showRestaurantSearch ? "block" : "none" }} />
+                        style={{ display: showRestaurantSearch ? "block" : "none" }}
+                        onChange={(e) => {
+                            setSearchRestaurant(e.target.value);
+                            // getCity();
+                        }}
+                        />
                 </div>
                 
                 <div className="activities-scroll">

@@ -55,6 +55,7 @@ const CreateAccount = () => {
              body: JSON.stringify(user)
          })
      const text = await response.text();
+     console.log(text);
      setSubmit(true);
          
 

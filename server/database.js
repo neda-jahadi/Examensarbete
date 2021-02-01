@@ -9,8 +9,10 @@ function getAllCities(searchword, callback) {
     get({name:{"$regex": `.*${searchword}.*`, $options: "i"}}, callback)
   }
 
-  function getCity(id,callback) {
-    get({ _id: new ObjectID(id) }, array => callback( array[0] ))
+  function getCity(id, callback) {
+     
+        get({ _id: new ObjectID(id) }, array => callback( array[0] ))
+
     }
 
   function getUser(userid,callback) {

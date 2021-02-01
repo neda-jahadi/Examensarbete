@@ -4,28 +4,27 @@ import deleteIcon from '../assets/delete.png';
 import commentIcon from '../assets/comment.png';
 import activityBackground from '../assets/activityBack.jpg';
 import restaurantBackground from '../assets/restaurantBack.jpg';
-import {useHistory} from 'react-router-dom';
+// import {useHistory} from 'react-router-dom';
 
 const DataList = ({ data, source, id1,userid, updateCity }) => {
-    const history = useHistory();
     const [like, setLike] = useState(false);
     const [comment, setComment] = useState('');
     const [chosedIndex, setIndex] = useState();
     const [userName, setUserName] = useState('');
 
 
-    let deleteTitle = '', editTitle = '', commentTitle = '', backgroundImg = activityBackground;
+    let deleteTitle = '', commentTitle = '', backgroundImg = activityBackground;
 
     switch (source) {
         case 'activity':
             deleteTitle = 'activity';
-            editTitle = 'editactivity';
+            // editTitle = 'editactivity';
             commentTitle = 'activity';
             break;
     
         default:
             deleteTitle = 'restaurant';
-            editTitle = 'editrestaurant';
+            // editTitle = 'editrestaurant';
             commentTitle = 'restaurant';
             backgroundImg = restaurantBackground;
             break;

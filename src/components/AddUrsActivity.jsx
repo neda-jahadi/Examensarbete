@@ -131,26 +131,26 @@ const AddUrsActivity = () => {
             <div className="content">
                 <div>
                     <input type="text" placeholder="Name ... " className="input" 
-                        pattern="[a-zA-Z0-9À-ž.\s]{1,30}"
+                        pattern="[a-zA-Z0-9À-ž-,'.\s]{1,30}"
                         onChange={(e) => {
                             setName(e.target.value)
                             setNameValid(e.target.validity.valid)
                             setSubmitMsgClass('inactive-submit-error');
                             }}/>
 
-                    <div className="error-name">Just Letter/Number(Min 1-Max 30) </div>
+                    <div className="error-name">Signs(-,'.) Letter Number (Min 1-Max 30) </div>
                 </div>
 
                 <div>
                     <input  type="text" placeholder="Address ..." className="input"
-                         pattern="[a-zA-Z0-9À-ž.\s]{5,40}"
+                         pattern="[a-zA-Z0-9À-ž-,'.\s]{5,40}"
                          onChange={(e) => {
                              setAddress(e.target.value)
                              setAddressValid(e.target.validity.valid)
                              setSubmitMsgClass('inactive-submit-error');
                              }} />
                              
-                    <div  className="error-address" >Just Letter/Number(Min 5-Max 40)</div>
+                    <div  className="error-address" >Signs(-,'.) Letter Number (Min 5-Max 40)</div>
                 </div>
                 
                 <div>

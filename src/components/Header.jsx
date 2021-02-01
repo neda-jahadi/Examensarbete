@@ -1,15 +1,15 @@
 import React from 'react';
 import './Header.css';
-import {useHistory} from 'react-router-dom';
+// import {useHistory} from 'react-router-dom';
 import HamburgerMenu from './HamburgerMenu';
 import DesktopMenu from './DesktopMenu';
 
 const Header = () => {
     
-    const history = useHistory();
-    const sendTo = (link) =>{
-        history.push(link);
-    }
+    // const history = useHistory();
+    // const sendTo = (link) =>{
+    //     history.push(link);
+    // }
 
     return(
         <div className="header-holder">
