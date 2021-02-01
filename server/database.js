@@ -291,5 +291,41 @@ function voteEntity(id, title, entityname,entityaddress, callback){
   )
 }
 
+function insertFan(id,userid, title, entityname,entityaddress, callback){
+   
+  MongoClient.connect(
+    url,
+    {  useUnifiedTopology: true },
+    async (error,client) => {
+      if(error) {
+        callback('"ERROR!! Could not connect"');
+        return;
+      }
+      const col = client.db(dbName).collection(cityCollectionName);
+      try {
+          if(title === 'activity' ) {
+              
+                  const cursor = await col.updateOne(
+                    {"_id":new ObjectID(id), activities: { $elemMatch: { name: entityname , address: entityaddress } } }, {  $push: { "activities.$.lovers": userid } } )
+
+                  callback(cursor.result);
+          }
+          else{
+                 const cursor = await col.updateOne(
+                   {"_id":new ObjectID(id), restaurants: { $elemMatch: { name: entityname , address: entityaddress } } }, {  $push: { "restaurants.$.lovers": userid } } )
+                 callback(cursor.result);
+          } 
+
+      }catch(error) {
+        console.log('Querry error:', error.message);
+        callback('"ERROR!! Query error"');
+
+      } finally {
+        client.close();
+      }
+    }
+  )
+}
+
 module.exports = {getAllCities, getCity, insertCity, insertEntity,
-     deleteEntity, insertUser, getUser,loginUser, userAvailibility,insertNewComment,voteEntity}
+     deleteEntity, insertUser, getUser,loginUser, userAvailibility,insertNewComment,voteEntity, insertFan}

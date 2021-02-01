@@ -9,7 +9,7 @@ app.use(cors())
 
 const port = 2294;
 
-const {getAllCities, getCity, insertCity, insertEntity,
+const {getAllCities, getCity, insertCity, insertEntity, insertFan,
          deleteEntity, insertUser, getUser,loginUser, userAvailibility,insertNewComment, voteEntity} = require('./database.js');
 const { Db } = require('mongodb');
 
@@ -84,6 +84,17 @@ app.get('/api/votentity' , (req,res) => {
     })
 })
 
+app.get('/api/insertfan' , (req,res) => {
+    let cityId = req.query.id1;
+    let userId = req.query.userid;
+    let title = req.query.title;
+    let entityname = req.query.entityname;
+    let entityaddress = req.query.entityaddress;
+    insertFan(cityId,userId,title,entityname,entityaddress, dataOrError => {
+        res.send(dataOrError)
+    })
+})
+
 app.post('/api/addcity', (req, res) => {
     let newCity = { name: req.body.name, activities: req.body.activities, restaurants: req.body.restaurants };
     insertCity(newCity, dataOrError => {
@@ -99,7 +110,8 @@ app.post('/api/adduser', (req, res) => {
 })
 
 app.post('/api/add/', (req,res) =>{
-    let newEntity = {name: req.body.name, address: req.body.address, comments: req.body.comments, likes: Number(req.body.likes) }
+    let newEntity = {name: req.body.name, address: req.body.address,
+         comments: req.body.comments, likes: Number(req.body.likes), lovers: req.body.lovers }
     let id = req.query.id;
     let entityTitle = req.query.title;
     insertEntity(id, newEntity, entityTitle, dataOrError => {
@@ -128,3 +140,4 @@ app.listen(port, ()=>{
 // db.cities.updateOne({"_id":ObjectId("60001c3b53ee671e497156ca"), activities: { $elemMatch: { name: "name" , address: "address" } } }, {  $push: { "activities.$.comments": {id: ObjectId("6006cad8b4c6da2f06047971"), name: 'Neda', comment:'Do it again for Paris'} } } )
 //db.cities.updateOne({"_id":ObjectId("60001c3b53ee671e497156ca"), activities: { $elemMatch: { name: 'Hotellerbjudanden - Paris' } } } )
 // db.cities.findOne({{"_id":ObjectId("60001c3b53ee671e497156ca")}, {activities:{name: 'Hotellerbjudanden - Paris'}}})
+//db.cities.updateOne({"_id":ObjectId("60001c3b53ee671e497156ca"), restaurants: { $elemMatch: { name: "Good foood" , address: "Good avenue 123 44" } } }, {  $push: { "restaurants.$.lovers": "6006cad8b4c6da2f06047971" } } )

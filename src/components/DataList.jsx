@@ -7,7 +7,7 @@ import restaurantBackground from '../assets/restaurantBack.jpg';
 // import {useHistory} from 'react-router-dom';
 
 const DataList = ({ data, source, id1,userid, updateCity }) => {
-    const [like, setLike] = useState(false);
+    // const [like, setLike] = useState(false);
     const [comment, setComment] = useState('');
     const [chosedIndex, setIndex] = useState();
     const [userName, setUserName] = useState('');
@@ -72,12 +72,22 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
             .catch(error => console.log(error))
         
     }
+    
+    const InsertFan = (data) => {
+        let url = `http://localhost:2294/api/insertfan/?id1=${id1}&userid=${userid}&title=${source}&entityname=${data.name}&entityaddress=${data.address}`;
+        console.log(url);
+        fetch(url)
+            .then(response => response.text())
+            .then(res => {console.log(res); updateCity();})
+            .catch(error => console.log(error))
+    }
+    
 
     const OnVote = (data) => {
         let url = `http://localhost:2294/api/votentity/?id1=${id1}&title=${source}&entityname=${data.name}&entityaddress=${data.address}`;
         fetch(url)
             .then(response => response.text())
-            .then(res => {console.log(res); updateCity()})
+            .then(res => {console.log(res); InsertFan(data);})
             .catch(error => console.log(error))
     }
 
@@ -124,7 +134,10 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
             </div>
 
             <div className="iconForItem-holder">
-                <div  onClick={() => {OnVote(datum);  }}>Vote</div>
+               {(datum.lovers.filter(ID => ID === userid).length) > 0 
+                    ? <div>Voted</div>
+                    : <div  onClick={() => {OnVote(datum);  }}>Vote</div>
+                }
 
                 <div className="Delete-comment">
                     <img src={commentIcon} alt="comment" onClick={() => setIndex(index)} />

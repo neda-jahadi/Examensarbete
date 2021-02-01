@@ -45,7 +45,7 @@ const CreateAccount = () => {
     }
 
     async function onSubmitUser() {
-        let user = {name: name , username: username, password: password  }
+        let user = {name: name , username: username, password: password }
 
         const response = await fetch(`http://localhost:2294/api/adduser`, {
              method: 'POST',

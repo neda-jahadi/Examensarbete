@@ -105,7 +105,8 @@ const AddUrsActivity = () => {
     
     async function onSubmit() {
         let comments = [{ name: userName, comment: comment}];
-      let item = {name: name, address: address, comments, likes: '1'};
+        let lovers = [userid];
+        let item = {name: name, address: address, comments, likes: '1', lovers};
         IfThereIsAlready(item)
     }
 
