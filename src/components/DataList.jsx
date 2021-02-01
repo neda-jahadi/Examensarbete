@@ -11,7 +11,7 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
     const [comment, setComment] = useState('');
     const [chosedIndex, setIndex] = useState();
     const [userName, setUserName] = useState('');
-
+    // const [indexForVote, setIndexForVote] = useState();
 
     let deleteTitle = '', commentTitle = '', backgroundImg = activityBackground;
 
@@ -65,15 +65,21 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
 
     const OnDeleteEntity = (data) => {
         let url = `http://localhost:2294/api/deletentity/?id1=${id1}&title=${deleteTitle}&entityname=${data.name}&entityaddress=${data.address}`;
-        console.log(url);
+        // console.log(url);
         fetch(url)
             .then(response => response.text())
-            .then(res => console.log(res))
+            .then(res => {console.log(res); updateCity();})
             .catch(error => console.log(error))
-        updateCity();
+        
     }
 
-    
+    const OnVote = (data) => {
+        let url = `http://localhost:2294/api/votentity/?id1=${id1}&title=${source}&entityname=${data.name}&entityaddress=${data.address}`;
+        fetch(url)
+            .then(response => response.text())
+            .then(res => {console.log(res); updateCity()})
+            .catch(error => console.log(error))
+    }
 
     let dataList = data.map((datum, index) => <div className="activity-box" key={index}>
             <div className="img-holder">
@@ -118,9 +124,7 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
             </div>
 
             <div className="iconForItem-holder">
-                {!like
-                    ? <div className="like" onClick={() => setLike(true)}>Like </div>
-                    : <div className="liked" onClick={() => setLike(false)}>Liked </div>}
+                <div  onClick={() => {OnVote(datum);  }}>Vote</div>
 
                 <div className="Delete-comment">
                     <img src={commentIcon} alt="comment" onClick={() => setIndex(index)} />

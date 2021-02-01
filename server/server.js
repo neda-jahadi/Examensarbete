@@ -10,7 +10,7 @@ app.use(cors())
 const port = 2294;
 
 const {getAllCities, getCity, insertCity, insertEntity,
-         deleteEntity, insertUser, getUser,loginUser, userAvailibility,insertNewComment} = require('./database.js');
+         deleteEntity, insertUser, getUser,loginUser, userAvailibility,insertNewComment, voteEntity} = require('./database.js');
 const { Db } = require('mongodb');
 
 let logger = (req,res,next) =>{
@@ -29,8 +29,8 @@ app.use( bodyParser.json() )
 
 
 app.get('/api/cities/', (req,res) =>{
-    let searchword = req.query.searchword;
-    getAllCities(searchword, dataOrError =>{
+    // let searchword = req.query.searchword;
+    getAllCities( dataOrError =>{
         res.send(dataOrError)
       })
 })
@@ -74,7 +74,15 @@ app.get('/api/deletentity', (req,res) => {
     })
 })
 
-
+app.get('/api/votentity' , (req,res) => {
+    let cityId = req.query.id1;
+    let title = req.query.title;
+    let entityname = req.query.entityname;
+    let entityaddress = req.query.entityaddress;
+    voteEntity(cityId,title,entityname,entityaddress, dataOrError => {
+        res.send(dataOrError)
+    })
+})
 
 app.post('/api/addcity', (req, res) => {
     let newCity = { name: req.body.name, activities: req.body.activities, restaurants: req.body.restaurants };

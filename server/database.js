@@ -5,8 +5,8 @@ const dbName = 'trip';
 const cityCollectionName = 'cities';
 const userCollectionName = 'users';
 
-function getAllCities(searchword, callback) {
-    get({name:{"$regex": `.*${searchword}.*`, $options: "i"}}, callback)
+function getAllCities( callback) {
+    get({}, callback)
   }
 
   function getCity(id, callback) {
@@ -254,5 +254,42 @@ function insertNewComment(cityId,title, name, address,newComment,  callback) {
   )
 }
 
+
+function voteEntity(id, title, entityname,entityaddress, callback){
+   
+  MongoClient.connect(
+    url,
+    {  useUnifiedTopology: true },
+    async (error,client) => {
+      if(error) {
+        callback('"ERROR!! Could not connect"');
+        return;
+      }
+      const col = client.db(dbName).collection(cityCollectionName);
+      try {
+          if(title === 'activity' ) {
+              
+                  const cursor = await col.updateOne(
+                    {"_id":new ObjectID(id), activities: { $elemMatch: { name: entityname , address: entityaddress } } }, {  $inc: { "activities.$.likes": 1 } } )
+
+                  callback(cursor.result);
+          }
+          else{
+                  const cursor = await col.updateOne(
+                    {"_id":new ObjectID(id), restaurants: { $elemMatch: { name: entityname , address: entityaddress } } }, {  $inc: { "restaurants.$.likes": 1 } } )
+                  callback(cursor.result);
+          } 
+
+      }catch(error) {
+        console.log('Querry error:', error.message);
+        callback('"ERROR!! Query error"');
+
+      } finally {
+        client.close();
+      }
+    }
+  )
+}
+
 module.exports = {getAllCities, getCity, insertCity, insertEntity,
-     deleteEntity, insertUser, getUser,loginUser, userAvailibility,insertNewComment}
+     deleteEntity, insertUser, getUser,loginUser, userAvailibility,insertNewComment,voteEntity}

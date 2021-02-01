@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import './Travel.css';
 import {useHistory} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
@@ -53,16 +53,16 @@ const Travel = () => {
     }
 
     async function updateCities() {
-        const response = await fetch(`http://localhost:2294/api/cities/?searchword=${searchedCity}`);
+        const response = await fetch(`http://localhost:2294/api/cities/`);
         const updatedCities = await response.json();
         setCities(updatedCities);
         
     }
         
-    useEffect( () => {
-        updateCities()
+    // useEffect( () => {
+    //     updateCities()
        
-      },[searchedCity]);   
+    //   },[searchedCity]);   
       
    
 
@@ -96,7 +96,8 @@ const Travel = () => {
     }
     
     if(cities.length > 0) {
-      jsxCities = cities.map((city, index) => <div key={city._id} className="city-list" >
+        let cityList = cities.filter(city => city.name.toLowerCase().includes(searchedCity.toLowerCase()) )
+      jsxCities = cityList.map((city, index) => <div key={city._id} className="city-list" >
                                                             
                                                              <span className="cityName" onClick={()=>sendTo(`/city/${userid}/${city._id}`)} >{city.name}</span>
                                                       </div>)
@@ -114,7 +115,7 @@ const Travel = () => {
 
                     <input className="search-input" type='text'
                         placeholder="Search city you want..."
-                        onChange={(e) => setSearchedCity(e.target.value) } />
+                        onChange={(e) => {setSearchedCity(e.target.value) }} />
 
                 </div>
 
@@ -132,7 +133,8 @@ const Travel = () => {
                                 pattern="[a-zA-Z\s]{1,50}"
                                 onChange={(e) => {setClassCityMessage('no-error-msg')
                                                   setCity(e.target.value);
-                                                  setCitynameValid(e.target.validity.valid)}
+                                                  setCitynameValid(e.target.validity.valid)
+                                                  }
                                 }/>
                                     
                         </div>
