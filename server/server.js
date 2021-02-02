@@ -9,7 +9,7 @@ app.use(cors())
 
 const port = 2294;
 
-const {getAllCities, getCity, insertCity, insertEntity, insertFan,
+const {getAllCities, getCity, insertCity, insertEntity, insertFan,unvoteEntity, deleteFan,
          deleteEntity, insertUser, getUser,loginUser, userAvailibility,insertNewComment, voteEntity} = require('./database.js');
 const { Db } = require('mongodb');
 
@@ -91,6 +91,27 @@ app.get('/api/insertfan' , (req,res) => {
     let entityname = req.query.entityname;
     let entityaddress = req.query.entityaddress;
     insertFan(cityId,userId,title,entityname,entityaddress, dataOrError => {
+        res.send(dataOrError)
+    })
+})
+
+app.get('/api/unvotentity' , (req,res) => {
+    let cityId = req.query.id1;
+    let title = req.query.title;
+    let entityname = req.query.entityname;
+    let entityaddress = req.query.entityaddress;
+    unvoteEntity(cityId,title,entityname,entityaddress, dataOrError => {
+        res.send(dataOrError)
+    })
+})
+
+app.get('/api/deletefan' , (req,res) => {
+    let cityId = req.query.id1;
+    let userId = req.query.userid;
+    let title = req.query.title;
+    let entityname = req.query.entityname;
+    let entityaddress = req.query.entityaddress;
+    deleteFan(cityId,userId,title,entityname,entityaddress, dataOrError => {
         res.send(dataOrError)
     })
 })

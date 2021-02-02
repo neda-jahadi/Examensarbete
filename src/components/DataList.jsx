@@ -77,7 +77,14 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
     
     const InsertFan = (data) => {
         let url = `http://localhost:2294/api/insertfan/?id1=${id1}&userid=${userid}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
-        console.log(url);
+        fetch(url)
+            .then(response => response.text())
+            .then(res => {console.log(res); updateCity();})
+            .catch(error => console.log(error))
+    }
+
+    const deleteFan = (data) => {
+        let url = `http://localhost:2294/api/deletefan/?id1=${id1}&userid=${userid}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
         fetch(url)
             .then(response => response.text())
             .then(res => {console.log(res); updateCity();})
@@ -87,10 +94,17 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
 
     const OnVote = (data) => {
         let url = `http://localhost:2294/api/votentity/?id1=${id1}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
-        console.log(url);
         fetch(url)
             .then(response => response.text())
             .then(res => {console.log(res); InsertFan(data);})
+            .catch(error => console.log(error))
+    }
+
+    const OnUnvote = (data) => {
+        let url = `http://localhost:2294/api/unvotentity/?id1=${id1}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
+        fetch(url)
+            .then(response => response.text())
+            .then(res => {console.log(res); deleteFan(data);})
             .catch(error => console.log(error))
     }
 
@@ -110,7 +124,9 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
                 </div>
                 <div>
                     {/* <div className="title">Likes: </div> */}
-                    <div className="item-info">{datum.likes}Likes</div>
+                    <div className="item-info">
+                        Liked by <span style={{fontWeight: 'bold'}}>{datum.likes}</span>
+                    </div>
                 </div>
                 <div>
                     <div className="title">Comments: </div>
@@ -138,7 +154,7 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
 
             <div className="iconForItem-holder">
                {(datum.lovers.filter(ID => ID === userid).length) > 0 
-                    ? <img className="like-icon" src={likedIcon} alt="liked" />
+                    ? <img className="like-icon" src={likedIcon} alt="liked" onClick={() => {OnUnvote(datum);  }}/>
                     : <img className="like-icon" src={likeIcon} alt="like" onClick={() => {OnVote(datum);  }} />
 
                 }
