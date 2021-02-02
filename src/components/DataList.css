@@ -33,29 +33,30 @@
  }
 
 .iconForItem-holder  img {
-    width: 30px;
-    height: 30px;
+    width: 27px;
+    height: 27px;
 }
 .iconForItem-holder {
     position: absolute;
     bottom: 0;
     /* background: rgb(255, 255, 255);  */
-    background:rgb(198,198,198,0.5); 
-    color: #f1f1f1;
+    background:rgb(178,178,178,0.5); 
     width: 100%;
     /* padding: 20px; */
     display: flex;
     flex-direction: row;
     justify-content:space-between;
-    height: 18%;
-    
+    height: 20%;
 }
+
+
 .activity-holder > div {
     margin-left: 5px;
 }
 .delete-comment {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 .activity-holder .title {
     margin-top: 10px;
@@ -80,18 +81,7 @@
 .like-icon {
     padding-left: 5px;
 } 
-.like {
-    font-weight: bold;
-    color: black;
-    width: 30Px;
-    height: 30px;
-}
-.liked {
-    font-weight: bold;
-    color: darkgreen;
-    width: 30px;
-    height: 30px;
-}
+
 .user {
     font-weight: bold;
     background-color: #B3F1F5;

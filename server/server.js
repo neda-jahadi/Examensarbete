@@ -135,7 +135,7 @@ app.listen(port, ()=>{
     console.log('Web server listening on port:' + port);
 })
 
-
+//{"name":"Musée Carnavalet","address":"23 Rue de Sévigné, 75003 ",
 // db.cities.updateOne({"_id":ObjectId("60001c3b53ee671e497156ca"), activities: { $elemMatch: { name: "knkmnkm" , address: "c mc m" } } }, {  $push: { "activities.$.comments": {id: ObjectId("6006cad8b4c6da2f06047971"), name: 'Neda', comment:'Again test hope'} } } )
 // db.cities.updateOne({"_id":ObjectId("60001c3b53ee671e497156ca"), activities: { $elemMatch: { name: "name" , address: "address" } } }, {  $push: { "activities.$.comments": {id: ObjectId("6006cad8b4c6da2f06047971"), name: 'Neda', comment:'Do it again for Paris'} } } )
 //db.cities.updateOne({"_id":ObjectId("60001c3b53ee671e497156ca"), activities: { $elemMatch: { name: 'Hotellerbjudanden - Paris' } } } )

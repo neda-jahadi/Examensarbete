@@ -4,7 +4,9 @@ import deleteIcon from '../assets/delete.png';
 import commentIcon from '../assets/comment.png';
 import activityBackground from '../assets/activityBack.jpg';
 import restaurantBackground from '../assets/restaurantBack.jpg';
-// import {useHistory} from 'react-router-dom';
+import likeIcon from '../assets/like.png';
+import likedIcon from '../assets/liked.png';
+
 
 const DataList = ({ data, source, id1,userid, updateCity }) => {
     // const [like, setLike] = useState(false);
@@ -46,7 +48,7 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
 
     async function onSendComment (name,address) {
         let newComment = { name: userName, comment: comment}
-        let url= `http://localhost:2294/api/addcomment/?cityid=${id1}&title=${commentTitle}&name=${name}&address=${address}`
+        let url= `http://localhost:2294/api/addcomment/?cityid=${id1}&name=${name}&address=${address}&title=${commentTitle}`
         // console.log(url);
         // console.log(newComment)
              const response = await fetch(url, {
@@ -64,7 +66,7 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
 
 
     const OnDeleteEntity = (data) => {
-        let url = `http://localhost:2294/api/deletentity/?id1=${id1}&title=${deleteTitle}&entityname=${data.name}&entityaddress=${data.address}`;
+        let url = `http://localhost:2294/api/deletentity/?id1=${id1}&entityname=${data.name}&entityaddress=${data.address}&title=${deleteTitle}`;
         // console.log(url);
         fetch(url)
             .then(response => response.text())
@@ -74,7 +76,7 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
     }
     
     const InsertFan = (data) => {
-        let url = `http://localhost:2294/api/insertfan/?id1=${id1}&userid=${userid}&title=${source}&entityname=${data.name}&entityaddress=${data.address}`;
+        let url = `http://localhost:2294/api/insertfan/?id1=${id1}&userid=${userid}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
         console.log(url);
         fetch(url)
             .then(response => response.text())
@@ -84,7 +86,8 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
     
 
     const OnVote = (data) => {
-        let url = `http://localhost:2294/api/votentity/?id1=${id1}&title=${source}&entityname=${data.name}&entityaddress=${data.address}`;
+        let url = `http://localhost:2294/api/votentity/?id1=${id1}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
+        console.log(url);
         fetch(url)
             .then(response => response.text())
             .then(res => {console.log(res); InsertFan(data);})
@@ -103,7 +106,7 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
                 </div>
                 <div>
                     {/* <div className="title">Address:</div> */}
-                    <div className="item-info">{datum.address}</div>
+                    <div className="item-info">{datum.address}test</div>
                 </div>
                 <div>
                     {/* <div className="title">Likes: </div> */}
@@ -135,11 +138,12 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
 
             <div className="iconForItem-holder">
                {(datum.lovers.filter(ID => ID === userid).length) > 0 
-                    ? <div>Voted</div>
-                    : <div  onClick={() => {OnVote(datum);  }}>Vote</div>
+                    ? <img className="like-icon" src={likedIcon} alt="liked" />
+                    : <img className="like-icon" src={likeIcon} alt="like" onClick={() => {OnVote(datum);  }} />
+
                 }
 
-                <div className="Delete-comment">
+                <div className="delete-comment">
                     <img src={commentIcon} alt="comment" onClick={() => setIndex(index)} />
                     <img src={deleteIcon} alt="delete" className="delete-icon" onClick={() => OnDeleteEntity(datum)} />
                 </div>

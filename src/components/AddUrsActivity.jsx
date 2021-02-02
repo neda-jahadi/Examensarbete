@@ -132,38 +132,38 @@ const AddUrsActivity = () => {
             <div className="content">
                 <div>
                     <input type="text" placeholder="Name ... " className="input" 
-                        pattern="[a-zA-Z0-9À-ž-,'.\s]{1,80}"
+                        pattern="[a-zA-Z0-9À-ž-,’'.\s]{1,80}"
                         onChange={(e) => {
                             setName(e.target.value)
                             setNameValid(e.target.validity.valid)
                             setSubmitMsgClass('inactive-submit-error');
                             }}/>
 
-                    <div className="error-name">Signs(-,'.) Letter Number (Min 1-Max 80) </div>
+                    <div className="error-name">Signs(-,’'.) Letter Number (Min 1-Max 80) </div>
                 </div>
 
                 <div>
                     <input  type="text" placeholder="Address ..." className="input"
-                         pattern="[a-zA-Z0-9À-ž-,'.\s]{5,}"
+                         pattern="[a-zA-Z0-9À-ž-,’'.\s]{5,}"
                          onChange={(e) => {
                              setAddress(e.target.value)
                              setAddressValid(e.target.validity.valid)
                              setSubmitMsgClass('inactive-submit-error');
                              }} />
                              
-                    <div  className="error-address" >Signs(-,'.) Letter Number (Min 5)</div>
+                    <div  className="error-address" >Signs(-,’'.) Letter Number (Min 5)</div>
                 </div>
                 
                 <div>
                     <input type="text" placeholder="Comment ..."  className="input-comment"
-                          pattern="[a-zA-Z0-9À-ž.,)(!:'\s]{3,}"
+                          pattern="[a-zA-Z0-9À-ž-.,)(!:'’\s]{3,}"
                          onChange={(e) => {
                              setComment(e.target.value)
                              setCommentValid(e.target.validity.valid)
                              setSubmitMsgClass('inactive-submit-error');
                              }} />
 
-                    <div  className="error-comment" >Min 3,Just Letter Number and ),.(!:'</div>
+                    <div  className="error-comment" >Min 3,Just Letter Number and -),.(!:’'</div>
                 </div>
                 
             </div>
