@@ -82,13 +82,13 @@ const CreateAccount = () => {
                     <div>
                         <div className="label">First name:</div>
                         <div className="input-and-message"> 
-                            <input type="text" id="firstname" placeholder="Just letters(3-13)"
-                                    pattern="[A-Za-z]{3,13}"
+                            <input type="text" id="firstname" placeholder="Letters, spaces between(3-13)"
+                                    pattern="[a-zA-ZÀ-ž][a-zA-ZÀ-ž\s]{3,13}"
                                     onChange={(e) => {
                                     setSubmit(false)
                                     setName(e.target.value)
                                     setFirstnameValid(e.target.validity.valid) }} />
-                            <div className={"firstname-error"}>Just Letters, Min 3,Max 13 characters </div>
+                            <div className={"firstname-error"}> Letters, spaces between, Min 3,Max 13 </div>
                         </div>
                         
                     </div>
@@ -98,8 +98,8 @@ const CreateAccount = () => {
                 <div>
                     <div className="label">Desired User Name:</div>
                     <div className="input-and-message">
-                        <input type="text" placeholder="Numbers and letters(3-13)"
-                                pattern="[A-Za-z0-9]{3,13}"
+                        <input type="text" placeholder="Numbers/letters-.(3-13)"
+                                pattern="[A-Za-zÀ-ž0-9-.]{3,13}"
                                 onChange={(e) => {
                                 setUsername(e.target.value)
                                 setAvailibilityMsg('Check availibility!')
@@ -107,7 +107,7 @@ const CreateAccount = () => {
                                 setSubmit(false)
                                 setAvailable(false)
                                 setUsernameValid(e.target.validity.valid) }} />
-                        <div className={"username-error"}>Min 3,Max 13 characters, Just Numbers/Letters</div>
+                        <div className={"username-error"}>Min 3,Max 13,Numbers/Letters and .-</div>
                     </div>
                     
 
@@ -126,12 +126,12 @@ const CreateAccount = () => {
                      <div className="label">Choose a password:</div>
                      <div className="input-and-message">
                         <input type="text" placeholder="Numbers and letters(3-13)"
-                                pattern="[A-Za-z0-9]{3,13}"
+                                pattern="[A-Za-zÀ-ž0-9]{3,13}"
                                 onChange={(e) => {
                                 setPassword(e.target.value); 
                                 setSubmit(false)
                                 setPasswordValid(e.target.validity.valid)}} />
-                        <div className={"password-error"}>Min3,Max 13 characters, Just Numbers/letters</div>
+                        <div className={"password-error"}>Min3-Max 13, Numbers/letters</div>
                      </div>
                     
 

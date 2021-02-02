@@ -11,10 +11,10 @@
     flex-direction: row;
     
 }
-.desktop-links  div {
+.desktop-links  h2 {
     font-size: large;
     padding-right: 40px;
-
+    color: white;
 }
 .appname-desktop {
     font-family: "Cursive",Brush Script MT;

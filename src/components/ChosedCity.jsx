@@ -93,7 +93,7 @@ const ChosedCity = () => {
             <div className="city-info">
                 <div className="info-title">
                     <div className="activity">Activities</div>
-                    <input type="text" placeholder="Search what you want..." 
+                    <input type="text" placeholder="Search activity..." 
                         style={{ display: showActivitySearch ? "block" : "none" }}
                         onChange={(e) => {
                             setSearchActivity(e.target.value);
@@ -118,7 +118,7 @@ const ChosedCity = () => {
             <div className="city-info">
                 <div className="info-title">
                     <div className="restaurant">Restaurants</div>
-                    <input type="text" placeholder="Search what you want..." 
+                    <input type="text" placeholder="Search restaurant..." 
                         style={{ display: showRestaurantSearch ? "block" : "none" }}
                         onChange={(e) => {
                             setSearchRestaurant(e.target.value);

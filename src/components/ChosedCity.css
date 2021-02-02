@@ -63,16 +63,16 @@
 .city-info {
     /* height: 40vh; */
     display: grid;
-    grid-template-rows: 15% 65% 12%;
+    grid-template-rows: 15% 65% 15%;
     padding: 5px;
-
 }
 
 .info-title {
     display: flex;
     flex-direction: row;
     margin-left: 10px;
-    margin-bottom: 5px;;
+    margin-bottom: 5px;
+
 }
 
 .add-icon {
@@ -131,7 +131,7 @@
 }
 .activity {
     font-style: italic;
-    color: purple;
+    color: darkolivegreen;
 }
 
 @media(min-width: 1025px){

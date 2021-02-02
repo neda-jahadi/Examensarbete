@@ -17,7 +17,7 @@ const Travel = () => {
     const {userid} = useParams();
 
     let addMycityBtnClass = 'disabled', infoMessage = "(a-z A-Z, Min 1- Max 50)" , classInfoMessage = 'no-error-msg';
-
+    
     if( citynameValid && city !== '' ){
         addMycityBtnClass = 'add-myCity';
         // classInfoMessage = 'no-error-msg';
@@ -130,12 +130,13 @@ const Travel = () => {
                     : <div className="input-add-holder" >
                         <div>
                             <input className="input-addCity" type="text" placeholder="City..."
-                                pattern="[a-zA-Z\s]{1,50}"
+                                pattern="[^\s][a-zA-ZÀ-ž\s]{0,50}"
                                 onChange={(e) => {setClassCityMessage('no-error-msg')
                                                   setCity(e.target.value);
                                                   setCitynameValid(e.target.validity.valid)
                                                   }
-                                }/>
+                                }
+                                onBlur = {() => setAddCity(false)}/>
                                     
                         </div>
                         

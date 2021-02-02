@@ -30,13 +30,13 @@ const DesktopMenu = () => {
         <div className="desktop-content">
             <div className="desktop-links">
                 <Link to="/" >
-                    <div className="signout" role="link">Sign out</div>
+                    <h2 className="signout" role="link">Sign out</h2>
                 </Link>
                 <Link to= {`/home/${userid}`} style={{display: activePath === 'home' ? 'none' : 'block'}}>
-                    <div className="home" role="link">Home</div>
+                    <h2 className="home" role="link">Home</h2>
                 </Link>
                 <Link to= {`/city/${userid}/${cityid}`} style={{display: activePath === 'add' ? 'block' : 'none'}}>
-                    <div className="city" role="link">My city</div>
+                    <h2 className="city" role="link">My city</h2>
                 </Link>
             </div>
             <div>

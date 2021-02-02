@@ -3,7 +3,7 @@
     margin: 5px;
     position: relative;
     max-width: 70vw;
-    height: 99%;
+    height: 97%;
 }
 
 .img-holder {
@@ -118,15 +118,18 @@
     display: flex;
    align-items: center;
    padding: 5px;
-   border: 1px solid;
+   
+   /* border: 1px solid; */
 }
 .new-comment textarea {
-    background-color:  #B3F1F5;
+    background-color: white;
     border-radius: 5px;
+
 }
 
 .send-commentbtn {
-   background-color:  #B3F1F5;
+   background-color:  darkcyan;
+   color: white;
    border-radius: 5px;
    border: none;
    padding: 5px;

@@ -9,11 +9,13 @@ import likedIcon from '../assets/liked.png';
 
 
 const DataList = ({ data, source, id1,userid, updateCity }) => {
-    // const [like, setLike] = useState(false);
+    
     const [comment, setComment] = useState('');
     const [chosedIndex, setIndex] = useState();
     const [userName, setUserName] = useState('');
-    // const [indexForVote, setIndexForVote] = useState();
+    const [commentClicked, setCommentClicked] = useState(false);
+
+    // const divRef = useRef(null);
 
     let deleteTitle = '', commentTitle = '', backgroundImg = activityBackground;
 
@@ -61,6 +63,7 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
      const text = await response.text();
      console.log(text);
         setIndex();
+        setCommentClicked(false);
         updateCity();
  }
 
@@ -108,32 +111,37 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
             .catch(error => console.log(error))
     }
 
+   
+
     let dataList = data.map((datum, index) => <div className="activity-box" key={index}>
             <div className="img-holder">
                 <img src={backgroundImg} alt="backImg" className="backImg" />
 
             </div>
             <div className="activity-holder">
-                <div>
-                    {/* <div className="title">Name:</div> */}
-                    <div className="item-info-name">{datum.name}</div>
-                </div>
-                <div>
-                    {/* <div className="title">Address:</div> */}
-                    <div className="item-info">{datum.address}test</div>
-                </div>
-                <div>
-                    {/* <div className="title">Likes: </div> */}
-                    <div className="item-info">
-                        Liked by <span style={{fontWeight: 'bold'}}>{datum.likes}</span>
+                <div className="name-address-like" style={{display: index === chosedIndex && commentClicked ? 'none' : 'block'}}>
+                    <div>
+                        {/* <div className="title">Name:</div> */}
+                        <div className="item-info-name">{datum.name}</div>
+                    </div>
+                    <div>
+                        {/* <div className="title">Address:</div> */}
+                        <div className="item-info">{datum.address}test</div>
+                    </div>
+                    <div>
+                        {/* <div className="title">Likes: </div> */}
+                        <div className="item-info">
+                            Liked by <span style={{fontWeight: 'bold'}}>{datum.likes}</span>
+                        </div>
                     </div>
                 </div>
+                
                 <div>
-                    <div className="title">Comments: </div>
+                    <div className="title" id="scrollto">Comments: </div>
                     
                 </div>
                 <div className="comment-holder" 
-                     style={{display: index === chosedIndex  ? 'none' : 'block'}}>
+                     style={{display: index === chosedIndex && commentClicked ? 'none' : 'block'}}>
                     {datum.comments.map((comment, index) => 
                         <div className="user-comment" key={index}>
                             <span className="user">{comment.name}:</span>
@@ -142,8 +150,8 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
                      }
                 </div>
 
-                <div style={{display: index === chosedIndex  ? 'inline-block' : 'none'}}>
-                    <div className ="new-comment">
+                <div style={{display: index === chosedIndex && commentClicked ? 'inline-block' : 'none'}}>
+                    <div className ="new-comment" >
                         <textarea type="comment" onChange={(e) => setComment(e.target.value)} />
                         <button className="send-commentbtn" onClick={() => onSendComment(datum.name,datum.address)} >Send!</button>
                     </div>
@@ -160,7 +168,13 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
                 }
 
                 <div className="delete-comment">
-                    <img src={commentIcon} alt="comment" onClick={() => setIndex(index)} />
+                    <img src={commentIcon} alt="comment" 
+                        onClick={() => {
+                            setIndex(index);
+                            setCommentClicked(!commentClicked);
+                           
+                        }} />
+
                     <img src={deleteIcon} alt="delete" className="delete-icon" onClick={() => OnDeleteEntity(datum)} />
                 </div>
 

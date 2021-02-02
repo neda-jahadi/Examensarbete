@@ -43,6 +43,7 @@
     padding: 10px;
     margin-left: 0px;
     width: 70%;
+    border: 1px solid gray;
 }
 /* .error {
   color: red;

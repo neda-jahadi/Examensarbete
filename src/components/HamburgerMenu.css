@@ -1,3 +1,4 @@
+
 #nav-icon1 {
 	width: 60px;
 	height: 45px;
@@ -12,7 +13,6 @@
 	-o-transition: .5s ease-in-out;
 	transition: .5s ease-in-out;
 	cursor: pointer;
-    
   }
   
   #nav-icon1 span {
@@ -20,7 +20,7 @@
 	position: absolute;
 	height: 9px;
 	width: 100%;
-	background: #201A1A;
+	background: white;
 	border-radius: 9px;
 	opacity: 1;
 	left: 0;
@@ -89,7 +89,7 @@
 	text-align: left;
 	width: 100vw;
 	height: 100vh;
-	background-color: #B3F1F5;
+	background-color: #00A3A3;
 	border: none;
 	position: absolute;		
 	left: 0;
@@ -118,7 +118,8 @@
 .hamburger-content h2{
 	position: relative;
 	display: block;			
-	transition: 0.5s;	   
+	transition: 0.5s;
+	color: white;	   
 }
 .hamburger-content h2::after{
 	position: absolute;
@@ -131,6 +132,9 @@
 	transform: scaleX(0);
 	transform-origin: right;
 	transition: transform 0.5s;
+}
+a:link {
+    text-decoration: none;
 }
 
 
