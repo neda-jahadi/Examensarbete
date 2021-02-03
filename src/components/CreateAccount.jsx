@@ -83,7 +83,7 @@ const CreateAccount = () => {
                         <div className="label">First name:</div>
                         <div className="input-and-message"> 
                             <input type="text" id="firstname" placeholder="Letters, spaces between(3-13)"
-                                    pattern="[a-zA-ZÀ-ž][a-zA-ZÀ-ž\s]{3,13}"
+                                    pattern="[a-zA-ZÀ-ž][a-zA-ZÀ-ž\s]{2,13}"
                                     onChange={(e) => {
                                     setSubmit(false)
                                     setName(e.target.value)

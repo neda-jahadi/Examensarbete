@@ -43,11 +43,6 @@ function App() {
               <AddUrsActivity />
           </Route>
 
-          {/* <Route path="/add-restaurant/:id">
-              <Header />
-              <AddUrsRestaurant />
-          </Route> */}
-
         </BrowserRouter>
       </Container>
       

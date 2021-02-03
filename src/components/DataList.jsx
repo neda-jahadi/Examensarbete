@@ -158,8 +158,8 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
                 <div style={{display: index === chosedIndex && commentClicked ? 'inline-block' : 'none'}}>
                     <div className ="new-comment" >
                         <input 
-                            pattern="[a-zA-ZÀ-ž][a-zA-ZÀ-ž.'\s]{0,}"
-                            placeholder="No special signs"
+                            pattern="[a-zA-ZÀ-ž][a-zA-ZÀ-ž.,)(:'’\s]{0,}"
+                            placeholder="No ?!%¤$#[/]=@"
                             onChange={(e) => ManageNewComment(e)} />
                         <button className={sendBtnStatus} onClick={() => onSendComment(datum.name,datum.address)} >Send!</button>
                     </div>
@@ -189,14 +189,17 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
                 }
 
                 <div className="delete-comment">
-                    <img src={commentIcon} alt="comment" 
+                    <img src={commentIcon} alt="comment" className="comment-icon"
                         onClick={() => {
                             setIndex(index);
                             setCommentClicked(!commentClicked);
                            
                         }} />
-
-                    <img src={deleteIcon} alt="delete" className="delete-icon" onClick={() => OnDeleteEntity(datum)} />
+                        
+                    {datum.owner === userid &&
+                        <img src={deleteIcon} alt="delete" className="delete-icon" onClick={() => OnDeleteEntity(datum)} />
+                    }
+                    
                 </div>
 
             </div>

@@ -48,10 +48,14 @@
     justify-content: center;
     /* padding-top: 10px; */ 
 }
-.submit > button {
+.submit  button {
     width: 50vw;
-}
 
+}
+.submit-btn-holder {
+    display: flex;
+    justify-content: center;
+}
 
 :invalid + .error-name { 
     display: block;
@@ -146,7 +150,7 @@
         width: 50%;
         text-align: left;
     }
-    .submit > button {
+    .submit  button {
         width: 20vw;
     }
     

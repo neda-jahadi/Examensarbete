@@ -106,7 +106,8 @@ const AddUrsActivity = () => {
     async function onSubmit() {
         let comments = [{ name: userName, comment: comment}];
         let lovers = [userid];
-        let item = {name: name, address: address, comments, likes: '1', lovers};
+        let owner = userid;
+        let item = {name: name, address: address, comments, likes: '1', lovers, owner};
         IfThereIsAlready(item)
     }
 
@@ -132,7 +133,7 @@ const AddUrsActivity = () => {
             <div className="content">
                 <div>
                     <input type="text" placeholder="Name ... " className="input" 
-                        pattern="[a-zA-Z0-9À-ž-,’'.\s]{1,80}"
+                        pattern="[a-zA-ZÀ-ž0-9][a-zA-Z0-9À-ž-,’'.\s]{0,80}"
                         onChange={(e) => {
                             setName(e.target.value)
                             setNameValid(e.target.validity.valid)
@@ -144,7 +145,7 @@ const AddUrsActivity = () => {
 
                 <div>
                     <input  type="text" placeholder="Address ..." className="input"
-                         pattern="[a-zA-Z0-9À-ž-,’'.\s]{5,}"
+                         pattern="[a-zA-ZÀ-ž0-9][a-zA-Z0-9À-ž-,’'.\s]{4,}"
                          onChange={(e) => {
                              setAddress(e.target.value)
                              setAddressValid(e.target.validity.valid)
@@ -156,7 +157,7 @@ const AddUrsActivity = () => {
                 
                 <div>
                     <input type="text" placeholder="Comment ..."  className="input-comment"
-                          pattern="[a-zA-Z0-9À-ž-.,)(!:'’\s]{3,}"
+                          pattern="[a-zA-ZÀ-ž0-9][a-zA-Z0-9À-ž-.,)(:'’\s]{2,}"
                          onChange={(e) => {
                              setComment(e.target.value)
                              setCommentValid(e.target.validity.valid)
@@ -168,7 +169,9 @@ const AddUrsActivity = () => {
                 
             </div>
             <div className="submit">
-                <button className={submitBtnStatus} onClick={()=> onSubmit()}>Submit!</button>
+                <div className="submit-btn-holder">
+                    <button className={submitBtnStatus} onClick={()=> onSubmit()}>Submit!</button>
+                </div>
                 <div className={submitMsgClass}>{SubmitionMessage}</div>
             </div>
         </div>

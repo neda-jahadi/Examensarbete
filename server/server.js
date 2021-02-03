@@ -132,7 +132,9 @@ app.post('/api/adduser', (req, res) => {
 
 app.post('/api/add/', (req,res) =>{
     let newEntity = {name: req.body.name, address: req.body.address,
-         comments: req.body.comments, likes: Number(req.body.likes), lovers: req.body.lovers }
+         comments: req.body.comments, likes: Number(req.body.likes),
+         lovers: req.body.lovers, owner: req.body.owner }
+         
     let id = req.query.id;
     let entityTitle = req.query.title;
     insertEntity(id, newEntity, entityTitle, dataOrError => {

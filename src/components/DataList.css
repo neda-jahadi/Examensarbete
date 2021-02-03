@@ -81,7 +81,9 @@
 .like-icon {
     padding-left: 5px;
 } 
-
+.comment-icon {
+    margin-right:5px;
+}
 .user {
     font-weight: bold;
     background-color: #B3F1F5;

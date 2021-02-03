@@ -130,13 +130,13 @@ const Travel = () => {
                     : <div className="input-add-holder" >
                         <div>
                             <input className="input-addCity" type="text" placeholder="City..."
-                                pattern="[^\s][a-zA-ZÀ-ž\s]{0,50}"
+                                pattern="[a-zA-ZÀ-ž][a-zA-ZÀ-ž\s]{0,50}"
                                 onChange={(e) => {setClassCityMessage('no-error-msg')
                                                   setCity(e.target.value);
                                                   setCitynameValid(e.target.validity.valid)
                                                   }
                                 }
-                                onBlur = {() => setAddCity(false)}/>
+                                />
                                     
                         </div>
                         
