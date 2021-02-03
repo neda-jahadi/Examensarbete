@@ -121,9 +121,10 @@
    
    /* border: 1px solid; */
 }
-.new-comment textarea {
+.new-comment input {
     background-color: white;
     border-radius: 5px;
+   padding: 5px;
 
 }
 
@@ -135,6 +136,21 @@
    padding: 5px;
    margin-left: 5px;
 }
+.unsend-commentbtn {
+    /* background-color:  darkcyan; */
+    /* color: white; */
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    margin-left: 5px;
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
 @media(min-width: 1025px){
     .activity-box {
         /* border: 1px solid orangered; */

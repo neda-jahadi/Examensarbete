@@ -14,10 +14,19 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
     const [chosedIndex, setIndex] = useState();
     const [userName, setUserName] = useState('');
     const [commentClicked, setCommentClicked] = useState(false);
+    const [commentValid, setCommentValid] = useState(false);
 
     // const divRef = useRef(null);
 
     let deleteTitle = '', commentTitle = '', backgroundImg = activityBackground;
+
+    let sendBtnStatus = 'unsend-commentbtn';
+    
+    if(commentValid && comment!== '' ){
+        sendBtnStatus = 'send-commentbtn';
+    }else{
+        sendBtnStatus ='unsend-commentbtn';
+    }
 
     switch (source) {
         case 'activity':
@@ -111,8 +120,13 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
             .catch(error => console.log(error))
     }
 
-   
-
+   const ManageNewComment = (e) => {
+    setComment(e.target.value);
+    setCommentValid(e.target.validity.valid);
+    
+        
+   }
+ 
     let dataList = data.map((datum, index) => <div className="activity-box" key={index}>
             <div className="img-holder">
                 <img src={backgroundImg} alt="backImg" className="backImg" />
@@ -140,8 +154,21 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
                     <div className="title" id="scrollto">Comments: </div>
                     
                 </div>
+
+                <div style={{display: index === chosedIndex && commentClicked ? 'inline-block' : 'none'}}>
+                    <div className ="new-comment" >
+                        <input 
+                            pattern="[a-zA-ZÀ-ž][a-zA-ZÀ-ž.'\s]{0,}"
+                            placeholder="No special signs"
+                            onChange={(e) => ManageNewComment(e)} />
+                        <button className={sendBtnStatus} onClick={() => onSendComment(datum.name,datum.address)} >Send!</button>
+                    </div>
+                    
+                </div>
+                
                 <div className="comment-holder" 
-                     style={{display: index === chosedIndex && commentClicked ? 'none' : 'block'}}>
+                     style={{display: 'flex', flexDirection:'column'}}
+                     >
                     {datum.comments.map((comment, index) => 
                         <div className="user-comment" key={index}>
                             <span className="user">{comment.name}:</span>
@@ -150,13 +177,7 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
                      }
                 </div>
 
-                <div style={{display: index === chosedIndex && commentClicked ? 'inline-block' : 'none'}}>
-                    <div className ="new-comment" >
-                        <textarea type="comment" onChange={(e) => setComment(e.target.value)} />
-                        <button className="send-commentbtn" onClick={() => onSendComment(datum.name,datum.address)} >Send!</button>
-                    </div>
-                    
-                </div>
+               
 
             </div>
 
