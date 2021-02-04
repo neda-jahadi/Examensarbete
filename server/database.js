@@ -1,6 +1,6 @@
 const { MongoClient, ObjectID } = require('mongodb')
-// const url = 'mongodb+srv://neda:7713601nj@cluster0.pn5gs.mongodb.net/goteborgaren_bera?retryWrites=true&w=majority';
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb+srv://nedajahadi:FS0qRFd6leqrnjyx@examensarbete.psbpx.mongodb.net/trip?retryWrites=true&w=majority';
+// const url = 'mongodb://localhost:27017';
 const dbName = 'trip';
 const cityCollectionName = 'cities';
 const userCollectionName = 'users';

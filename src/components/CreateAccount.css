@@ -98,6 +98,15 @@
     display: none;
 }
 
+input {
+    outline:none;
+   }
+
+input:invalid {
+    border: 1px solid red;
+}
+
+
 :invalid + .firstname-error { 
     display: block;
     color: red; 
