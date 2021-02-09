@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './DataList.css';
 import deleteIcon from '../assets/delete.png';
 import commentIcon from '../assets/comment.png';
@@ -8,15 +8,22 @@ import likeIcon from '../assets/like.png';
 import likedIcon from '../assets/liked.png';
 
 
-const DataList = ({ data, source, id1,userid, updateCity }) => {
+const DataList = ({ count, setCount,data, source, id1,userid, updateCity, userName }) => {
     
     const [comment, setComment] = useState('');
     const [chosedIndex, setIndex] = useState();
-    const [userName, setUserName] = useState('');
+    // const [userName, setUserName] = useState('');
     const [commentClicked, setCommentClicked] = useState(false);
     const [commentValid, setCommentValid] = useState(false);
+    const [commentErrorStatus, setCommentErrorStatus] = useState(false);
 
-    // const divRef = useRef(null);
+    const componentIsMounted = React.useRef(true);
+
+    useEffect(() => {
+        return () => {
+            componentIsMounted.current = false
+        }
+    }, [])
 
     let deleteTitle = '', commentTitle = '', backgroundImg = activityBackground;
 
@@ -43,19 +50,22 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
             break;
     }
 
-    const getUser = () => {
-        fetch(`http://localhost:2294/api/user/?userid=${userid}` )
-        .then(response => response.json())
-        .then(res => {
-                setUserName(res.name)
-            }
-                )
-        .catch(error => console.log(error))
-    }
+    // const getUser = () => {
+    //     fetch(`http://localhost:2294/api/user/?userid=${userid}` )
+    //     .then(response => response.json())
+    //     .then(res => {
+    //         if(componentIsMounted.current){
+    //             setUserName(res.name)
+    //         }
+               
+    //         }
+    //             )
+    //     .catch(error => console.log(error))
+    // }
 
-    if(userName ===''){
-        getUser();
-    }
+    // if(userName ===''){
+    //     getUser();
+    // }
 
     async function onSendComment (name,address) {
         let newComment = { name: userName, comment: comment}
@@ -71,9 +81,13 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
          })
      const text = await response.text();
      console.log(text);
+     if(componentIsMounted.current){
         setIndex();
         setCommentClicked(false);
-        updateCity();
+        // updateCity();
+        setCount(count+1);
+     }
+        
  }
 
 
@@ -82,7 +96,14 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
         // console.log(url);
         fetch(url)
             .then(response => response.text())
-            .then(res => {console.log(res); updateCity();})
+            .then(res => {
+                if(componentIsMounted.current){
+                    console.log(res);
+                    setCount(count+1);
+                    // updateCity();
+                }
+                
+            })
             .catch(error => console.log(error))
         
     }
@@ -91,7 +112,13 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
         let url = `http://localhost:2294/api/insertfan/?id1=${id1}&userid=${userid}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
         fetch(url)
             .then(response => response.text())
-            .then(res => {console.log(res); updateCity();})
+            .then(res => {
+                if(componentIsMounted.current){
+                    console.log(res);
+                    // updateCity();
+                    setCount(count+1);
+                }
+            })
             .catch(error => console.log(error))
     }
 
@@ -99,7 +126,14 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
         let url = `http://localhost:2294/api/deletefan/?id1=${id1}&userid=${userid}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
         fetch(url)
             .then(response => response.text())
-            .then(res => {console.log(res); updateCity();})
+            .then(res => {
+                if(componentIsMounted.current){
+                    console.log(res);
+                    setCount(count+1);
+                    // updateCity();
+                }
+                
+            })
             .catch(error => console.log(error))
     }
     
@@ -108,7 +142,13 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
         let url = `http://localhost:2294/api/votentity/?id1=${id1}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
         fetch(url)
             .then(response => response.text())
-            .then(res => {console.log(res); InsertFan(data);})
+            .then(res => {
+                if(componentIsMounted.current){
+                    console.log(res);
+                    InsertFan(data);
+                }
+                
+            })
             .catch(error => console.log(error))
     }
 
@@ -116,14 +156,24 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
         let url = `http://localhost:2294/api/unvotentity/?id1=${id1}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
         fetch(url)
             .then(response => response.text())
-            .then(res => {console.log(res); deleteFan(data);})
+            .then(res => {
+                if(componentIsMounted.current){
+                    console.log(res);
+                    deleteFan(data);
+                }
+                
+            })
             .catch(error => console.log(error))
     }
 
    const ManageNewComment = (e) => {
     setComment(e.target.value);
     setCommentValid(e.target.validity.valid);
-    
+        if(e.target.validity.valid) {
+            setCommentErrorStatus(false);
+        }else{
+            setCommentErrorStatus(true);
+        }
         
    }
  
@@ -151,17 +201,23 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
                 </div>
                 
                 <div>
-                    <div className="title" id="scrollto">Comments: </div>
+                    <div className="title" >Comments: </div>
                     
                 </div>
 
-                <div style={{display: index === chosedIndex && commentClicked ? 'inline-block' : 'none'}}>
+                <div className="new-comment-area" style={{display: index === chosedIndex && commentClicked ? 'inline-block' : 'none'}}>
                     <div className ="new-comment" >
                         <input 
-                            pattern="[a-zA-ZÀ-ž][a-zA-ZÀ-ž.,)(:'’\s]{0,}"
+                            pattern="[a-zA-ZÀ-ž0-9][a-zA-ZÀ-ž0-9.,)(:'’\s]{0,}"
                             placeholder="No ?!%¤$#[/]=@"
                             onChange={(e) => ManageNewComment(e)} />
                         <button className={sendBtnStatus} onClick={() => onSendComment(datum.name,datum.address)} >Send!</button>
+                    </div>
+
+                    <div className="error-holder">
+                        <span className="error" style={{opacity: commentErrorStatus ? 1 : 0}}>
+                            Letter,Number, No ?!%¤$#[/]=@
+                        </span>
                     </div>
                     
                 </div>
@@ -193,7 +249,9 @@ const DataList = ({ data, source, id1,userid, updateCity }) => {
                         onClick={() => {
                             setIndex(index);
                             setCommentClicked(!commentClicked);
-                           
+                            // const test = myRef.current;
+                            
+                            // console.log(test)
                         }} />
                         
                     {datum.owner === userid &&

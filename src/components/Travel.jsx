@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import './Travel.css';
 import {useHistory} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
@@ -6,6 +6,7 @@ import {useParams} from 'react-router-dom';
 
 const Travel = () => {
 
+   
     const [cities, setCities] = useState([]);
     const [addCity, setAddCity] = useState(false);
     const [city, setCity] = useState('');
@@ -15,6 +16,7 @@ const Travel = () => {
     const [classCityMessage, setClassCityMessage] = useState('no-error-msg');
 
     const {userid} = useParams();
+    const componentIsMounted = React.useRef(true);
 
     let addMycityBtnClass = 'disabled', infoMessage = "(a-z A-Z, Min 1- Max 50)" , classInfoMessage = 'no-error-msg';
     
@@ -42,9 +44,11 @@ const Travel = () => {
         fetch(`http://localhost:2294/api/user/?userid=${userid}` )
         .then(response => response.json())
         .then(res => {
-                setGreetingName(res.name)
-            }
-                )
+            if(componentIsMounted.current){
+            setGreetingName(res.name)
+        }
+            
+         })
         .catch(error => console.log(error))
     }
 
@@ -52,17 +56,32 @@ const Travel = () => {
         getUser();
     }
 
-    async function updateCities() {
-        const response = await fetch(`http://localhost:2294/api/cities/`);
-        const updatedCities = await response.json();
-        setCities(updatedCities);
+    // async function updateCities() {
+    //     const response = await fetch(`http://localhost:2294/api/cities/`);
+    //     const updatedCities = await response.json();
+    //     setCities(updatedCities);
         
-    }
+    // }
         
-    // useEffect( () => {
-    //     updateCities()
-       
-    //   },[searchedCity]);   
+    
+    useEffect(() => {
+        return () => {
+            componentIsMounted.current = false
+        }
+    }, []) 
+
+    useEffect( () => {
+        
+        fetch(`http://localhost:2294/api/cities/`)
+        .then(response => response.json())
+        .then(res => {
+            if(componentIsMounted.current){
+                setCities(res)
+            }
+            
+        })
+        .catch(error => console.log(error))
+      },[addCity]);   
       
    
 
@@ -80,20 +99,23 @@ const Travel = () => {
                 },
                 body: JSON.stringify(data)
             });
-            const text = await response.text();
+        const text = await response.text();
+        if(componentIsMounted.current){
             console.log('response is:',text);
             if(text === 'Already exists'){
                 setClassCityMessage('error-msg')
             }else {
                 setAddCity(false);
-                updateCities();
+                // updateCities();
             }
+        }
+        
       }
 
     let jsxCities = null;
-    if(cities.length === 0){
-        updateCities();
-    }
+    // if(cities.length === 0){
+    //     updateCities();
+    // }
     
     if(cities.length > 0) {
         let cityList = cities.filter(city => city.name.toLowerCase().includes(searchedCity.toLowerCase()) )

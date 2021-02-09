@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import './AddUrsActivity.css';
 import {useHistory} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
@@ -31,10 +31,22 @@ const AddUrsActivity = () => {
         history.push(link);
     }
 
+    const componentIsMounted = React.useRef(true);
+
+    useEffect(() => {
+        return () => {
+            componentIsMounted.current = false
+        }
+    }, [])
+
     const getCity = () => {
         fetch(`http://localhost:2294/api/city/?id=${cityid}` )
         .then(response => response.json())
-        .then(res => setCity(res))
+        .then(res => {
+            if(componentIsMounted.current){
+                setCity(res)
+            }
+        })
         .catch(error => console.log(error))
         
     }
@@ -48,14 +60,15 @@ const AddUrsActivity = () => {
         fetch(`http://localhost:2294/api/user/?userid=${userid}` )
         .then(response => response.json())
         .then(res => {
+            if(componentIsMounted.current){
                 setUserName(res.name)
             }
-                )
+               
+        })
         .catch(error => console.log(error))
     }
 
     if(userName ===''){
-        console.log(userName);
         getUser();
     }
      
@@ -120,9 +133,11 @@ const AddUrsActivity = () => {
                 body: JSON.stringify(item)
             })
         const text = await response.text();
-        console.log(text);
-            
-        sendTo(`/city/${userid}/${cityid}`);
+        if(componentIsMounted.current){
+            console.log(text);   
+            sendTo(`/city/${userid}/${cityid}`);
+        }
+       
     }
 
     return(

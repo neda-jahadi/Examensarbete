@@ -1,4 +1,4 @@
-import React,{ useState} from 'react';
+import React,{ useState,useEffect} from 'react';
 import './ChosedCity.css';
 import {useHistory} from 'react-router-dom';
 import {useParams} from 'react-router-dom';
@@ -9,39 +9,73 @@ const ChosedCity = () => {
     let activities = null;
     let restaurants = null;
 
-   
+    const componentIsMounted = React.useRef(true);
 
+    useEffect(() => {
+        return () => {
+            componentIsMounted.current = false
+        }
+    }, []) 
+   
+    const [count, setCount] = useState(0);
     const [city, setCity] = useState({});
     const [showActivitySearch, setShowActivitySearch] = useState(false);
     const [showRestaurantSearch, setShowRestaurantSearch] = useState(false);
     const [searchActivity, setSearchActivity] = useState('');
     const [searchRestaurant, setSearchRestaurant] = useState('');
+    const [username, setUserName] = useState('');
 
     const {userid,cityid} = useParams();
     const history = useHistory();
     
+    if(userid){
+        fetch(`http://localhost:2294/api/user/?userid=${userid}` )
+        .then(response => response.json())
+        .then(res => {
+            if(componentIsMounted.current){
+                setUserName(res.name)
+            }
+               
+            }
+                )
+        .catch(error => console.log(error))
+    }
 
     const getCity = () => {
         let url = `http://localhost:2294/api/city/?id=${cityid}`;
         fetch( url )
         .then(response => response.json())
         .then(res => {
+            if(componentIsMounted.current){
                 setCity(res);
                 decideShowSearch(res);
+            }
+                
             }
                 )
         .catch(error => console.log(error))
         
     }
 
-    // useEffect( () => {
-    //     getCity()
+    useEffect( () => {
+        let url = `http://localhost:2294/api/city/?id=${cityid}`;
+        fetch( url )
+        .then(response => response.json())
+        .then(res => {
+            if(componentIsMounted.current){
+                setCity(res);
+                decideShowSearch(res);
+            }
+                
+            }
+                )
+        .catch(error => console.log(error))
        
-    //   },[]);   
+      },[count,cityid]);   
     
-     if(!city.name) {
-         getCity();   
-     }
+    //  if(!city.name) {
+    //      getCity();   
+    //  }
      
 
     const sendTo = (link) =>{
@@ -67,21 +101,27 @@ const ChosedCity = () => {
     if(city.activities) {
         let activityList = city.activities.filter(activity => activity.name.toLowerCase().includes(searchActivity.toLowerCase()) )
         activities = <DataList
+                        count={count}
+                        setCount={setCount}
                         data={activityList}
                         source ='activity'
                         id1={cityid}
                         userid={userid}
-                        updateCity={getCity} />
+                        updateCity={getCity}
+                        userName={username} />
     }
 
     if(city.restaurants) {
         let restaurantList = city.restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(searchRestaurant.toLowerCase()) )
         restaurants = <DataList 
+                        count={count}
+                        setCount={setCount}
                         data={restaurantList}
                         source ='restaurant'
                         id1={cityid}
                         userid={userid}
-                        updateCity={getCity} />
+                        updateCity={getCity}
+                        userName={username} />
    
     }
     

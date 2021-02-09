@@ -119,15 +119,16 @@
     width: 100%;
     display: flex;
    align-items: center;
-   padding: 5px;
+   padding-top: 5px;
    
    /* border: 1px solid; */
 }
 .new-comment input {
     background-color: white;
+    border: 1px solid;
     border-radius: 5px;
    padding: 5px;
-
+   
 }
 
 .send-commentbtn {
@@ -152,6 +153,16 @@
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+.error-holder {
+    margin-top:0px;
+}
+.error {
+    font-size: x-small;
+    color: red;
+    display: flex;
+    align-items: flex-start;
+}
+
 
 @media(min-width: 1025px){
     .activity-box {

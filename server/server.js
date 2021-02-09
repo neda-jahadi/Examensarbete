@@ -8,6 +8,7 @@ var cors = require('cors')
 app.use(cors())
 
 const port = 2294;
+// const port = process.env.PORT || 2294; 
 
 const {getAllCities, getCity, insertCity, insertEntity, insertFan,unvoteEntity, deleteFan,
          deleteEntity, insertUser, getUser,loginUser, userAvailibility,insertNewComment, voteEntity} = require('./database.js');
@@ -20,6 +21,8 @@ let logger = (req,res,next) =>{
 
 app.use(logger);
 
+
+// server.use(express.static(__dirname + '/../build'));
 app.use(express.static(__dirname + '/../src'));
 
 app.use( bodyParser.urlencoded({ extended: true }) )
@@ -158,9 +161,3 @@ app.listen(port, ()=>{
     console.log('Web server listening on port:' + port);
 })
 
-//{"name":"Musée Carnavalet","address":"23 Rue de Sévigné, 75003 ",
-// db.cities.updateOne({"_id":ObjectId("60001c3b53ee671e497156ca"), activities: { $elemMatch: { name: "knkmnkm" , address: "c mc m" } } }, {  $push: { "activities.$.comments": {id: ObjectId("6006cad8b4c6da2f06047971"), name: 'Neda', comment:'Again test hope'} } } )
-// db.cities.updateOne({"_id":ObjectId("60001c3b53ee671e497156ca"), activities: { $elemMatch: { name: "name" , address: "address" } } }, {  $push: { "activities.$.comments": {id: ObjectId("6006cad8b4c6da2f06047971"), name: 'Neda', comment:'Do it again for Paris'} } } )
-//db.cities.updateOne({"_id":ObjectId("60001c3b53ee671e497156ca"), activities: { $elemMatch: { name: 'Hotellerbjudanden - Paris' } } } )
-// db.cities.findOne({{"_id":ObjectId("60001c3b53ee671e497156ca")}, {activities:{name: 'Hotellerbjudanden - Paris'}}})
-//db.cities.updateOne({"_id":ObjectId("60001c3b53ee671e497156ca"), restaurants: { $elemMatch: { name: "Good foood" , address: "Good avenue 123 44" } } }, {  $push: { "restaurants.$.lovers": "6006cad8b4c6da2f06047971" } } )
