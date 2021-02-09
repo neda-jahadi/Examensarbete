@@ -16,6 +16,7 @@ const DataList = ({ count, setCount,data, source, id1,userid, updateCity, userNa
     const [commentClicked, setCommentClicked] = useState(false);
     const [commentValid, setCommentValid] = useState(false);
     const [commentErrorStatus, setCommentErrorStatus] = useState(false);
+    
 
     const componentIsMounted = React.useRef(true);
 
@@ -208,7 +209,7 @@ const DataList = ({ count, setCount,data, source, id1,userid, updateCity, userNa
                 <div className="new-comment-area" style={{display: index === chosedIndex && commentClicked ? 'inline-block' : 'none'}}>
                     <div className ="new-comment" >
                         <input 
-                            pattern="[a-zA-ZÀ-ž0-9][a-zA-ZÀ-ž0-9.,)(:'’\s]{0,}"
+                            pattern="[a-zA-ZÀ-ž0-9][a-zA-ZÀ-ž0-9.,)(:'’\s]{0,150}"
                             placeholder="No ?!%¤$#[/]=@"
                             onChange={(e) => ManageNewComment(e)} />
                         <button className={sendBtnStatus} onClick={() => onSendComment(datum.name,datum.address)} >Send!</button>
@@ -216,7 +217,7 @@ const DataList = ({ count, setCount,data, source, id1,userid, updateCity, userNa
 
                     <div className="error-holder">
                         <span className="error" style={{opacity: commentErrorStatus ? 1 : 0}}>
-                            Letter,Number, No ?!%¤$#[/]=@
+                            Letter,Number, No ?!%¤$#[/]=@, Max 150
                         </span>
                     </div>
                     
@@ -227,8 +228,10 @@ const DataList = ({ count, setCount,data, source, id1,userid, updateCity, userNa
                      >
                     {datum.comments.map((comment, index) => 
                         <div className="user-comment" key={index}>
+                            
                             <span className="user">{comment.name}:</span>
                             <span className="comment-content" >{comment.comment}</span>
+
                         </div> )
                      }
                 </div>

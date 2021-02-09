@@ -36,12 +36,13 @@
 .cities {
     overflow-y: scroll;
     background: #B3F1F5; 
+    padding: 5px;
+
     
 }
 .city-list {
     padding: 10px;
-    
-
+    background-color: #fff;
 }
 .cityName:hover{
     cursor: pointer;

@@ -20,8 +20,12 @@ const CreateAccount = () => {
     const history = useHistory();
     let submitBtnStatus = 'disabled';
     
-    if(firstnameValid && usernameValid && passwordValid && available){
-        submitBtnStatus = 'submit-btn';
+
+    if(firstnameValid && usernameValid && passwordValid &&
+         available && password!=='' && username!=='' && name!==''){
+        
+            submitBtnStatus = 'submit-btn';
+        
     }else{
         submitBtnStatus ='disabled';
     }
