@@ -1,6 +1,9 @@
 import React,{useState} from 'react';
 import  './Login.css';
 import {useHistory} from 'react-router-dom';
+import hidePassIcon from '../assets/hide-pass.png';
+import showPassIcon from '../assets/show-pass.jpg';
+import userIcon from '../assets/user.png';
 
 
 const Login = () => {
@@ -8,6 +11,8 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showError, setShowError] = useState(false);
+    const [showPass, setShowPass] = useState(false);
+    const [passInputType, setPassInputType] = useState('password');
     
     const onLogin = () => {
         let url = `http://localhost:2294/api/login/?username=${username}&password=${password}`;
@@ -32,10 +37,30 @@ const Login = () => {
             <div className="userinfo-holder">
 
                 <div className="user-info">
-                    <input type="text" placeholder="Username..." onChange={(e) => {
+                    <div className="user-pass-container">
+                        <input type="text" placeholder="Username..." onChange={(e) => {
                             setUsername(e.target.value)
                             setShowError(false)}} />
-                    <input type="password" placeholder="Password..." onChange={(e) => setPassword(e.target.value)} />
+                        <img src={userIcon} alt="user"  />
+
+                    </div>
+                    
+                    <div className="user-pass-container">
+                        <input type={passInputType} placeholder="Password..." onChange={(e) =>
+                            setPassword(e.target.value)} />
+                        {!showPass 
+                            ? <img src={hidePassIcon} alt="hide-password" onClick= {() => {
+                                setPassInputType('text');
+                                setShowPass(true); }} />
+
+                            : <img src={showPassIcon} alt="show-password" onClick= {() => {
+                                setPassInputType('password');
+                                setShowPass(false); }} />
+                        }
+                        
+
+                    </div>
+                   
                 </div>
 
             </div>

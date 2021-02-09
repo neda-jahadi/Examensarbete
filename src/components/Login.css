@@ -24,12 +24,24 @@
     align-items: center;
 
 }
-.user-info > input {
+.user-pass-container {
     padding: 20px;
     width: 50vw;
     margin: 20px;
     border: 1px solid lightslategray;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
+.user-pass-container > img {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+}
+.user-pass-container > input {
+    border: none;
+}
+
 .loginbtn-holder  {
     justify-content: center;
     align-items: center;
@@ -56,6 +68,7 @@
     justify-content: center;
 }
 
+
 @media(min-width: 1025px){
     .login-container {
         margin: 50px;
@@ -74,11 +87,12 @@
         justify-content: space-around; 
         width: 80%;
     }
-    .user-info > input {
+    .user-pass-container {
         padding: 20px;
         width: 30vw;
         margin: 0px;
     }
+    
     .login-btn {
         width: 20%;
         border-radius: 5px;
@@ -86,4 +100,5 @@
         border: none;
         background-color: green;
     }
+    
 }
