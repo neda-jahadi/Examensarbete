@@ -39,14 +39,9 @@
     
 }
 .submit {
-    /* display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center; */
     display: grid;
     grid-template-rows: 1fr 1fr;
     justify-content: center;
-    /* padding-top: 10px; */ 
 }
 .submit  button {
     width: 50vw;
@@ -86,7 +81,6 @@
 }
 .activeBtn {
     padding: 20px;
-    /* width: 40vw; */
     font-size: large;
     background-color: green;
     border-radius: 5px;
@@ -95,7 +89,6 @@
 }
 .inactiveBtn{
     padding: 20px;
-    /* width: 40vw; */
     font-size: large;
     border-radius: 5px;
     border: none;

@@ -56,13 +56,7 @@ const Travel = () => {
         getUser();
     }
 
-    // async function updateCities() {
-    //     const response = await fetch(`http://localhost:2294/api/cities/`);
-    //     const updatedCities = await response.json();
-    //     setCities(updatedCities);
-        
-    // }
-        
+    
     
     useEffect(() => {
         return () => {
@@ -106,17 +100,13 @@ const Travel = () => {
                 setClassCityMessage('error-msg')
             }else {
                 setAddCity(false);
-                // updateCities();
             }
         }
         
       }
 
     let jsxCities = null;
-    // if(cities.length === 0){
-    //     updateCities();
-    // }
-    
+   
     if(cities.length > 0) {
         let cityList = cities.filter(city => city.name.toLowerCase().includes(searchedCity.toLowerCase()) )
       jsxCities = cityList.map((city, index) => <div key={city._id} className="city-list" >

@@ -8,7 +8,7 @@ import likeIcon from '../assets/like.png';
 import likedIcon from '../assets/liked.png';
 
 
-const DataList = ({ count, setCount,data, source, id1,userid, updateCity, userName }) => {
+const DataList = ({ count, setCount,data, source, id1,userid, userName }) => {
     
     const [comment, setComment] = useState('');
     const [chosedIndex, setIndex] = useState();
@@ -66,7 +66,6 @@ const DataList = ({ count, setCount,data, source, id1,userid, updateCity, userNa
      if(componentIsMounted.current){
         setIndex();
         setCommentClicked(false);
-        // updateCity();
         setCount(count+1);
      }
         
@@ -75,14 +74,12 @@ const DataList = ({ count, setCount,data, source, id1,userid, updateCity, userNa
 
     const OnDeleteEntity = (data) => {
         let url = `http://localhost:2294/api/deletentity/?id1=${id1}&entityname=${data.name}&entityaddress=${data.address}&title=${deleteTitle}`;
-        // console.log(url);
         fetch(url)
             .then(response => response.text())
             .then(res => {
                 if(componentIsMounted.current){
                     console.log(res);
                     setCount(count+1);
-                    // updateCity();
                 }
                 
             })
@@ -97,7 +94,6 @@ const DataList = ({ count, setCount,data, source, id1,userid, updateCity, userNa
             .then(res => {
                 if(componentIsMounted.current){
                     console.log(res);
-                    // updateCity();
                     setCount(count+1);
                 }
             })
@@ -112,7 +108,6 @@ const DataList = ({ count, setCount,data, source, id1,userid, updateCity, userNa
                 if(componentIsMounted.current){
                     console.log(res);
                     setCount(count+1);
-                    // updateCity();
                 }
                 
             })
@@ -167,15 +162,12 @@ const DataList = ({ count, setCount,data, source, id1,userid, updateCity, userNa
             <div className="activity-holder">
                 <div className="name-address-like" style={{display: index === chosedIndex && commentClicked ? 'none' : 'block'}}>
                     <div>
-                        {/* <div className="title">Name:</div> */}
                         <div className="item-info-name">{datum.name}</div>
                     </div>
                     <div>
-                        {/* <div className="title">Address:</div> */}
-                        <div className="item-info">{datum.address}test</div>
+                        <div className="item-info">{datum.address}</div>
                     </div>
                     <div>
-                        {/* <div className="title">Likes: </div> */}
                         <div className="item-info">
                             Liked by <span style={{fontWeight: 'bold'}}>{datum.likes}</span>
                         </div>
@@ -233,9 +225,7 @@ const DataList = ({ count, setCount,data, source, id1,userid, updateCity, userNa
                         onClick={() => {
                             setIndex(index);
                             setCommentClicked(!commentClicked);
-                            // const test = myRef.current;
                             
-                            // console.log(test)
                         }} />
                         
                     {datum.owner === userid &&

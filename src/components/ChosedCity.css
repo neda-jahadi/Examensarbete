@@ -4,10 +4,6 @@
     grid-template-rows: 10% 45% 45%;
 
 }
-/* .chosed-city > div {
-    border: 1px solid blue;
-} */
-
 
 .activity-box {
     border: 1px solid green ;
@@ -25,22 +21,11 @@
  .activity-holder > div {
      display: flex;
      flex-direction: row;
-     /* width: 70vw; */
      flex-wrap: wrap;
      padding-left:5px;
  }
 
- /* .activity-holder {
-    position: absolute;
-    top: 0;
-    background: rgb(0, 0, 0); 
-    background: rgba(0, 0, 0, 0.5); 
-    color: #f1f1f1;
-    width: 100%;
-     overflow-y: scroll;
-     height: 60%;
-     
- } */
+
 .activities-scroll {
     overflow-x: scroll;
 }
@@ -51,7 +36,6 @@
     align-items: center;
 }
 .city-name {
-    /* height: 7vh; */
     font-size: larger;
     font-weight: bold;
     text-align: center;
@@ -61,7 +45,6 @@
     color: darkcyan;
 }
 .city-info {
-    /* height: 40vh; */
     display: grid;
     grid-template-rows: 15% 65% 15%;
     padding: 5px;
@@ -97,7 +80,6 @@
     background: rgba(255, 255, 255, 0.5); /* Black background with 0.5 opacity */
     color: #f1f1f1;
     width: 100%;
-    /* padding: 20px; */
     display: flex;
     flex-direction: row;
     justify-content: flex-end; 
@@ -183,15 +165,12 @@
         justify-content: space-between;
         margin-left: 10px;
         margin-bottom: 5px;;
-        /* padding-left: 20px; */
         padding-right: 20px;
     }
    
     .info-title > input {
         width: 50%;
         height: 20px;
-        /* padding: 10px; */
-        /* margin-left: 40px; */
         border: none;
         background-color: lightgray;
         border-radius: 5px;

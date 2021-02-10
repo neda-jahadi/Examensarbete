@@ -41,21 +41,7 @@ const ChosedCity = () => {
         .catch(error => console.log(error))
     }
 
-    const getCity = () => {
-        let url = `http://localhost:2294/api/city/?id=${cityid}`;
-        fetch( url )
-        .then(response => response.json())
-        .then(res => {
-            if(componentIsMounted.current){
-                setCity(res);
-                decideShowSearch(res);
-            }
-                
-            }
-                )
-        .catch(error => console.log(error))
-        
-    }
+    
 
     useEffect( () => {
         let url = `http://localhost:2294/api/city/?id=${cityid}`;
@@ -73,9 +59,7 @@ const ChosedCity = () => {
        
       },[count,cityid]);   
     
-    //  if(!city.name) {
-    //      getCity();   
-    //  }
+    
      
 
     const sendTo = (link) =>{
@@ -107,7 +91,6 @@ const ChosedCity = () => {
                         source ='activity'
                         id1={cityid}
                         userid={userid}
-                        updateCity={getCity}
                         userName={username} />
     }
 
@@ -120,7 +103,6 @@ const ChosedCity = () => {
                         source ='restaurant'
                         id1={cityid}
                         userid={userid}
-                        updateCity={getCity}
                         userName={username} />
    
     }

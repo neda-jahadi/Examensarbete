@@ -1,4 +1,3 @@
-console.log('Hello1');
 const express = require('express');
 
 const bodyParser = require('body-parser');
@@ -8,7 +7,6 @@ var cors = require('cors')
 
 app.use(cors())
 
-// const port = 2294;
 const port = process.env.PORT || 2294; 
 
 const {getAllCities, getCity, insertCity, insertEntity, insertFan,unvoteEntity, deleteFan,
@@ -22,10 +20,8 @@ let logger = (req,res,next) =>{
 
 app.use(logger);
 
-console.log('Hello2');
 
 app.use(express.static(__dirname + '/../build'));
-// app.use(express.static(__dirname + '/../src'));
 
 app.use( bodyParser.urlencoded({ extended: true }) )
 app.use( bodyParser.json() )
@@ -34,7 +30,6 @@ app.use( bodyParser.json() )
 
 
 app.get('/api/cities/', (req,res) =>{
-    // let searchword = req.query.searchword;
     getAllCities( dataOrError =>{
         res.send(dataOrError)
       })

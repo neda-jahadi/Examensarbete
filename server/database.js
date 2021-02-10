@@ -180,7 +180,6 @@ function getAllCities( callback) {
       }
       const col = client.db(dbName).collection(cityCollectionName);
       try {
-          // console.log('type of filter is:', typeof(filter));
         
         const cursor = await col.find(filter)
         const array = await cursor.toArray();
