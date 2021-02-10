@@ -1,3 +1,4 @@
+console.log('Hello1');
 const express = require('express');
 
 const bodyParser = require('body-parser');
@@ -21,8 +22,9 @@ let logger = (req,res,next) =>{
 
 app.use(logger);
 
+console.log('Hello2');
 
-server.use(express.static(__dirname + '/../build'));
+app.use(express.static(__dirname + '/../build'));
 // app.use(express.static(__dirname + '/../src'));
 
 app.use( bodyParser.urlencoded({ extended: true }) )
