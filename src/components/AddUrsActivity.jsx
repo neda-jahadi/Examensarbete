@@ -14,7 +14,6 @@ const AddUrsActivity = () => {
     const [nameValid, setNameValid] = useState(false);
     const [addressValid, setAddressValid] = useState(false);
     const [commentValid, setCommentValid] = useState(false);
-    // const [submit, setSubmit] = useState(false);
     const [submitMsgClass, setSubmitMsgClass] = useState('inactive-submit-error');
 
     const history = useHistory();

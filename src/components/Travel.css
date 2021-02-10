@@ -7,9 +7,7 @@
     display: grid;
     grid-template-rows: 10% 15% 50% 10% 5%;
 }
-/* .travel-container > div {
-    border: 1px solid green;
-} */
+
 
 .travel-container > .greeting {
     font-weight: bold;
@@ -91,10 +89,8 @@
     border: none;
 }
 .choose-input {
-    /* border:1px solid; */
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
 }
 .input-add-holder {
    display: flex;
@@ -124,19 +120,8 @@
         flex-wrap: wrap;
         padding: 10px;
     }
-    /* .city-list {
-        border: 1px solid;
-        width: 100px;
-        height: 100px;
-        padding: 20px;
-        margin: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    } */
+    
     .city-list {
-        /* position: relative; */
-        /* display: inline-block; */
         margin: 10px;
         display: flex;
         justify-content: center;
@@ -181,10 +166,7 @@
           display: inline;
       }
       .choose-input {
-        /* border:1px solid;
-        display: flex; */
         flex-direction: row;
-        /* justify-content:space-between; */
         align-items: center;
         
     }
@@ -195,11 +177,9 @@
     }
     .input-addCity{
         width: 20vw;
-        /* padding: 15px; */
     }
    
     .addBtn {
-        /* padding: 15px; */
         width:30vw;
     }
 }

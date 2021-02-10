@@ -12,7 +12,6 @@ const DataList = ({ count, setCount,data, source, id1,userid, updateCity, userNa
     
     const [comment, setComment] = useState('');
     const [chosedIndex, setIndex] = useState();
-    // const [userName, setUserName] = useState('');
     const [commentClicked, setCommentClicked] = useState(false);
     const [commentValid, setCommentValid] = useState(false);
     const [commentErrorStatus, setCommentErrorStatus] = useState(false);
@@ -39,40 +38,22 @@ const DataList = ({ count, setCount,data, source, id1,userid, updateCity, userNa
     switch (source) {
         case 'activity':
             deleteTitle = 'activity';
-            // editTitle = 'editactivity';
             commentTitle = 'activity';
             break;
     
         default:
             deleteTitle = 'restaurant';
-            // editTitle = 'editrestaurant';
             commentTitle = 'restaurant';
             backgroundImg = restaurantBackground;
             break;
     }
 
-    // const getUser = () => {
-    //     fetch(`http://localhost:2294/api/user/?userid=${userid}` )
-    //     .then(response => response.json())
-    //     .then(res => {
-    //         if(componentIsMounted.current){
-    //             setUserName(res.name)
-    //         }
-               
-    //         }
-    //             )
-    //     .catch(error => console.log(error))
-    // }
-
-    // if(userName ===''){
-    //     getUser();
-    // }
+    
 
     async function onSendComment (name,address) {
         let newComment = { name: userName, comment: comment}
         let url= `http://localhost:2294/api/addcomment/?cityid=${id1}&name=${name}&address=${address}&title=${commentTitle}`
-        // console.log(url);
-        // console.log(newComment)
+        
              const response = await fetch(url, {
              method: 'POST',
              headers: {
@@ -228,7 +209,7 @@ const DataList = ({ count, setCount,data, source, id1,userid, updateCity, userNa
                      >
                     {datum.comments.map((comment, index) => 
                         <div className="user-comment" key={index}>
-                            
+
                             <span className="user">{comment.name}:</span>
                             <span className="comment-content" >{comment.comment}</span>
 
