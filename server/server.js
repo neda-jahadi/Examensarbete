@@ -7,8 +7,8 @@ var cors = require('cors')
 
 app.use(cors())
 
-const port = 2294;
-// const port = process.env.PORT || 2294; 
+// const port = 2294;
+const port = process.env.PORT || 2294; 
 
 const {getAllCities, getCity, insertCity, insertEntity, insertFan,unvoteEntity, deleteFan,
          deleteEntity, insertUser, getUser,loginUser, userAvailibility,insertNewComment, voteEntity} = require('./database.js');
@@ -22,8 +22,8 @@ let logger = (req,res,next) =>{
 app.use(logger);
 
 
-// server.use(express.static(__dirname + '/../build'));
-app.use(express.static(__dirname + '/../src'));
+server.use(express.static(__dirname + '/../build'));
+// app.use(express.static(__dirname + '/../src'));
 
 app.use( bodyParser.urlencoded({ extended: true }) )
 app.use( bodyParser.json() )

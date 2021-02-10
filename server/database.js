@@ -1,5 +1,9 @@
 const { MongoClient, ObjectID } = require('mongodb')
-const url = 'mongodb+srv://nedajahadi:FS0qRFd6leqrnjyx@examensarbete.psbpx.mongodb.net/trip?retryWrites=true&w=majority';
+require("dotenv").config();
+
+let dbPW = process.env.DB_PASS;
+
+const url = `mongodb+srv://nedajahadi:${dbPW}@examensarbete.psbpx.mongodb.net/trip?retryWrites=true&w=majority`;
 // const url = 'mongodb://localhost:27017';
 const dbName = 'trip';
 const cityCollectionName = 'cities';
