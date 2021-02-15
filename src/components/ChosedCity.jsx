@@ -83,11 +83,12 @@ const ChosedCity = () => {
 
    
     if(city.activities) {
-        let activityList = city.activities.filter(activity => activity.name.toLowerCase().includes(searchActivity.toLowerCase()) )
+        let activityList = city.activities.sort((a, b) => (a.likes > b.likes) ? -1 : 1);
+        let sortedActivityList = activityList.filter(activity => activity.name.toLowerCase().includes(searchActivity.toLowerCase()) )
         activities = <DataList
                         count={count}
                         setCount={setCount}
-                        data={activityList}
+                        data={sortedActivityList}
                         source ='activity'
                         id1={cityid}
                         userid={userid}
@@ -95,11 +96,12 @@ const ChosedCity = () => {
     }
 
     if(city.restaurants) {
-        let restaurantList = city.restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(searchRestaurant.toLowerCase()) )
+        let restaurantList = city.restaurants.sort((a, b) => (a.likes > b.likes) ? -1 : 1);
+        let sortedRestaurantList = restaurantList.filter(restaurant => restaurant.name.toLowerCase().includes(searchRestaurant.toLowerCase()) )
         restaurants = <DataList 
                         count={count}
                         setCount={setCount}
-                        data={restaurantList}
+                        data={sortedRestaurantList}
                         source ='restaurant'
                         id1={cityid}
                         userid={userid}
