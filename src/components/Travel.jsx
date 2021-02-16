@@ -41,7 +41,7 @@ const Travel = () => {
 
     
     const getUser = () => {
-        fetch(`http://localhost:2294/api/user/?userid=${userid}` )
+        fetch(`https://trip-adviser.herokuapp.com/api/user/?userid=${userid}` )
         .then(response => response.json())
         .then(res => {
             if(componentIsMounted.current){
@@ -66,7 +66,7 @@ const Travel = () => {
 
     useEffect( () => {
         
-        fetch(`http://localhost:2294/api/cities/`)
+        fetch(`https://trip-adviser.herokuapp.com/api/cities/`)
         .then(response => response.json())
         .then(res => {
             if(componentIsMounted.current){
@@ -86,7 +86,7 @@ const Travel = () => {
         let restaurants = [];
         let data = { name , activities, restaurants};
         
-        const response = await fetch('http://localhost:2294/api/addcity', {
+        const response = await fetch('https://trip-adviser.herokuapp.com/api/addcity', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

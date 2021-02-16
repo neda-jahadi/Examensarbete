@@ -39,7 +39,7 @@ const AddUrsActivity = () => {
     }, [])
 
     const getCity = () => {
-        fetch(`http://localhost:2294/api/city/?id=${cityid}` )
+        fetch(`https://trip-adviser.herokuapp.com/api/city/?id=${cityid}` )
         .then(response => response.json())
         .then(res => {
             if(componentIsMounted.current){
@@ -56,7 +56,7 @@ const AddUrsActivity = () => {
      }
 
      const getUser = () => {
-        fetch(`http://localhost:2294/api/user/?userid=${userid}` )
+        fetch(`https://trip-adviser.herokuapp.com/api/user/?userid=${userid}` )
         .then(response => response.json())
         .then(res => {
             if(componentIsMounted.current){
@@ -116,7 +116,7 @@ const AddUrsActivity = () => {
     }
 
     async function insertTheEntity (item) {
-           const response = await fetch(`http://localhost:2294/api/add/?title=${apiTitle}&id=${cityid}`, {
+           const response = await fetch(`https://trip-adviser.herokuapp.com/api/add/?title=${apiTitle}&id=${cityid}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

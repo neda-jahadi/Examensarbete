@@ -28,23 +28,38 @@ const ChosedCity = () => {
     const {userid,cityid} = useParams();
     const history = useHistory();
     
-    if(userid){
-        fetch(`http://localhost:2294/api/user/?userid=${userid}` )
+    useEffect( () => {
+        let url = `https://trip-adviser.herokuapp.com/api/user/?userid=${userid}`;
+        fetch( url )
         .then(response => response.json())
         .then(res => {
             if(componentIsMounted.current){
                 setUserName(res.name)
             }
-               
+                
             }
                 )
         .catch(error => console.log(error))
-    }
+       
+      },[userid]); 
+    
+    // if(userid){
+    //     fetch(`https://trip-adviser.herokuapp.com/api/user/?userid=${userid}` )
+    //     .then(response => response.json())
+    //     .then(res => {
+    //         if(componentIsMounted.current){
+    //             setUserName(res.name)
+    //         }
+               
+    //         }
+    //             )
+    //     .catch(error => console.log(error))
+    // }
 
     
 
     useEffect( () => {
-        let url = `http://localhost:2294/api/city/?id=${cityid}`;
+        let url = `https://trip-adviser.herokuapp.com/api/city/?id=${cityid}`;
         fetch( url )
         .then(response => response.json())
         .then(res => {

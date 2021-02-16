@@ -52,7 +52,7 @@ const DataList = ({ count, setCount,data, source, id1,userid, userName }) => {
 
     async function onSendComment (name,address) {
         let newComment = { name: userName, comment: comment}
-        let url= `http://localhost:2294/api/addcomment/?cityid=${id1}&name=${name}&address=${address}&title=${commentTitle}`
+        let url= `https://trip-adviser.herokuapp.com/api/addcomment/?cityid=${id1}&name=${name}&address=${address}&title=${commentTitle}`
         
              const response = await fetch(url, {
              method: 'POST',
@@ -73,7 +73,7 @@ const DataList = ({ count, setCount,data, source, id1,userid, userName }) => {
 
 
     const OnDeleteEntity = (data) => {
-        let url = `http://localhost:2294/api/deletentity/?id1=${id1}&entityname=${data.name}&entityaddress=${data.address}&title=${deleteTitle}`;
+        let url = `https://trip-adviser.herokuapp.com/api/deletentity/?id1=${id1}&entityname=${data.name}&entityaddress=${data.address}&title=${deleteTitle}`;
         fetch(url)
             .then(response => response.text())
             .then(res => {
@@ -88,7 +88,7 @@ const DataList = ({ count, setCount,data, source, id1,userid, userName }) => {
     }
     
     const InsertFan = (data) => {
-        let url = `http://localhost:2294/api/insertfan/?id1=${id1}&userid=${userid}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
+        let url = `https://trip-adviser.herokuapp.com/api/insertfan/?id1=${id1}&userid=${userid}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
         fetch(url)
             .then(response => response.text())
             .then(res => {
@@ -101,7 +101,7 @@ const DataList = ({ count, setCount,data, source, id1,userid, userName }) => {
     }
 
     const deleteFan = (data) => {
-        let url = `http://localhost:2294/api/deletefan/?id1=${id1}&userid=${userid}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
+        let url = `https://trip-adviser.herokuapp.com/api/deletefan/?id1=${id1}&userid=${userid}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
         fetch(url)
             .then(response => response.text())
             .then(res => {
@@ -116,7 +116,7 @@ const DataList = ({ count, setCount,data, source, id1,userid, userName }) => {
     
 
     const OnVote = (data) => {
-        let url = `http://localhost:2294/api/votentity/?id1=${id1}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
+        let url = `https://trip-adviser.herokuapp.com/api/votentity/?id1=${id1}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
         fetch(url)
             .then(response => response.text())
             .then(res => {
@@ -130,7 +130,7 @@ const DataList = ({ count, setCount,data, source, id1,userid, userName }) => {
     }
 
     const OnUnvote = (data) => {
-        let url = `http://localhost:2294/api/unvotentity/?id1=${id1}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
+        let url = `https://trip-adviser.herokuapp.com/api/unvotentity/?id1=${id1}&entityname=${data.name}&entityaddress=${data.address}&title=${source}`;
         fetch(url)
             .then(response => response.text())
             .then(res => {

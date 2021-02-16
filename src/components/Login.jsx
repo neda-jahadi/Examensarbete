@@ -15,7 +15,7 @@ const Login = () => {
     const [passInputType, setPassInputType] = useState('password');
     
     const onLogin = () => {
-        let url = `http://localhost:2294/api/login/?username=${username}&password=${password}`;
+        let url = `https://trip-adviser.herokuapp.com/api/login/?username=${username}&password=${password}`;
         fetch(url )
         .then(response => response.json())
         .then(res => {
