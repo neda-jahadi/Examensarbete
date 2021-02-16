@@ -31,7 +31,7 @@ const CreateAccount = () => {
     }
 
     const usernameAvailibility = () => {
-        let url = `http://localhost:2294/api/useravailibility/?username=${username}`;
+        let url = `https://trip-adviser.herokuapp.com/api/useravailibility/?username=${username}`;
         console.log(url);
         fetch(url )
         .then(response => response.json())
@@ -51,7 +51,7 @@ const CreateAccount = () => {
     async function onSubmitUser() {
         let user = {name: name , username: username, password: password }
 
-        const response = await fetch(`http://localhost:2294/api/adduser`, {
+        const response = await fetch(`https://trip-adviser.herokuapp.com/api/adduser`, {
              method: 'POST',
              headers: {
                  'Content-Type': 'application/json'

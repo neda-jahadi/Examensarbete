@@ -43,18 +43,7 @@ const ChosedCity = () => {
        
       },[userid]); 
     
-    // if(userid){
-    //     fetch(`https://trip-adviser.herokuapp.com/api/user/?userid=${userid}` )
-    //     .then(response => response.json())
-    //     .then(res => {
-    //         if(componentIsMounted.current){
-    //             setUserName(res.name)
-    //         }
-               
-    //         }
-    //             )
-    //     .catch(error => console.log(error))
-    // }
+    
 
     
 
