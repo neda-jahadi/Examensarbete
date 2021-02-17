@@ -15,7 +15,8 @@ const DataList = ({ count, setCount,data, source, id1,userid, userName }) => {
     const [commentClicked, setCommentClicked] = useState(false);
     const [commentValid, setCommentValid] = useState(false);
     const [commentErrorStatus, setCommentErrorStatus] = useState(false);
-    
+    const [likeClicked, setLikeClicked] = useState(false);
+    const [unlikeClicked, setUnlikeClicked] = useState(false);
 
     const componentIsMounted = React.useRef(true);
 
@@ -95,6 +96,8 @@ const DataList = ({ count, setCount,data, source, id1,userid, userName }) => {
                 if(componentIsMounted.current){
                     console.log(res);
                     setCount(count+1);
+                    setUnlikeClicked(false);
+                    setLikeClicked(false);
                 }
             })
             .catch(error => console.log(error))
@@ -108,6 +111,8 @@ const DataList = ({ count, setCount,data, source, id1,userid, userName }) => {
                 if(componentIsMounted.current){
                     console.log(res);
                     setCount(count+1);
+                    setUnlikeClicked(false);
+                    setLikeClicked(false);
                 }
                 
             })
@@ -215,8 +220,10 @@ const DataList = ({ count, setCount,data, source, id1,userid, userName }) => {
 
             <div className="iconForItem-holder">
                {(datum.lovers.filter(ID => ID === userid).length) > 0 
-                    ? <img className="like-icon" src={likedIcon} alt="liked" onClick={() => {OnUnvote(datum);  }}/>
-                    : <img className="like-icon" src={likeIcon} alt="like" onClick={() => {OnVote(datum);  }} />
+                    ? <img className="like-icon" style={{ pointerEvents: likeClicked || unlikeClicked ? 'none' : 'auto'}}
+                     src={likedIcon} alt="liked" onClick={() => { setLikeClicked(true);OnUnvote(datum);  }}/>
+                    : <img className="like-icon" style={{ pointerEvents: likeClicked || unlikeClicked ? 'none' : 'auto'}}
+                     src={likeIcon} alt="like" onClick={() => { setUnlikeClicked(true); OnVote(datum);  }} />
 
                 }
 
